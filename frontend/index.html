@@ -3026,11 +3026,11 @@ document.addEventListener('click', function(e) {
       <div style="background:linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); padding:30px; border-radius:15px; width:90%; max-width:400px; color:white; text-align:center;">
         <h2 style="margin:0 0 15px 0;">🎉 Welcome to ZYLORB!</h2>
         <p style="margin:0 0 20px 0;">Authentication system is WORKING!</p>
-        <button onclick="const modal = this.closest('.fixed'); modal.remove(); setTimeout(() => { if(window.versionManager) window.versionManager.showToast('Account created successfully! 🎉', 'success') }, 100)"
+        <button onclick="const modal = this.closest('div[style*=\"position:fixed\"]'); if(modal) modal.remove(); setTimeout(() => { if(window.versionManager) window.versionManager.showToast('Account created successfully! 🎉', 'success') }, 100)"
                 style="padding:12px 25px; background:white; color:#8b5cf6; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
           Create Account
         </button>
-        <button onclick="this.parentElement.parentElement.remove()" 
+       <button onclick="const modal = this.closest('div[style*=\"position:fixed\"]'); if(modal) modal.remove()"
                 style="padding:12px 25px; background:transparent; color:white; border:1px solid white; border-radius:8px; margin-left:10px; cursor:pointer;">
           Cancel
         </button>
@@ -3050,11 +3050,11 @@ document.addEventListener('click', function(e) {
       <div style="background:linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); padding:30px; border-radius:15px; width:90%; max-width:400px; color:white; text-align:center;">
         <h2 style="margin:0 0 15px 0;">🔐 Sign In</h2>
         <p style="margin:0 0 20px 0;">Sign In system is WORKING!</p>
-        <button onclick="this.parentElement.parentElement.remove(); setTimeout(() => { if(window.versionManager) window.versionManager.showToast('Signed in successfully! 🎉', 'success') }, 100)" 
+        <button onclick="const modal = this.closest('div[style*=\"position:fixed\"]'); if(modal) modal.remove(); setTimeout(() => { if(window.versionManager) window.versionManager.showToast('Signed in successfully! 🎉', 'success') }, 100)"
                 style="padding:12px 25px; background:white; color:#8b5cf6; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
           Sign In
         </button>
-        <button onclick="this.parentElement.parentElement.remove()" 
+       <button onclick="const modal = this.closest('div[style*=\"position:fixed\"]'); if(modal) modal.remove()"
                 style="padding:12px 25px; background:transparent; color:white; border:1px solid white; border-radius:8px; margin-left:10px; cursor:pointer;">
           Cancel
         </button>

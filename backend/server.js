@@ -125,22 +125,27 @@ let nextUserId = 1;
 let nextPostId = 1;
 
 const server = http.createServer((req, res) => {
-    // Get client IP for rate limiting
+    // 🔥 NAYA CORS CODE - RATE LIMITING SE PEHLE
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Origin, Accept');
+    res.setHeader('Access-Control-Max-Age', '86400');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    
+    // PREFLIGHT REQUESTS HANDLE KARO
+    if (req.method === 'OPTIONS') {
+        res.writeHead(200);
+        res.end();
+        return;
+    }
+    
+    // AB RATE LIMITING CHECK KARO
     const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     
     // Apply rate limiting
     if (!checkRateLimit(clientIP)) {
         res.writeHead(429, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ message: 'Too many requests. Please try again later.' }));
-        return;
-    }
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    
-    if (req.method === 'OPTIONS') {
-        res.writeHead(200);
-        res.end();
         return;
     }
     

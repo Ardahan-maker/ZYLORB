@@ -1,0 +1,2928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA Manifest -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#8b5cf6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ZYLORB">
+<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZYLORB - Gaming • Life • Culture • Professional</title>
+    <meta name="description" content="Share your gaming highlights, daily moments, cultural experiences, and professional insights in one vibrant community platform with four distinct zones.">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- SEO Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="author" content="ZYLORB">
+    <meta name="theme-color" content="#8b5cf6">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zylorb.com/">
+    <meta property="og:title" content="ZYLORB - Gaming • Life • Culture • Professional">
+    <meta property="og:description" content="Share your gaming highlights, daily moments, cultural experiences, and professional insights in one vibrant community platform.">
+    <meta property="og:image" content="https://zylorb.com/assets/zylorb-preview-1200x630.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://zylorb.com/">
+    <meta property="twitter:title" content="ZYLORB - Gaming • Life • Culture • Professional">
+    <meta property="twitter:description" content="Share your gaming highlights, daily moments, cultural experiences, and professional insights in one vibrant community platform.">
+    <meta property="twitter:image" content="https://zylorb.com/assets/zylorb-preview-1200x630.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .loading-skeleton {
+            background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .zone-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .zone-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #7a44d8 0%, #db2777 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #c084fc 0%, #f472b6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #f472b6;
+        }
+        
+        .btn-gaming {
+            background: linear-gradient(135deg, #8b5cf6 0%, #4f46e5 100%);
+        }
+        .btn-gaming:hover {
+            background: linear-gradient(135deg, #7c3aed 0%, #4338ca 100%);
+        }
+        
+        .btn-life {
+            background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+        }
+        .btn-life:hover {
+            background: linear-gradient(135deg, #db2777 0%, #e11d48 100%);
+        }
+        
+        .btn-culture {
+            background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+        }
+        .btn-culture:hover {
+            background: linear-gradient(135deg, #0891b2 0%, #1d4ed8 100%);
+        }
+        
+        .btn-professional {
+            background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+        }
+        .btn-professional:hover {
+            background: linear-gradient(135deg, #ea580c 0%, #b91c1c 100%);
+        }
+        
+        .version-badge {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .hidden { display: none !important; }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .zone-card {
+                padding: 1.5rem;
+            }
+            
+            .zone-card:hover {
+                transform: translateY(-4px);
+            }
+        }
+        
+        /* Animation for smooth transitions */
+      .zone-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.zone-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .zone-card {
+        padding: 1.5rem;
+    }
+    
+     
+        /* Kuch bhi transform mat add karo */
+    }
+
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        /* Reels Section Styles */
+.reel-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+}
+
+.reel-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+#reels-section {
+    position: relative;
+    overflow: hidden;
+}
+/* Add smooth scrolling to entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improve mobile touch targets */
+@media (max-width: 768px) {
+  .btn-primary, .btn-secondary {
+    min-height: 44px; /* Better touch targets */
+  }
+}
+/* Mobile Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Optimize large media */
+.reel-card video,
+.story-content img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Touch improvements for mobile */
+@media (max-width: 768px) {
+    .btn-primary, 
+    .btn-secondary,
+    .zone-card button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Reduce blur on mobile for performance */
+    .zone-card,
+    .card-glass {
+        backdrop-filter: blur(8px);
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center z-50">
+        <div class="text-center">
+           <!-- NEW PERFECT LOGO -->
+<div class="flex flex-col items-center justify-center mx-auto mb-4">
+    <div class="flex space-x-1">
+        <div class="w-4 h-4 bg-purple-500 transform rotate-45"></div>
+        <div class="w-4 h-4 bg-pink-500 transform rotate-45"></div>
+    </div>
+    <div class="flex space-x-1 mt-1">
+        <div class="w-4 h-4 bg-blue-500 transform rotate-45"></div>
+        <div class="w-4 h-4 bg-green-500 transform rotate-45"></div>
+    </div>
+     </div>
+            <div class="loading-skeleton w-32 h-4 rounded mx-auto"></div>
+            <p class="text-white/60 mt-2">Loading ZYLORB v2.1.0...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-black/20 backdrop-blur-lg border-b border-white/10 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <!-- NEW PERFECT LOGO -->
+<div class="flex flex-col items-center justify-center">
+    <div class="flex space-x-1">
+        <div class="w-3 h-3 bg-purple-500 transform rotate-45"></div>
+        <div class="w-3 h-3 bg-pink-500 transform rotate-45"></div>
+    </div>
+    <div class="flex space-x-1 mt-1">
+        <div class="w-3 h-3 bg-blue-500 transform rotate-45"></div>
+        <div class="w-3 h-3 bg-green-500 transform rotate-45"></div>
+    </div>
+</div>
+                    <h1 class="text-2xl font-bold text-white">ZYLORB</h1>
+                    <span class="px-2 py-1 bg-green-600 text-white text-xs rounded-full">v2.1.0</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#gaming" class="text-white/80 hover:text-white transition-colors">Gaming</a>
+                    <a href="#life" class="text-white/80 hover:text-white transition-colors">Daily Life</a>
+                    <a href="#culture" class="text-white/80 hover:text-white transition-colors">Culture</a>
+                    <a href="#professional" class="text-white/80 hover:text-white transition-colors">Professional</a>
+                    <a href="#explore" class="text-white/80 hover:text-white transition-colors">Explore</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="btn-secondary">Sign In</button>
+                    <button class="btn-primary">Join Now</button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav id="mobile-menu" class="hidden md:hidden py-4 border-t border-white/10">
+                <div class="flex flex-col space-y-4">
+                    <a href="#gaming" class="text-white/80 hover:text-white transition-colors">Gaming</a>
+                    <a href="#life" class="text-white/80 hover:text-white transition-colors">Daily Life</a>
+                    <a href="#culture" class="text-white/80 hover:text-white transition-colors">Culture</a>
+                    <a href="#professional" class="text-white/80 hover:text-white transition-colors">Professional</a>
+                    <a href="#explore" class="text-white/80 hover:text-white transition-colors">Explore</a>
+                    <div class="flex flex-col space-y-2 pt-4">
+                        <button class="btn-secondary text-left">Sign In</button>
+                        <button class="btn-primary text-left">Join Now</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Stories Bar -->
+    <section id="stories-section" class="py-4 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center space-x-4 overflow-x-auto pb-2">
+                <!-- Add Story Button -->
+                <div class="flex-shrink-0">
+                    <button id="add-story-btn" class="relative w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:scale-105 transition-transform">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                    </button>
+                    <p class="text-white/80 text-xs text-center mt-1">Add Story</p>
+                </div>
+                
+                <!-- Stories -->
+                <div id="stories-container" class="flex space-x-4">
+                    <!-- Stories will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Reels/Short Videos Section -->
+<section id="reels-section" class="py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-900/50 to-pink-900/50">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-white flex items-center">
+                <span class="text-2xl mr-2">🎬</span>
+                Short Videos / Reels
+            </h3>
+            <button id="add-reel-btn" class="btn-primary text-sm">
+                <span class="mr-2">+</span> Create Reel
+            </button>
+        </div>
+        
+        <div id="reels-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Reel Item 1 -->
+            <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+                <div class="relative">
+                    <video class="w-full h-80 object-cover" muted loop>
+                        <source src="#" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                        <p class="text-white font-semibold">Epic Gaming Moment 🎮</p>
+                        <p class="text-white/60 text-sm">GamerPro • 2.5K views</p>
+                    </div>
+                    <div class="absolute top-2 right-2">
+                        <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs">LIVE</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reel Item 2 -->
+            <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+                <div class="relative">
+                    <video class="w-full h-80 object-cover" muted loop>
+                        <source src="#" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                        <p class="text-white font-semibold">Morning Routine ✨</p>
+                        <p class="text-white/60 text-sm">LifeStyler • 1.8K views</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reel Item 3 -->
+            <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+                <div class="relative">
+                    <video class="w-full h-80 object-cover" muted loop>
+                        <source src="#" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                        <p class="text-white font-semibold">Cultural Dance 🎭</p>
+                        <p class="text-white/60 text-sm">CultureKing • 3.2K views</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- News & Bulletins -->
+    <section id="news-section" class="py-6 px-4 sm:px-6 lg:px-8 bg-black/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-2xl font-bold text-white flex items-center">
+                    <span class="text-2xl mr-2">📰</span>
+                    Latest News & Bulletins
+                </h3>
+                <button id="add-news-btn" class="btn-secondary text-sm">Add News</button>
+            </div>
+            <div id="news-container" class="grid md:grid-cols-3 gap-4">
+                <!-- News items will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto text-center">
+                <div class="animate-bounce">
+                    <h2 class="text-5xl md:text-7xl font-bold text-white mb-6">
+                        Your World, <span class="gradient-text">Four Zones</span>
+                    </h2>
+                </div>
+                <p class="text-xl text-white/80 mb-12 max-w-3xl mx-auto">
+                    Share your gaming highlights, daily moments, cultural experiences, and professional insights all in one vibrant community platform
+                </p>
+                
+                <!-- Zone Cards -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+                    <!-- Gaming Zone -->
+                    <div id="gaming" class="zone-card">
+                        <div class="bg-gradient-to-br from-purple-500 to-indigo-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">🎮</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Gaming Zone</h3>
+                        <p class="text-white/80 mb-6">Share clips, highlights, tournaments, memes, and tips & tricks. Showcase both casual and professional gaming content.</p>
+                        <div class="space-y-3 text-left mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Epic gameplay highlights</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Tournament streams</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Gaming memes & tips</span>
+                            </div>
+                        </div>
+                        <div class="text-white/60 text-sm mb-4 flex justify-between">
+                            <span>1.2K posts</span>
+                            <span>850 active users</span>
+                        </div>
+                        <button class="btn-primary btn-gaming w-full py-3 rounded-xl">
+                            Enter Gaming Zone
+                        </button>
+                    </div>
+
+                    <!-- Daily Life Zone -->
+                    <div id="life" class="zone-card">
+                        <div class="bg-gradient-to-br from-pink-500 to-rose-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">👤</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Daily Life Zone</h3>
+                        <p class="text-white/80 mb-6">Post short stories, daily vlogs, personal style, and friendly moments. A casual Insta/TikTok vibe with gaming lifestyle blend.</p>
+                        <div class="space-y-3 text-left mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-pink-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Daily vlogs & stories</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-pink-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Personal style & moments</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-pink-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Lifestyle content</span>
+                            </div>
+                        </div>
+                        <div class="text-white/60 text-sm mb-4 flex justify-between">
+                            <span>980 posts</span>
+                            <span>650 active users</span>
+                        </div>
+                        <button class="btn-primary btn-life w-full py-3 rounded-xl">
+                            Enter Life Zone
+                        </button>
+                    </div>
+
+                    <!-- Culture & Events Zone -->
+                    <div id="culture" class="zone-card">
+                        <div class="bg-gradient-to-br from-cyan-500 to-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">🎭</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Culture & Events Zone</h3>
+                        <p class="text-white/80 mb-6">Celebrate local festivals, weddings, traditions, sports events, and concerts. Become an ambassador of your culture.</p>
+                        <div class="space-y-3 text-left mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Cultural festivals</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Local events & traditions</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Community gatherings</span>
+                            </div>
+                        </div>
+                        <div class="text-white/60 text-sm mb-4 flex justify-between">
+                            <span>750 posts</span>
+                            <span>420 active users</span>
+                        </div>
+                        <button class="btn-primary btn-culture w-full py-3 rounded-xl">
+                            Enter Culture Zone
+                        </button>
+                    </div>
+
+                    <!-- Professional Zone -->
+                    <div id="professional" class="zone-card">
+                        <div class="bg-gradient-to-br from-orange-500 to-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">💼</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Professional Zone</h3>
+                        <p class="text-white/80 mb-6">Connect with professionals, share career insights, business tips, and industry knowledge across all fields.</p>
+                        <div class="space-y-3 text-left mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Career networking</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Industry insights</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                                <span class="text-white/80 text-sm">Business collaboration</span>
+                            </div>
+                        </div>
+                        <div class="text-white/60 text-sm mb-4 flex justify-between">
+                            <span>540 posts</span>
+                            <span>320 active users</span>
+                        </div>
+                        <button class="btn-primary btn-professional w-full py-3 rounded-xl">
+                            Enter Professional Zone
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="explore" class="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h3 class="text-4xl font-bold text-white mb-4">One Platform, Endless Possibilities</h3>
+                    <p class="text-xl text-white/80">Connect, share, and discover across all four zones</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">📱</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-white mb-2">Cross-Zone Sharing</h4>
+                        <p class="text-white/70 text-sm">Share content across all zones seamlessly</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🌍</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-white mb-2">Global Community</h4>
+                        <p class="text-white/70 text-sm">Connect with people worldwide</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">⚡</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-white mb-2">Real-time Updates</h4>
+                        <p class="text-white/70 text-sm">Stay updated with live content feeds</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🎯</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-white mb-2">Smart Discovery</h4>
+                        <p class="text-white/70 text-sm">Find content tailored to your interests</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Post Creation Section -->
+        <section id="post-creation" class="py-20 px-4 sm:px-6 lg:px-8 bg-black/10">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold text-white mb-4">Create Your Post</h3>
+                    <p class="text-xl text-white/80">Share your content across all zones</p>
+                </div>
+                
+                <div class="card-glass p-8 rounded-2xl">
+                    <form id="post-form" class="space-y-6">
+                        <!-- Zone Selection -->
+                        <div>
+                            <label class="block text-white font-semibold mb-3">Select Zone</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="zone" value="gaming" class="sr-only peer">
+                                    <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-purple-500 peer-checked:bg-purple-500/20 transition-all text-center">
+                                        <span class="text-2xl block mb-1">🎮</span>
+                                        <span class="text-white text-sm">Gaming</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="zone" value="life" class="sr-only peer">
+                                    <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-pink-500 peer-checked:bg-pink-500/20 transition-all text-center">
+                                        <span class="text-2xl block mb-1">👤</span>
+                                        <span class="text-white text-sm">Life</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="zone" value="culture" class="sr-only peer">
+                                    <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-cyan-500 peer-checked:bg-cyan-500/20 transition-all text-center">
+                                        <span class="text-2xl block mb-1">🎭</span>
+                                        <span class="text-white text-sm">Culture</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="zone" value="professional" class="sr-only peer">
+                                    <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-orange-500 peer-checked:bg-orange-500/20 transition-all text-center">
+                                        <span class="text-2xl block mb-1">💼</span>
+                                        <span class="text-white text-sm">Professional</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Content Input -->
+                        <div>
+                            <label for="post-content" class="block text-white font-semibold mb-3">What's on your mind?</label>
+                            <textarea id="post-content" rows="4" class="w-full bg-white/10 border border-white/20 rounded-lg p-4 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 resize-none" placeholder="Share your thoughts, experiences, or insights..."></textarea>
+                        </div>
+
+                        <!-- Tags Input -->
+                        <div>
+                            <label for="post-tags" class="block text-white font-semibold mb-3">Tags</label>
+                            <input type="text" id="post-tags" class="w-full bg-white/10 border border-white/20 rounded-lg p-4 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Add tags separated by commas (e.g., gaming, fps, tournament)">
+                            <div id="tags-display" class="flex flex-wrap gap-2 mt-3"></div>
+                        </div>
+
+                        <!-- Media Upload -->
+                        <div>
+                            <label class="block text-white font-semibold mb-3">Media (Demo)</label>
+                            <div class="media-upload-area border-2 border-dashed border-white/20 rounded-lg p-8 text-center hover:border-white/40 transition-colors cursor-pointer" onclick="window.fileUploadSystem.showUploader()"></div>
+                                <svg class="w-12 h-12 text-white/60 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                </svg>
+                                <p class="text-white/80">Click to upload images or videos</p>
+                                <p class="text-white/60 text-sm mt-2">PNG, JPG, MP4 up to 10MB</p>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full btn-primary py-4 text-lg font-bold">
+                            Create Post
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Profiles Section -->
+        <section id="user-profiles" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold text-white mb-4">Featured Creators</h3>
+                    <p class="text-xl text-white/80">Connect with amazing creators across all zones</p>
+                </div>
+                
+                <div id="profiles-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- User profiles will be populated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="text-4xl font-bold text-white mb-6">Ready to Join ZYLORB?</h3>
+                <p class="text-xl text-white/80 mb-8">Start sharing your gaming highlights, daily moments, cultural experiences, and professional insights today</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="btn-primary px-10 py-5 text-xl font-bold transform hover:scale-105">
+                        Create Account
+                    </button>
+                    <button class="btn-secondary px-8 py-4 text-lg">
+                        Explore Zones
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Guidelines Section -->
+        <section id="community-guidelines" class="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold text-white mb-4">Community Guidelines</h3>
+                    <p class="text-xl text-white/80">Keeping ZYLORB safe and respectful for everyone</p>
+                </div>
+
+                <div class="card-glass rounded-2xl p-8">
+                    <!-- Strict Prohibited Content Section -->
+                    <div class="mb-8">
+                        <h4 class="text-2xl font-bold text-red-400 mb-4">🚫 Strictly Prohibited Content</h4>
+                        <div class="space-y-3 text-white/80">
+                            <div class="flex items-start space-x-3">
+                                <span class="text-red-400 mt-1">•</span>
+                                <span><strong>Pornography & Sexual Content:</strong> Absolutely no nudity, sexually explicit content, pornography, or sexually suggestive material of any kind.</span>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <span class="text-red-400 mt-1">•</span>
+                                <span><strong>Hate Speech:</strong> No content that promotes violence or hatred against individuals or groups.</span>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <span class="text-red-400 mt-1">•</span>
+                                <span><strong>Harassment & Bullying:</strong> Do not share content that threatens, harasses, or bullies others.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Moderation Notice -->
+                    <div class="bg-red-900/20 border border-red-400/50 rounded-xl p-6 mb-6">
+                        <h5 class="text-lg font-bold text-red-300 mb-2">⚠️ Automated Content Moderation</h5>
+                        <p class="text-white/80 text-sm">
+                            Our AI-powered system automatically scans all uploaded content for prohibited material. 
+                            Any content violating these guidelines will be <strong>immediately removed</strong> and may result 
+                            in account suspension or permanent ban.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black/40 backdrop-blur-lg border-t border-white/10 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                       <!-- NEW PERFECT LOGO -->
+<div class="flex flex-col items-center justify-center">
+    <div class="flex space-x-1">
+        <div class="w-2 h-2 bg-purple-500 transform rotate-45"></div>
+        <div class="w-2 h-2 bg-pink-500 transform rotate-45"></div>
+    </div>
+    <div class="flex space-x-1 mt-1">
+        <div class="w-2 h-2 bg-blue-500 transform rotate-45"></div>
+        <div class="w-2 h-2 bg-green-500 transform rotate-45"></div>
+    </div>
+</div>
+                        <span class="text-white font-bold text-lg">ZYLORB</span>
+                    </div>
+                    <p class="text-white/80 text-sm">Your world, four zones. Connect, share, and discover.</p>
+                </div>
+                
+                <div>
+                    <h5 class="text-white font-semibold mb-4">Zones</h5>
+                    <ul class="space-y-2 text-white/80 text-sm">
+                        <li><a href="#gaming" class="hover:text-white transition-colors">Gaming Zone</a></li>
+                        <li><a href="#life" class="hover:text-white transition-colors">Daily Life Zone</a></li>
+                        <li><a href="#culture" class="hover:text-white transition-colors">Culture & Events</a></li>
+                        <li><a href="#professional" class="hover:text-white transition-colors">Professional Zone</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="text-white font-semibold mb-4">Community</h5>
+                    <ul class="space-y-2 text-white/80 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Guidelines</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Support</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Creators</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="text-white font-semibold mb-4">Connect</h5>
+                    <ul class="space-y-2 text-white/80 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Discord</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Twitter</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-white/80 text-sm">&copy; 2024 ZYLORB. All rights reserved.</p>
+                    <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                        <button id="version-info-btn" class="version-badge bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center space-x-2 text-white/60 text-sm">
+                            <span>v2.1.0</span>
+                            <span class="text-xs opacity-60">(Build 2024.01.15.001)</span>
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                        <span class="px-2 py-1 bg-green-600 text-white text-xs rounded">PRODUCTION</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Version Modal -->
+    <div id="version-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-2xl max-h-[80vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-3">
+                        <!-- NEW PERFECT LOGO -->
+<div class="flex flex-col items-center justify-center">
+    <div class="flex space-x-1">
+        <div class="w-3 h-3 bg-purple-500 transform rotate-45"></div>
+        <div class="w-3 h-3 bg-pink-500 transform rotate-45"></div>
+    </div>
+    <div class="flex space-x-1 mt-1">
+        <div class="w-3 h-3 bg-blue-500 transform rotate-45"></div>
+        <div class="w-3 h-3 bg-green-500 transform rotate-45"></div>
+    </div>
+</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">ZYLORB</h3>
+                            <p class="text-white/60">Version Information</p>
+                        </div>
+                    </div>
+                    <button id="close-version-modal" class="text-white/60 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Version Details -->
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-white font-semibold mb-2">System Information</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-white/60">Version:</span>
+                                    <span class="text-white font-mono">v2.1.0</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-white/60">Build:</span>
+                                    <span class="text-white font-mono">2024.01.15.001</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-white/60">Environment:</span>
+                                    <span class="px-2 py-1 bg-green-600 text-white text-xs rounded">PRODUCTION</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-white/60">Build Date:</span>
+                                    <span class="text-white">January 15, 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-white font-semibold mb-2">Platform Details</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-white/60">Database:</span>
+                                    <span class="text-green-400">✓ Supabase</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-white/60">Storage:</span>
+                                    <span class="text-green-400">✓ Cloud Storage</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-white/60">CDN:</span>
+                                    <span class="text-green-400">✓ Active</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-white/60">Security:</span>
+                                    <span class="text-green-400">✓ Enhanced</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-white font-semibold mb-2">Active Features</h4>
+                        <div class="space-y-1 text-sm max-h-48 overflow-y-auto">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-white/80">Multi-Zone Content System</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-white/80">Stories & Media Sharing</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-white/80">Professional Networking</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-white/80">Real-time Messaging</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-white/80">Content Moderation AI</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-white/80">News & Bulletins</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-white/80">User Profiles & Following</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-white/80">Advanced Search</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-white/80">Mobile Responsive Design</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-white/80">PWA Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Changelog -->
+                <div class="mb-6">
+                    <h4 class="text-white font-semibold mb-3">Recent Updates</h4>
+                    <div class="space-y-4 max-h-64 overflow-y-auto">
+                        <div class="border-l-2 border-purple-500 pl-4">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-white font-semibold">v2.1.0</span>
+                                <span class="text-white/60 text-sm">2024-01-15</span>
+                            </div>
+                            <ul class="space-y-1 text-sm text-white/80">
+                                <li>• Enhanced content moderation system</li>
+                                <li>• Advanced image analysis</li>
+                                <li>• Comprehensive reporting system</li>
+                                <li>• Version management system</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-2 border-blue-500 pl-4">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-white font-semibold">v2.0.5</span>
+                                <span class="text-white/60 text-sm">2024-01-10</span>
+                            </div>
+                            <ul class="space-y-1 text-sm text-white/80">
+                                <li>• Professional zone features</li>
+                                <li>• Networking events</li>
+                                <li>• Skill endorsements</li>
+                                <li>• Mentorship system</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-2 border-green-500 pl-4">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-white font-semibold">v2.0.0</span>
+                                <span class="text-white/60 text-sm">2024-01-05</span>
+                            </div>
+                            <ul class="space-y-1 text-sm text-white/80">
+                                <li>• Stories system</li>
+                                <li>• News & bulletins</li>
+                                <li>• Enhanced messaging</li>
+                                <li>• Performance optimizations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Actions -->
+                <div class="flex space-x-4">
+                    <button id="copy-version-info" class="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg font-semibold transition-colors">
+                        Copy Version Info
+                    </button>
+                    <button id="check-updates" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-lg font-semibold transition-all">
+                        Check for Updates
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Real-time Chat -->
+    <div id="chat-widget" class="fixed bottom-4 right-4 z-50">
+        <button id="chat-toggle" class="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            <span id="chat-badge" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white text-xs rounded-full flex items-center justify-center hidden">3</span>
+        </button>
+        
+        <div id="chat-panel" class="hidden absolute bottom-16 right-0 w-80 h-96 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl">
+            <div class="p-4 border-b border-white/20">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-white font-semibold">Community Chat</h3>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <span class="text-white/60 text-sm">124 online</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto h-64 space-y-3">
+                <!-- Chat messages will be populated here -->
+            </div>
+            
+            <div class="p-4 border-t border-white/20">
+                <div class="flex space-x-2">
+                    <input type="text" id="chat-input" placeholder="Type a message..." class="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/60 text-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20">
+                    <button id="send-message" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Panel -->
+    <div id="notifications-widget" class="fixed top-20 right-4 z-40">
+        <button id="notifications-toggle" class="relative w-12 h-12 bg-white/10 backdrop-blur-lg border border-white/20 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5-5-5 5h5zm0 0v-8a6 6 0 00-12 0v8h12z"></path>
+            </svg>
+            <span id="notifications-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">5</span>
+        </button>
+        
+        <div id="notifications-panel" class="hidden absolute top-14 right-0 w-80 max-h-96 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl overflow-hidden">
+            <div class="p-4 border-b border-white/20">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-white font-semibold">Notifications</h3>
+                    <button id="mark-all-read" class="text-purple-400 hover:text-purple-300 text-sm">Mark all read</button>
+                </div>
+            </div>
+            
+            <div id="notifications-list" class="max-h-80 overflow-y-auto">
+                <!-- Notifications will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2 max-w-sm"></div>
+
+    <script>
+        // Content Moderation System
+        class ContentModeration {
+            constructor() {
+                // MY NAME IS MUDDASIR - AND I AM BLOCKING ADULT AND SEXUAL CONTENT
+this.blockedKeywords = [
+   // Adult content
+    'porn', 'porno', 'xxx', 'nsfw', 'adult', 'nude', 'naked',
+    'sex', 'sexual', 'hentai', 'erotic', 'explicit', 'xxxvideo',
+    'fuck', 'dick', 'pussy', 'ass', 'boobs', 'tits', 'cum',
+    'blowjob', 'handjob', 'masturbat', 'orgasm', 'penis', 'vagina',
+    'sexy', 'hot', 'seductive', 'provocative', 'onlyfans',
+    'camgirl', 'strip', 'nudist', 'bare', 'bikini', 'lingerie',
+    'hotgirl', 'sexvideo', 'adultvideo', 'pornvideo',
+    
+    // Violence & hate speech
+    'kill', 'murder', 'violence', 'attack', 'hurt', 'harm',
+    'hate', 'racist', 'racism', 'discriminat', 'nazi',
+    
+    // Drugs & illegal
+    'drug', 'weed', 'marijuana', 'cocaine', 'heroin', 'lsd',
+    'illegal', 'weapon', 'gun', 'bomb', 'terror'
+];
+            }
+
+            scanTextContent(text) {
+                const violations = [];
+                const lowerText = text.toLowerCase();
+                
+                this.blockedKeywords.forEach(keyword => {
+                    if (lowerText.includes(keyword)) {
+                        violations.push({
+                            type: 'BLOCKED_KEYWORD',
+                            keyword: keyword,
+                            severity: 'HIGH',
+                            message: `Content contains prohibited keyword: ${keyword}`
+                        });
+                    }
+                });
+
+                return violations;
+            }
+
+            async moderateContent(content) {
+                const result = {
+                    approved: false,
+                    violations: [],
+                    message: ''
+                };
+
+                try {
+                    let violations = [];
+
+                    // Text content moderation
+                    if (content.text) {
+                        const textViolations = this.scanTextContent(content.text);
+                        violations = violations.concat(textViolations);
+                    }
+
+                    // Determine action based on violations
+                    if (violations.length > 0) {
+                        result.approved = false;
+                        result.violations = violations;
+                        result.message = '🚫 This content violates our community guidelines';
+                    } else {
+                        result.approved = true;
+                        result.message = 'Content approved';
+                    }
+
+                } catch (error) {
+                    result.approved = false;
+                    result.message = 'Content could not be processed';
+                }
+
+                return result;
+            }
+        }
+
+        // Version Management System
+        class VersionManager {
+            constructor() {
+                this.version = '2.1.0';
+                this.buildNumber = '2024.01.15.001';
+                this.environment = this.detectEnvironment();
+                this.features = [
+                    'Multi-Zone Content System',
+                    'Stories & Media Sharing',
+                    'Professional Networking',
+                    'Real-time Messaging',
+                    'Content Moderation AI',
+                    'News & Bulletins',
+                    'User Profiles & Following',
+                    'Advanced Search',
+                    'Mobile Responsive Design',
+                    'PWA Support'
+                ];
+                this.init();
+            }
+
+            detectEnvironment() {
+                const hostname = window.location.hostname;
+                if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                    return 'development';
+                } else if (hostname.includes('staging') || hostname.includes('dev')) {
+                    return 'staging';
+                } else {
+                    return 'production';
+                }
+            }
+
+            init() {
+                this.logVersionInfo();
+                this.setupEventListeners();
+            }
+
+            logVersionInfo() {
+                console.log(`
+%c🚀 ZYLORB v${this.version}
+%c📦 Build: ${this.buildNumber}
+%c🌍 Environment: ${this.environment}
+%c⚡ Status: All systems operational
+%c🔧 Features: ${this.features.length} active modules
+                `, 
+                'color: #8b5cf6; font-size: 16px; font-weight: bold;',
+                'color: #06b6d4; font-size: 12px;',
+                'color: #10b981; font-size: 12px;',
+                'color: #f59e0b; font-size: 12px;',
+                'color: #ec4899; font-size: 12px;'
+                );
+            }
+
+            setupEventListeners() {
+                // Version info button
+                document.getElementById('version-info-btn').addEventListener('click', () => {
+                    document.getElementById('version-modal').classList.remove('hidden');
+                });
+
+                // Close modal
+                document.getElementById('close-version-modal').addEventListener('click', () => {
+                    document.getElementById('version-modal').classList.add('hidden');
+                });
+
+                // Copy version info
+                document.getElementById('copy-version-info').addEventListener('click', () => {
+                    this.copyVersionInfo();
+                });
+
+                // Check updates
+                document.getElementById('check-updates').addEventListener('click', () => {
+                    this.checkForUpdates();
+                });
+
+                // Close modal on outside click
+                document.getElementById('version-modal').addEventListener('click', (e) => {
+                    if (e.target.id === 'version-modal') {
+                        document.getElementById('version-modal').classList.add('hidden');
+                    }
+                });
+            }
+
+            copyVersionInfo() {
+                const info = `
+ZYLORB Version Information
+=============================
+Version: v${this.version}
+Build: ${this.buildNumber}
+Environment: ${this.environment}
+Build Date: ${new Date().toLocaleDateString()}
+Browser: ${navigator.userAgent}
+Platform: ${navigator.platform}
+
+Active Features:
+${this.features.map(f => `• ${f}`).join('\n')}
+                `.trim();
+                
+                navigator.clipboard.writeText(info).then(() => {
+                    this.showToast('Version information copied to clipboard!', 'success');
+                });
+            }
+
+            checkForUpdates() {
+                this.showToast('Checking for updates...', 'info');
+                
+                setTimeout(() => {
+                    this.showToast('You are running the latest version!', 'success');
+                }, 2000);
+            }
+
+            showToast(message, type = 'info') {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = `
+                    bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg p-4 shadow-lg
+                    transform transition-all duration-300 translate-x-full opacity-0
+                    ${type === 'error' ? 'border-red-400/50 bg-red-900/20' : ''}
+                    ${type === 'success' ? 'border-green-400/50 bg-green-900/20' : ''}
+                `;
+                
+                toast.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl">
+                            ${type === 'error' ? '❌' : type === 'success' ? '✅' : 'ℹ️'}
+                        </span>
+                        <p class="text-white text-sm">${message}</p>
+                        <button class="text-white/60 hover:text-white ml-auto" onclick="this.parentElement.parentElement.remove()">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(toast);
+                
+                // Animate in
+                setTimeout(() => {
+                    toast.classList.remove('translate-x-full', 'opacity-0');
+                }, 100);
+                
+                // Auto remove
+                setTimeout(() => {
+                    toast.classList.add('translate-x-full', 'opacity-0');
+                    setTimeout(() => toast.remove(), 300);
+                }, 5000);
+            }
+        }
+
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Stories System
+        class StoriesSystem {
+            constructor() {
+                this.stories = [
+                    { 
+                        id: 1, 
+                        user: 'GamerPro', 
+                        avatar: '🎮', 
+                        zone: 'gaming', 
+                        viewed: false,
+                        content: [
+                            { type: 'image', url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDMwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8dGV4dCB4PSIxNTAiIHk9IjI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQ4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+OrjwvdGV4dD4KPGR0ZXh0IHg9IjE1MCIgeT0iMzAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FcGljIEdhbWluZyBNb21lbnQ8L3RleHQ+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzhmNWNmNjtzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNGY0NmU1O3N0b3Atb3BhY2l0eToxIiAvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPg==', text: 'Epic gaming moment! 🎮', timestamp: new Date(Date.now() - 3600000) },
+                            { type: 'video', url: 'demo-video', text: 'Tournament highlights', timestamp: new Date(Date.now() - 1800000) }
+                        ],
+                        views: 45,
+                        expiresAt: new Date(Date.now() + 86400000)
+                    },
+                    { 
+                        id: 2, 
+                        user: 'LifeStyler', 
+                        avatar: '✨', 
+                        zone: 'life', 
+                        viewed: true,
+                        content: [
+                            { type: 'image', url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDMwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8dGV4dCB4PSIxNTAiIHk9IjI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQ4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+4pyoPC90ZXh0Pgo8dGV4dCB4PSIxNTAiIHk9IjMwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TW9ybmluZyBSb3V0aW5lPC90ZXh0Pgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNlYzQ4OTk7c3RvcC1vcGFjaXR5OjEiIC8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2Y0M2Y1ZTtzdG9wLW9wYWNpdHk6MSIgLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4=', text: 'Morning routine ✨', timestamp: new Date(Date.now() - 7200000) }
+                        ],
+                        views: 23,
+                        expiresAt: new Date(Date.now() + 72000000)
+                    },
+                    { 
+                        id: 3, 
+                        user: 'CultureKing', 
+                        avatar: '🎭', 
+                        zone: 'culture', 
+                        viewed: false,
+                        content: [
+                            { type: 'image', url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDMwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8dGV4dCB4PSIxNTAiIHk9IjI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQ4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+OrTwvdGV4dD4KPHR0ZXh0IHg9IjE1MCIgeT0iMzAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GZXN0aXZhbCBDZWxlYnJhdGlvbjwvdGV4dD4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDZiNmQ0O3N0b3Atb3BhY2l0eToxIiAvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMyNTYzZWI7c3RvcC1vcGFjaXR5OjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+', text: 'Festival celebration 🎭', timestamp: new Date(Date.now() - 5400000) }
+                        ],
+                        views: 67,
+                        expiresAt: new Date(Date.now() + 64800000)
+                    },
+                    { 
+                        id: 4, 
+                        user: 'TechExpert', 
+                        avatar: '💼', 
+                        zone: 'professional', 
+                        viewed: false,
+                        content: [
+                            { type: 'image', url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDMwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8dGV4dCB4PSIxNTAiIHk9IjI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQ4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+SvDwvdGV4dD4KPHR0ZXh0IHg9IjE1MCIgeT0iMzAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5UZWNoIElubm92YXRpb248L3RleHQ+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6I2Y5NzMxNjtzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZGMyNjI2O3N0b3Atb3BhY2l0eToxIiAvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPg==', text: 'Tech innovation 💼', timestamp: new Date(Date.now() - 9000000) }
+                        ],
+                        views: 89,
+                        expiresAt: new Date(Date.now() + 54000000)
+                    }
+                ];
+                this.currentStoryIndex = 0;
+                this.currentContentIndex = 0;
+                this.storyViewerOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.renderStories();
+                this.setupEventListeners();
+                this.createStoryViewer();
+            }
+
+            renderStories() {
+                const container = document.getElementById('stories-container');
+                container.innerHTML = this.stories.map(story => {
+                    const isExpired = new Date() > story.expiresAt;
+                    const timeLeft = this.getTimeLeft(story.expiresAt);
+                    
+                    return `
+                        <div class="flex-shrink-0 cursor-pointer story-item" data-story-id="${story.id}">
+                            <div class="relative w-16 h-16 ${story.viewed ? 'bg-gray-500' : 'bg-gradient-to-r from-purple-500 to-pink-500'} rounded-full p-1 ${isExpired ? 'opacity-50' : ''}">
+                                <div class="w-full h-full bg-black/20 rounded-full flex items-center justify-center">
+                                    <span class="text-2xl">${story.avatar}</span>
+                                </div>
+                                ${!isExpired && !story.viewed ? '<div class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center"><span class="text-white text-xs">•</span></div>' : ''}
+                            </div>
+                            <p class="text-white/80 text-xs text-center mt-1 truncate w-16">${story.user}</p>
+                            <p class="text-white/60 text-xs text-center">${timeLeft}</p>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            createStoryViewer() {
+                const viewer = document.createElement('div');
+                viewer.id = 'story-viewer';
+                viewer.className = 'hidden fixed inset-0 bg-black z-50 flex items-center justify-center';
+                viewer.innerHTML = `
+                    <div class="relative w-full max-w-sm h-full bg-black">
+                        <!-- Progress bars -->
+                        <div id="story-progress" class="absolute top-4 left-4 right-4 flex space-x-1 z-10">
+                            <!-- Progress bars will be populated here -->
+                        </div>
+                        
+                        <!-- Story header -->
+                        <div class="absolute top-12 left-4 right-4 flex items-center justify-between z-10">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                                    <span id="story-avatar" class="text-lg">🎮</span>
+                                </div>
+                                <div>
+                                    <p id="story-username" class="text-white font-semibold text-sm">Username</p>
+                                    <p id="story-timestamp" class="text-white/60 text-xs">2h ago</p>
+                                </div>
+                            </div>
+                            <button id="close-story" class="text-white/80 hover:text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <!-- Story content -->
+                        <div id="story-content" class="w-full h-full flex items-center justify-center">
+                            <!-- Content will be populated here -->
+                        </div>
+                        
+                        <!-- Story text overlay -->
+                        <div id="story-text" class="absolute bottom-20 left-4 right-4">
+                            <p class="text-white text-lg font-semibold"></p>
+                        </div>
+                        
+                        <!-- Story controls -->
+                        <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <button id="story-like" class="text-white/80 hover:text-red-400 transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                    </svg>
+                                </button>
+                                <button id="story-share" class="text-white/80 hover:text-white transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-4 h-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                                <span id="story-views" class="text-white/60 text-sm">0</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation areas -->
+                        <div class="absolute inset-0 flex">
+                            <div id="story-prev" class="w-1/3 h-full cursor-pointer"></div>
+                            <div id="story-pause" class="w-1/3 h-full cursor-pointer"></div>
+                            <div id="story-next" class="w-1/3 h-full cursor-pointer"></div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(viewer);
+            }
+
+            setupEventListeners() {
+                document.getElementById('add-story-btn').addEventListener('click', () => {
+                    this.showStoryCreator();
+                });
+
+                document.querySelectorAll('.story-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        const storyId = parseInt(e.currentTarget.dataset.storyId);
+                        this.openStoryViewer(storyId);
+                    });
+                });
+
+                // Story viewer controls
+                document.getElementById('close-story').addEventListener('click', () => {
+                    this.closeStoryViewer();
+                });
+
+                document.getElementById('story-prev').addEventListener('click', () => {
+                    this.previousContent();
+                });
+
+                document.getElementById('story-next').addEventListener('click', () => {
+                    this.nextContent();
+                });
+
+                document.getElementById('story-like').addEventListener('click', () => {
+                    window.versionManager.showToast('Story liked! ❤️', 'success');
+                });
+
+                document.getElementById('story-share').addEventListener('click', () => {
+                    window.versionManager.showToast('Story shared! 📤', 'success');
+                });
+            }
+
+            openStoryViewer(storyId) {
+                const storyIndex = this.stories.findIndex(s => s.id === storyId);
+                if (storyIndex === -1) return;
+
+                this.currentStoryIndex = storyIndex;
+                this.currentContentIndex = 0;
+                this.storyViewerOpen = true;
+
+                const story = this.stories[storyIndex];
+                story.viewed = true;
+                story.views++;
+
+                document.getElementById('story-viewer').classList.remove('hidden');
+                this.updateStoryViewer();
+                this.startStoryProgress();
+                this.renderStories();
+                this.setupEventListeners();
+            }
+
+            updateStoryViewer() {
+                const story = this.stories[this.currentStoryIndex];
+                const content = story.content[this.currentContentIndex];
+
+                document.getElementById('story-avatar').textContent = story.avatar;
+                document.getElementById('story-username').textContent = story.user;
+                document.getElementById('story-timestamp').textContent = this.formatTime(content.timestamp);
+                document.getElementById('story-views').textContent = story.views;
+
+                // Update progress bars
+                const progressContainer = document.getElementById('story-progress');
+                progressContainer.innerHTML = story.content.map((_, index) => `
+                    <div class="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
+                        <div class="h-full bg-white transition-all duration-300 ${index < this.currentContentIndex ? 'w-full' : index === this.currentContentIndex ? 'story-progress-active' : 'w-0'}"></div>
+                    </div>
+                `).join('');
+
+                // Update content
+                const contentContainer = document.getElementById('story-content');
+                if (content.type === 'image') {
+                    contentContainer.innerHTML = `<img src="${content.url}" alt="Story content" class="w-full h-full object-cover">`;
+                } else if (content.type === 'video') {
+                    contentContainer.innerHTML = `
+                        <div class="w-full h-full bg-gradient-to-br from-purple-900 to-blue-900 flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-white">Video Story</p>
+                                <p class="text-white/60 text-sm">Tap to play</p>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Update text overlay
+                document.querySelector('#story-text p').textContent = content.text;
+            }
+
+            startStoryProgress() {
+                const progressBar = document.querySelector('.story-progress-active');
+                if (progressBar) {
+                    progressBar.style.width = '0%';
+                    setTimeout(() => {
+                        progressBar.style.width = '100%';
+                    }, 100);
+
+                    setTimeout(() => {
+                        if (this.storyViewerOpen) {
+                            this.nextContent();
+                        }
+                    }, 5000);
+                }
+            }
+
+            nextContent() {
+                const story = this.stories[this.currentStoryIndex];
+                
+                if (this.currentContentIndex < story.content.length - 1) {
+                    this.currentContentIndex++;
+                    this.updateStoryViewer();
+                    this.startStoryProgress();
+                } else {
+                    // Move to next story
+                    if (this.currentStoryIndex < this.stories.length - 1) {
+                        this.currentStoryIndex++;
+                        this.currentContentIndex = 0;
+                        this.updateStoryViewer();
+                        this.startStoryProgress();
+                    } else {
+                        this.closeStoryViewer();
+                    }
+                }
+            }
+
+            previousContent() {
+                if (this.currentContentIndex > 0) {
+                    this.currentContentIndex--;
+                    this.updateStoryViewer();
+                    this.startStoryProgress();
+                } else if (this.currentStoryIndex > 0) {
+                    this.currentStoryIndex--;
+                    const prevStory = this.stories[this.currentStoryIndex];
+                    this.currentContentIndex = prevStory.content.length - 1;
+                    this.updateStoryViewer();
+                    this.startStoryProgress();
+                }
+            }
+
+            closeStoryViewer() {
+                this.storyViewerOpen = false;
+                document.getElementById('story-viewer').classList.add('hidden');
+            }
+
+            showStoryCreator() {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4';
+                modal.innerHTML = `
+                    <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-md p-6">
+                        <h3 class="text-2xl font-bold text-white mb-6">Create Story</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Upload Media</label>
+                               <div class="media-upload-area border-2 border-dashed border-white/20 rounded-lg p-8 text-center hover:border-white/40 transition-colors cursor-pointer" onclick="window.fileUploadSystem.showUploader()">
+                                    <svg class="w-12 h-12 text-white/60 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    <p class="text-white/80">Click to upload photo or video</p>
+                                    <p class="text-white/60 text-sm mt-2">JPG, PNG, MP4 up to 10MB</p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Add Text</label>
+                                <input type="text" placeholder="What's happening?" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20">
+                            </div>
+                            
+                            <div class="flex space-x-3">
+                                <button class="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg font-semibold transition-colors" onclick="this.closest('.fixed').remove()">
+                                    Cancel
+                                </button>
+                                <button class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-lg font-semibold transition-all" onclick="window.storiesSystem.createStory(); this.closest('.fixed').remove();">
+                                    Share Story
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+
+            createStory() {
+                window.versionManager.showToast('Story created successfully! 📸', 'success');
+            }
+
+            getTimeLeft(expiresAt) {
+                const now = new Date();
+                const timeLeft = expiresAt - now;
+                
+                if (timeLeft <= 0) return 'Expired';
+                
+                const hours = Math.floor(timeLeft / 3600000);
+                const minutes = Math.floor((timeLeft % 3600000) / 60000);
+                
+                if (hours > 0) return `${hours}h`;
+                return `${minutes}m`;
+            }
+
+            formatTime(timestamp) {
+                const now = new Date();
+                const diff = now - timestamp;
+                const hours = Math.floor(diff / 3600000);
+                const days = Math.floor(diff / 86400000);
+                
+                if (days > 0) return `${days}d ago`;
+                if (hours > 0) return `${hours}h ago`;
+                return 'Just now';
+            }
+        }
+
+        // News System
+        class NewsSystem {
+            constructor() {
+                this.news = [
+                    {
+                        id: 1,
+                        type: 'announcement',
+                        title: 'ZYLORB v2.1.0 Released!',
+                        content: 'New features including enhanced moderation, stories system, advanced tagging, and real-time notifications.',
+                        author: 'Admin',
+                        timestamp: new Date(Date.now() - 3600000),
+                        zone: 'general',
+                        priority: 'high',
+                        tags: ['update', 'features', 'announcement']
+                    },
+                    {
+                        id: 2,
+                        type: 'event',
+                        title: 'Gaming Tournament This Weekend',
+                        content: 'Join our community tournament with amazing prizes! Registration closes Friday. Multiple game categories available.',
+                        author: 'GameMaster',
+                        timestamp: new Date(Date.now() - 7200000),
+                        zone: 'gaming',
+                        priority: 'medium',
+                        tags: ['tournament', 'gaming', 'event', 'prizes']
+                    },
+                    {
+                        id: 3,
+                        type: 'culture',
+                        title: 'Cultural Festival Highlights',
+                        content: 'Amazing moments from last week\'s cultural celebrations. Check out the photo gallery and video highlights.',
+                        author: 'CultureTeam',
+                        timestamp: new Date(Date.now() - 86400000),
+                        zone: 'culture',
+                        priority: 'low',
+                        tags: ['festival', 'culture', 'celebration', 'highlights']
+                    },
+                    {
+                        id: 4,
+                        type: 'bulletin',
+                        title: 'New Professional Networking Features',
+                        content: 'Introducing enhanced networking tools, skill endorsements, and mentorship matching system.',
+                        author: 'ProfessionalTeam',
+                        timestamp: new Date(Date.now() - 10800000),
+                        zone: 'professional',
+                        priority: 'medium',
+                        tags: ['networking', 'professional', 'features', 'mentorship']
+                    },
+                    {
+                        id: 5,
+                        type: 'bulletin',
+                        title: 'Community Guidelines Update',
+                        content: 'Updated community guidelines with enhanced content moderation policies. Please review the new guidelines.',
+                        author: 'ModerationTeam',
+                        timestamp: new Date(Date.now() - 172800000),
+                        zone: 'general',
+                        priority: 'high',
+                        tags: ['guidelines', 'moderation', 'community', 'policy']
+                    },
+                    {
+                        id: 6,
+                        type: 'event',
+                        title: 'Daily Life Photography Contest',
+                        content: 'Share your best daily moments! Contest runs for 2 weeks with exciting prizes for winners.',
+                        author: 'LifeTeam',
+                        timestamp: new Date(Date.now() - 259200000),
+                        zone: 'life',
+                        priority: 'medium',
+                        tags: ['contest', 'photography', 'daily-life', 'prizes']
+                    }
+                ];
+                this.filteredNews = [...this.news];
+                this.currentFilter = 'all';
+                this.init();
+            }
+
+            init() {
+                this.renderNews();
+                this.setupEventListeners();
+                this.createNewsFilters();
+            }
+
+            createNewsFilters() {
+                const filtersContainer = document.createElement('div');
+                filtersContainer.className = 'flex flex-wrap gap-2 mb-6';
+                filtersContainer.innerHTML = `
+                    <button class="news-filter-btn active px-4 py-2 bg-purple-500 text-white rounded-full text-sm font-semibold transition-colors" data-filter="all">
+                        All News
+                    </button>
+                    <button class="news-filter-btn px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm font-semibold transition-colors" data-filter="announcement">
+                        📢 Announcements
+                    </button>
+                    <button class="news-filter-btn px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm font-semibold transition-colors" data-filter="event">
+                        🎉 Events
+                    </button>
+                    <button class="news-filter-btn px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm font-semibold transition-colors" data-filter="bulletin">
+                        📋 Bulletins
+                    </button>
+                    <button class="news-filter-btn px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm font-semibold transition-colors" data-filter="culture">
+                        🎭 Culture
+                    </button>
+                `;
+                
+                const newsSection = document.getElementById('news-section');
+                const newsContainer = document.getElementById('news-container');
+                newsSection.insertBefore(filtersContainer, newsContainer);
+            }
+
+            renderNews() {
+                const container = document.getElementById('news-container');
+                container.innerHTML = this.filteredNews.map(item => {
+                    const typeIcon = this.getTypeIcon(item.type);
+                    const priorityColor = this.getPriorityColor(item.priority);
+                    
+                    return `
+                        <div class="card-glass p-6 rounded-xl hover:bg-white/15 transition-colors cursor-pointer news-item" data-news-id="${item.id}">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-lg">${typeIcon}</span>
+                                    <span class="px-2 py-1 bg-purple-500/20 text-purple-300 text-xs rounded-full">${item.zone}</span>
+                                    ${item.priority === 'high' ? '<span class="px-2 py-1 bg-red-500/20 text-red-300 text-xs rounded-full">Priority</span>' : ''}
+                                </div>
+                                <span class="text-white/60 text-xs">${this.formatTime(item.timestamp)}</span>
+                            </div>
+                            
+                            <h4 class="text-white font-semibold mb-2 ${priorityColor}">${item.title}</h4>
+                            <p class="text-white/80 text-sm mb-3 line-clamp-2">${item.content}</p>
+                            
+                            <!-- Tags -->
+                            <div class="flex flex-wrap gap-1 mb-3">
+                                ${item.tags.map(tag => `
+                                    <span class="px-2 py-1 bg-white/10 text-white/70 text-xs rounded-full">#${tag}</span>
+                                `).join('')}
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <span class="text-white/60 text-xs">By ${item.author}</span>
+                                <div class="flex items-center space-x-3">
+                                    <button class="text-purple-400 hover:text-purple-300 text-sm news-share-btn" data-news-id="${item.id}">Share</button>
+                                    <button class="text-purple-400 hover:text-purple-300 text-sm news-read-btn" data-news-id="${item.id}">Read more</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            setupEventListeners() {
+                document.getElementById('add-news-btn').addEventListener('click', () => {
+                    this.showNewsCreator();
+                });
+
+                // Filter buttons
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('news-filter-btn')) {
+                        const filter = e.target.dataset.filter;
+                        this.filterNews(filter);
+                        
+                        // Update active button
+                        document.querySelectorAll('.news-filter-btn').forEach(btn => {
+                            btn.classList.remove('active', 'bg-purple-500');
+                            btn.classList.add('bg-white/10', 'hover:bg-white/20');
+                        });
+                        e.target.classList.add('active', 'bg-purple-500');
+                        e.target.classList.remove('bg-white/10', 'hover:bg-white/20');
+                    }
+                });
+
+                // News item interactions
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('news-read-btn')) {
+                        const newsId = parseInt(e.target.dataset.newsId);
+                        this.readNews(newsId);
+                    } else if (e.target.classList.contains('news-share-btn')) {
+                        const newsId = parseInt(e.target.dataset.newsId);
+                        this.shareNews(newsId);
+                    }
+                });
+            }
+
+            filterNews(filter) {
+                this.currentFilter = filter;
+                
+                if (filter === 'all') {
+                    this.filteredNews = [...this.news];
+                } else {
+                    this.filteredNews = this.news.filter(item => item.type === filter);
+                }
+                
+                this.renderNews();
+            }
+
+            showNewsCreator() {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4';
+                modal.innerHTML = `
+                    <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-2xl p-6">
+                        <h3 class="text-2xl font-bold text-white mb-6">Create News/Bulletin</h3>
+                        
+                        <form id="news-form" class="space-y-4">
+                            <!-- News Type -->
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Type</label>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="news-type" value="announcement" class="sr-only peer">
+                                        <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-purple-500 peer-checked:bg-purple-500/20 transition-all text-center">
+                                            <span class="text-2xl block mb-1">📢</span>
+                                            <span class="text-white text-sm">Announcement</span>
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="news-type" value="event" class="sr-only peer">
+                                        <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-purple-500 peer-checked:bg-purple-500/20 transition-all text-center">
+                                            <span class="text-2xl block mb-1">🎉</span>
+                                            <span class="text-white text-sm">Event</span>
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="news-type" value="bulletin" class="sr-only peer">
+                                        <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-purple-500 peer-checked:bg-purple-500/20 transition-all text-center">
+                                            <span class="text-2xl block mb-1">📋</span>
+                                            <span class="text-white text-sm">Bulletin</span>
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="news-type" value="culture" class="sr-only peer">
+                                        <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-purple-500 peer-checked:bg-purple-500/20 transition-all text-center">
+                                            <span class="text-2xl block mb-1">🎭</span>
+                                            <span class="text-white text-sm">Culture</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Zone Selection -->
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Target Zone</label>
+                                <select class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20">
+                                    <option value="general">General</option>
+                                    <option value="gaming">Gaming</option>
+                                    <option value="life">Daily Life</option>
+                                    <option value="culture">Culture</option>
+                                    <option value="professional">Professional</option>
+                                </select>
+                            </div>
+
+                            <!-- Priority -->
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Priority</label>
+                                <div class="flex space-x-4">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="priority" value="low" class="mr-2">
+                                        <span class="text-white">Low</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="priority" value="medium" class="mr-2" checked>
+                                        <span class="text-white">Medium</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="priority" value="high" class="mr-2">
+                                        <span class="text-white">High</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Title -->
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Title</label>
+                                <input type="text" placeholder="Enter news title..." class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20">
+                            </div>
+
+                            <!-- Content -->
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Content</label>
+                                <textarea rows="4" placeholder="Write your news content..." class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 resize-none"></textarea>
+                            </div>
+
+                            <!-- Tags -->
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Tags</label>
+                                <input type="text" placeholder="Add tags separated by commas..." class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20">
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="flex space-x-3 pt-4">
+                                <button type="button" class="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg font-semibold transition-colors" onclick="this.closest('.fixed').remove()">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-lg font-semibold transition-all">
+                                    Publish News
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Handle form submission
+                modal.querySelector('#news-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.createNews();
+                    modal.remove();
+                });
+            }
+
+            createNews() {
+                window.versionManager.showToast('News published successfully! 📰', 'success');
+            }
+
+            readNews(newsId) {
+                const news = this.news.find(n => n.id === newsId);
+                if (news) {
+                    window.versionManager.showToast(`Reading: ${news.title} 📖`, 'info');
+                }
+            }
+
+            shareNews(newsId) {
+                const news = this.news.find(n => n.id === newsId);
+                if (news) {
+                    window.versionManager.showToast(`News shared: ${news.title} 📤`, 'success');
+                }
+            }
+
+            getTypeIcon(type) {
+                const icons = {
+                    announcement: '📢',
+                    event: '🎉',
+                    bulletin: '📋',
+                    culture: '🎭'
+                };
+                return icons[type] || '📰';
+            }
+
+            getPriorityColor(priority) {
+                const colors = {
+                    high: 'text-red-300',
+                    medium: 'text-yellow-300',
+                    low: 'text-white'
+                };
+                return colors[priority] || 'text-white';
+            }
+
+            formatTime(timestamp) {
+                const now = new Date();
+                const diff = now - timestamp;
+                const hours = Math.floor(diff / 3600000);
+                const days = Math.floor(diff / 86400000);
+                
+                if (days > 0) return `${days}d ago`;
+                if (hours > 0) return `${hours}h ago`;
+                return 'Just now';
+            }
+        }
+
+        // User Profiles System
+        class UserProfilesSystem {
+            constructor() {
+                this.profiles = [
+                    {
+                        id: 1,
+                        username: 'GamerPro2024',
+                        avatar: '🎮',
+                        zone: 'Gaming',
+                        followers: 1250,
+                        posts: 89,
+                        verified: true,
+                        bio: 'Professional esports player & content creator'
+                    },
+                    {
+                        id: 2,
+                        username: 'LifestyleBlogger',
+                        avatar: '✨',
+                        zone: 'Life',
+                        followers: 890,
+                        posts: 156,
+                        verified: false,
+                        bio: 'Sharing daily moments and lifestyle tips'
+                    },
+                    {
+                        id: 3,
+                        username: 'CulturalAmbassador',
+                        avatar: '🎭',
+                        zone: 'Culture',
+                        followers: 2100,
+                        posts: 234,
+                        verified: true,
+                        bio: 'Celebrating traditions and cultural diversity'
+                    },
+                    {
+                        id: 4,
+                        username: 'TechInnovator',
+                        avatar: '💼',
+                        zone: 'Professional',
+                        followers: 3400,
+                        posts: 67,
+                        verified: true,
+                        bio: 'Tech entrepreneur and industry thought leader'
+                    }
+                ];
+                this.init();
+            }
+
+            init() {
+                this.renderProfiles();
+            }
+
+            renderProfiles() {
+                const container = document.getElementById('profiles-container');
+                container.innerHTML = this.profiles.map(profile => `
+                    <div class="card-glass p-6 rounded-xl text-center hover:bg-white/15 transition-colors cursor-pointer">
+                        <div class="relative inline-block mb-4">
+                            <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto">
+                                <span class="text-3xl">${profile.avatar}</span>
+                            </div>
+                            ${profile.verified ? '<div class="absolute -bottom-1 -right-1 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center"><svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></div>' : ''}
+                        </div>
+                        <h4 class="text-white font-semibold mb-1">${profile.username}</h4>
+                        <p class="text-purple-300 text-sm mb-3">${profile.zone} Zone</p>
+                        <p class="text-white/70 text-xs mb-4 h-8">${profile.bio}</p>
+                        <div class="flex justify-center space-x-4 mb-4 text-xs">
+                            <div class="text-center">
+                                <div class="text-white font-semibold">${profile.followers.toLocaleString()}</div>
+                                <div class="text-white/60">Followers</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-white font-semibold">${profile.posts}</div>
+                                <div class="text-white/60">Posts</div>
+                            </div>
+                        </div>
+                        <button class="btn-primary w-full py-2 text-sm">Follow</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Chat System
+        class ChatSystem {
+            constructor() {
+                this.messages = [
+                    { id: 1, user: 'GamerPro', message: 'Anyone up for a tournament?', timestamp: new Date(Date.now() - 300000), avatar: '🎮' },
+                    { id: 2, user: 'LifeStyler', message: 'Just posted my morning routine!', timestamp: new Date(Date.now() - 600000), avatar: '✨' },
+                    { id: 3, user: 'CultureKing', message: 'Festival photos are amazing this year', timestamp: new Date(Date.now() - 900000), avatar: '🎭' }
+                ];
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.renderMessages();
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                document.getElementById('chat-toggle').addEventListener('click', () => {
+                    this.toggleChat();
+                });
+
+                document.getElementById('send-message').addEventListener('click', () => {
+                    this.sendMessage();
+                });
+
+                document.getElementById('chat-input').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.sendMessage();
+                    }
+                });
+            }
+
+            toggleChat() {
+                const panel = document.getElementById('chat-panel');
+                const badge = document.getElementById('chat-badge');
+                
+                this.isOpen = !this.isOpen;
+                
+                if (this.isOpen) {
+                    panel.classList.remove('hidden');
+                    badge.classList.add('hidden');
+                } else {
+                    panel.classList.add('hidden');
+                }
+            }
+
+            sendMessage() {
+                const input = document.getElementById('chat-input');
+                const message = input.value.trim();
+                
+                if (message) {
+                    this.messages.push({
+                        id: Date.now(),
+                        user: 'You',
+                        message: message,
+                        timestamp: new Date(),
+                        avatar: '👤'
+                    });
+                    
+                    input.value = '';
+                    this.renderMessages();
+                    
+                    // Simulate response
+                    setTimeout(() => {
+                        this.messages.push({
+                            id: Date.now(),
+                            user: 'Community',
+                            message: 'Thanks for sharing! 🎉',
+                            timestamp: new Date(),
+                            avatar: '🤖'
+                        });
+                        this.renderMessages();
+                    }, 1000);
+                }
+            }
+
+            renderMessages() {
+                const container = document.getElementById('chat-messages');
+                container.innerHTML = this.messages.map(msg => `
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-sm">${msg.avatar}</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-white font-semibold text-sm">${msg.user}</span>
+                                <span class="text-white/60 text-xs">${this.formatTime(msg.timestamp)}</span>
+                            </div>
+                            <p class="text-white/80 text-sm">${msg.message}</p>
+                        </div>
+                    </div>
+                `).join('');
+                
+                container.scrollTop = container.scrollHeight;
+            }
+
+            formatTime(timestamp) {
+                return timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+        }
+
+        // Notifications System
+        class NotificationsSystem {
+            constructor() {
+                this.notifications = [
+                    {
+                        id: 1,
+                        type: 'like',
+                        message: 'GamerPro liked your post',
+                        timestamp: new Date(Date.now() - 300000),
+                        read: false,
+                        avatar: '🎮'
+                    },
+                    {
+                        id: 2,
+                        type: 'follow',
+                        message: 'LifeStyler started following you',
+                        timestamp: new Date(Date.now() - 600000),
+                        read: false,
+                        avatar: '✨'
+                    },
+                    {
+                        id: 3,
+                        type: 'comment',
+                        message: 'CultureKing commented on your post',
+                        timestamp: new Date(Date.now() - 900000),
+                        read: true,
+                        avatar: '🎭'
+                    },
+                    {
+                        id: 4,
+                        type: 'mention',
+                        message: 'You were mentioned in a post',
+                        timestamp: new Date(Date.now() - 1200000),
+                        read: false,
+                        avatar: '💼'
+                    },
+                    {
+                        id: 5,
+                        type: 'system',
+                        message: 'Welcome to ZYLORB v2.1.0!',
+                        timestamp: new Date(Date.now() - 1800000),
+                        read: true,
+                        avatar: '🚀'
+                    }
+                ];
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.renderNotifications();
+                this.setupEventListeners();
+                this.updateBadge();
+            }
+
+            setupEventListeners() {
+                document.getElementById('notifications-toggle').addEventListener('click', () => {
+                    this.toggleNotifications();
+                });
+
+                document.getElementById('mark-all-read').addEventListener('click', () => {
+                    this.markAllRead();
+                });
+            }
+
+            toggleNotifications() {
+                const panel = document.getElementById('notifications-panel');
+                this.isOpen = !this.isOpen;
+                
+                if (this.isOpen) {
+                    panel.classList.remove('hidden');
+                } else {
+                    panel.classList.add('hidden');
+                }
+            }
+
+            markAllRead() {
+                this.notifications.forEach(notif => notif.read = true);
+                this.renderNotifications();
+                this.updateBadge();
+                window.versionManager.showToast('All notifications marked as read', 'success');
+            }
+
+            renderNotifications() {
+                const container = document.getElementById('notifications-list');
+                container.innerHTML = this.notifications.map(notif => `
+                    <div class="p-4 border-b border-white/10 hover:bg-white/5 transition-colors cursor-pointer ${notif.read ? 'opacity-60' : ''}">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-lg">${notif.avatar}</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-white text-sm mb-1">${notif.message}</p>
+                                <span class="text-white/60 text-xs">${this.formatTime(notif.timestamp)}</span>
+                                ${!notif.read ? '<div class="w-2 h-2 bg-blue-500 rounded-full mt-1"></div>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            updateBadge() {
+                const badge = document.getElementById('notifications-badge');
+                const unreadCount = this.notifications.filter(n => !n.read).length;
+                
+                if (unreadCount > 0) {
+                    badge.textContent = unreadCount;
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+            }
+
+            formatTime(timestamp) {
+                const now = new Date();
+                const diff = now - timestamp;
+                const minutes = Math.floor(diff / 60000);
+                const hours = Math.floor(diff / 3600000);
+                const days = Math.floor(diff / 86400000);
+                
+                if (days > 0) return `${days}d ago`;
+                if (hours > 0) return `${hours}h ago`;
+                if (minutes > 0) return `${minutes}m ago`;
+                return 'Just now';
+            }
+        }
+
+        // Tag System
+        class TagSystem {
+            constructor() {
+                this.trendingTags = [
+                    { tag: 'gaming', count: 1250, trend: 'up' },
+                    { tag: 'esports', count: 890, trend: 'up' },
+                    { tag: 'lifestyle', count: 756, trend: 'stable' },
+                    { tag: 'culture', count: 634, trend: 'up' },
+                    { tag: 'tech', count: 567, trend: 'down' },
+                    { tag: 'professional', count: 445, trend: 'up' },
+                    { tag: 'festival', count: 389, trend: 'up' },
+                    { tag: 'tournament', count: 234, trend: 'stable' }
+                ];
+                this.userTags = [];
+                this.init();
+            }
+
+            init() {
+                this.createTagExplorer();
+                this.createTrendingTagsWidget();
+            }
+
+            createTagExplorer() {
+                const explorer = document.createElement('div');
+                explorer.id = 'tag-explorer';
+                explorer.className = 'hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4';
+                explorer.innerHTML = `
+                    <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-4xl max-h-[80vh] overflow-hidden">
+                        <div class="p-6 border-b border-white/20">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold text-white">Explore Tags</h3>
+                                <button id="close-tag-explorer" class="text-white/60 hover:text-white transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <!-- Tag Search -->
+                            <div class="relative">
+                                <input type="text" id="tag-search" placeholder="Search tags..." class="w-full bg-white/10 border border-white/20 rounded-lg pl-10 pr-4 py-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20">
+                                <svg class="absolute left-3 top-3.5 w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <div class="p-6 overflow-y-auto max-h-96">
+                            <!-- Trending Tags -->
+                            <div class="mb-8">
+                                <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                    <span class="text-2xl mr-2">🔥</span>
+                                    Trending Tags
+                                </h4>
+                                <div id="trending-tags-grid" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <!-- Trending tags will be populated here -->
+                                </div>
+                            </div>
+                            
+                            <!-- Zone Tags -->
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                        <span class="text-xl mr-2">🎮</span>
+                                        Gaming Tags
+                                    </h4>
+                                    <div class="flex flex-wrap gap-2" id="gaming-tags">
+                                        <!-- Gaming tags will be populated here -->
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                        <span class="text-xl mr-2">✨</span>
+                                        Lifestyle Tags
+                                    </h4>
+                                    <div class="flex flex-wrap gap-2" id="lifestyle-tags">
+                                        <!-- Lifestyle tags will be populated here -->
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                        <span class="text-xl mr-2">🎭</span>
+                                        Culture Tags
+                                    </h4>
+                                    <div class="flex flex-wrap gap-2" id="culture-tags">
+                                        <!-- Culture tags will be populated here -->
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                        <span class="text-xl mr-2">💼</span>
+                                        Professional Tags
+                                    </h4>
+                                    <div class="flex flex-wrap gap-2" id="professional-tags">
+                                        <!-- Professional tags will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(explorer);
+                this.populateTagExplorer();
+            }
+
+            createTrendingTagsWidget() {
+                const widget = document.createElement('div');
+                widget.id = 'trending-tags-widget';
+                widget.className = 'fixed bottom-20 left-4 z-40 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-4 w-64 hidden md:block';
+                widget.innerHTML = `
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-white font-semibold text-sm">Trending Tags</h4>
+                        <button id="expand-tags" class="text-purple-400 hover:text-purple-300 text-sm">View All</button>
+                    </div>
+                    <div id="trending-tags-list" class="space-y-2">
+                        <!-- Trending tags will be populated here -->
+                    </div>
+                `;
+                document.body.appendChild(widget);
+                this.populateTrendingWidget();
+                this.setupTagEventListeners();
+            }
+
+            populateTagExplorer() {
+                // Trending tags grid
+                const trendingGrid = document.getElementById('trending-tags-grid');
+                trendingGrid.innerHTML = this.trendingTags.map(tag => `
+                    <div class="bg-white/10 hover:bg-white/20 rounded-lg p-3 cursor-pointer transition-colors tag-item" data-tag="${tag.tag}">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-white font-semibold">#${tag.tag}</span>
+                            <span class="text-xs ${tag.trend === 'up' ? 'text-green-400' : tag.trend === 'down' ? 'text-red-400' : 'text-gray-400'}">
+                                ${tag.trend === 'up' ? '↗️' : tag.trend === 'down' ? '↘️' : '➡️'}
+                            </span>
+                        </div>
+                        <span class="text-white/60 text-xs">${tag.count.toLocaleString()} posts</span>
+                    </div>
+                `).join('');
+
+                // Zone-specific tags
+                const zoneTags = {
+                    gaming: ['fps', 'moba', 'rpg', 'streaming', 'esports', 'mobile', 'pc', 'console'],
+                    lifestyle: ['morning', 'workout', 'food', 'travel', 'fashion', 'selfie', 'mood', 'daily'],
+                    culture: ['festival', 'tradition', 'music', 'dance', 'art', 'heritage', 'celebration', 'local'],
+                    professional: ['networking', 'career', 'startup', 'innovation', 'leadership', 'skills', 'growth', 'business']
+                };
+
+                Object.keys(zoneTags).forEach(zone => {
+                    const container = document.getElementById(`${zone === 'lifestyle' ? 'lifestyle' : zone}-tags`);
+                    container.innerHTML = zoneTags[zone].map(tag => `
+                        <span class="inline-block px-3 py-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 text-sm rounded-full cursor-pointer transition-colors tag-item" data-tag="${tag}">
+                            #${tag}
+                        </span>
+                    `).join('');
+                });
+            }
+
+            populateTrendingWidget() {
+                const list = document.getElementById('trending-tags-list');
+                list.innerHTML = this.trendingTags.slice(0, 5).map(tag => `
+                    <div class="flex items-center justify-between py-1 cursor-pointer hover:bg-white/10 rounded px-2 -mx-2 transition-colors tag-item" data-tag="${tag.tag}">
+                        <span class="text-white text-sm">#${tag.tag}</span>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-white/60 text-xs">${tag.count}</span>
+                            <span class="text-xs ${tag.trend === 'up' ? 'text-green-400' : tag.trend === 'down' ? 'text-red-400' : 'text-gray-400'}">
+                                ${tag.trend === 'up' ? '↗️' : tag.trend === 'down' ? '↘️' : '➡️'}
+                            </span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            setupTagEventListeners() {
+                // Expand tags button
+                document.getElementById('expand-tags').addEventListener('click', () => {
+                    document.getElementById('tag-explorer').classList.remove('hidden');
+                });
+
+                // Close tag explorer
+                document.getElementById('close-tag-explorer').addEventListener('click', () => {
+                    document.getElementById('tag-explorer').classList.add('hidden');
+                });
+
+                // Tag search
+                document.getElementById('tag-search').addEventListener('input', (e) => {
+                    this.searchTags(e.target.value);
+                });
+
+                // Tag click handlers
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('tag-item') || e.target.closest('.tag-item')) {
+                        const tagElement = e.target.classList.contains('tag-item') ? e.target : e.target.closest('.tag-item');
+                        const tag = tagElement.dataset.tag;
+                        this.exploreTag(tag);
+                    }
+                });
+
+                // Close explorer on outside click
+                document.getElementById('tag-explorer').addEventListener('click', (e) => {
+                    if (e.target.id === 'tag-explorer') {
+                        document.getElementById('tag-explorer').classList.add('hidden');
+                    }
+                });
+            }
+
+            searchTags(query) {
+                if (!query.trim()) {
+                    this.populateTagExplorer();
+                    return;
+                }
+
+                const filteredTags = this.trendingTags.filter(tag => 
+                    tag.tag.toLowerCase().includes(query.toLowerCase())
+                );
+
+                const trendingGrid = document.getElementById('trending-tags-grid');
+                trendingGrid.innerHTML = filteredTags.map(tag => `
+                    <div class="bg-white/10 hover:bg-white/20 rounded-lg p-3 cursor-pointer transition-colors tag-item" data-tag="${tag.tag}">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-white font-semibold">#${tag.tag}</span>
+                            <span class="text-xs ${tag.trend === 'up' ? 'text-green-400' : tag.trend === 'down' ? 'text-red-400' : 'text-gray-400'}">
+                                ${tag.trend === 'up' ? '↗️' : tag.trend === 'down' ? '↘️' : '➡️'}
+                            </span>
+                        </div>
+                        <span class="text-white/60 text-xs">${tag.count.toLocaleString()} posts</span>
+                    </div>
+                `).join('');
+            }
+
+            exploreTag(tag) {
+                window.versionManager.showToast(`Exploring #${tag} posts! 🔍`, 'info');
+                document.getElementById('tag-explorer').classList.add('hidden');
+            }
+
+            addUserTag(tag) {
+                if (!this.userTags.includes(tag)) {
+                    this.userTags.push(tag);
+                }
+            }
+
+            removeUserTag(tag) {
+                this.userTags = this.userTags.filter(t => t !== tag);
+            }
+
+            getUserTags() {
+                return this.userTags;
+            }
+        }
+
+        // Post Creation System
+        class PostCreationSystem {
+            constructor() {
+                this.tags = [];
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                document.getElementById('post-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.createPost();
+                });
+
+                document.getElementById('post-tags').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' || e.key === ',') {
+                        e.preventDefault();
+                        this.addTag();
+                    }
+                });
+
+                document.getElementById('post-tags').addEventListener('blur', () => {
+                    this.addTag();
+                });
+            }
+
+            addTag() {
+                const input = document.getElementById('post-tags');
+                let tag = input.value.trim().replace(',', '').replace('#', '');
+                
+                if (tag && !this.tags.includes(tag)) {
+                    this.tags.push(tag);
+                    this.renderTags();
+                    input.value = '';
+                    
+                    // Add to user tags in tag system
+                    if (window.tagSystem) {
+                        window.tagSystem.addUserTag(tag);
+                    }
+                }
+            }
+
+            removeTag(tagToRemove) {
+                this.tags = this.tags.filter(tag => tag !== tagToRemove);
+                this.renderTags();
+                
+                // Remove from user tags in tag system
+                if (window.tagSystem) {
+                    window.tagSystem.removeUserTag(tagToRemove);
+                }
+            }
+
+            renderTags() {
+                const container = document.getElementById('tags-display');
+                container.innerHTML = this.tags.map(tag => `
+                    <span class="inline-flex items-center px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-full">
+                        #${tag}
+                        <button type="button" class="ml-2 text-purple-300 hover:text-white" onclick="window.postCreation.removeTag('${tag}')">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </span>
+                `).join('');
+            }
+
+            async createPost() {
+                const zone = document.querySelector('input[name="zone"]:checked')?.value;
+                const content = document.getElementById('post-content').value.trim();
+                
+                if (!zone) {
+                    window.versionManager.showToast('Please select a zone', 'error');
+                    return;
+                }
+                
+                if (!content) {
+                    window.versionManager.showToast('Please add some content', 'error');
+                    return;
+                }
+
+                // Content moderation check
+                const moderationResult = await window.contentModeration.moderateContent({
+                    text: content,
+                    media: []
+                });
+
+                if (!moderationResult.approved) {
+                    window.versionManager.showToast(moderationResult.message, 'error');
+                    return;
+                }
+
+                // Simulate post creation with tags
+                const tagText = this.tags.length > 0 ? ` with tags: ${this.tags.map(t => '#' + t).join(', ')}` : '';
+                window.versionManager.showToast(`Post created in ${zone} zone${tagText}! 🎉`, 'success');
+                
+                // Reset form
+                document.getElementById('post-form').reset();
+                this.tags = [];
+                this.renderTags();
+            }
+        }
+// File Upload System
+class FileUploadSystem {
+  constructor() {
+    this.apiBase = 'http://localhost:5000/api';
+  }
+
+  async uploadFile(file, folder = 'zylorb') {
+    try {
+      const base64 = await this.fileToBase64(file);
+      
+      const response = await fetch(this.apiBase + '/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + (window.authSystem?.token || '')
+        },
+        body: JSON.stringify({ image: base64, folder: folder })
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  showUploader() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*,video/*';
+    input.onchange = (e) => this.handleFileSelect(e);
+    input.click();
+  }
+
+  async handleFileSelect(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      const result = await this.uploadFile(file);
+      window.versionManager.showToast('File uploaded successfully! 🎉', 'success');
+      
+      // Post creation mein media add karo
+      if (window.postCreation) {
+        window.postCreation.addMedia(result.url);
+      }
+    } catch (error) {
+      window.versionManager.showToast('Upload failed: ' + error.message, 'error');
+    }
+  }
+}
+
+// Post Creation System Update - Media Support
+class PostCreationSystem {
+  // ... existing code ...
+
+  addMedia(mediaUrl) {
+    const mediaArea = document.querySelector('.media-preview') || this.createMediaArea();
+    const mediaItem = document.createElement('div');
+    mediaItem.className = 'relative';
+    mediaItem.innerHTML = `
+      <img src="${mediaUrl}" class="w-20 h-20 object-cover rounded-lg border border-white/20">
+      <button type="button" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs" onclick="this.parentElement.remove()">×</button>
+    `;
+    mediaArea.appendChild(mediaItem);
+  }
+
+  createMediaArea() {
+    const area = document.createElement('div');
+    area.className = 'media-preview flex flex-wrap gap-2 mt-3';
+    const uploadArea = document.querySelector('.media-upload-area');
+    uploadArea.parentNode.insertBefore(area, uploadArea.nextSibling);
+    return area;
+  }
+}
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize file upload system
+        window.fileUploadSystem = new FileUploadSystem();
+            // Initialize content moderation
+            window.contentModeration = new ContentModeration();
+            
+            // Initialize version manager
+            window.versionManager = new VersionManager();
+
+            // Initialize all systems
+            window.tagSystem = new TagSystem();
+            window.storiesSystem = new StoriesSystem();
+            window.newsSystem = new NewsSystem();
+            window.userProfilesSystem = new UserProfilesSystem();
+            window.chatSystem = new ChatSystem();
+            window.notificationsSystem = new NotificationsSystem();
+            window.postCreation = new PostCreationSystem();
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+            // Zone button interactions with content moderation
+            document.querySelectorAll('.zone-card button').forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    const zoneName = e.target.textContent.replace('Enter ', '').replace(' Zone', '');
+                    
+                    // Simulate content check for zone entry
+                    const testContent = {
+                        text: `Sample post for ${zoneName} zone`,
+                        media: []
+                    };
+                    
+                    const moderationResult = await window.contentModeration.moderateContent(testContent);
+                    
+                    if (moderationResult.approved) {
+                        window.versionManager.showToast(`Welcome to ${zoneName}! 🎉`, 'success');
+                    } else {
+                        window.versionManager.showToast(moderationResult.message, 'error');
+                    }
+                });
+            });
+
+            // CTA button interactions
+            document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    if (e.target.textContent.includes('Create Account')) {
+                        window.versionManager.showToast('Account creation coming soon! 🚀', 'info');
+                    } else if (e.target.textContent.includes('Join Now')) {
+                        window.versionManager.showToast('Join the community! 🎮', 'success');
+                    } else if (e.target.textContent.includes('Explore')) {
+                        window.versionManager.showToast('Explore all zones! 🌟', 'info');
+                    }
+                });
+            });
+
+            // Hide loading screen
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+            }, 1500);
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Close panels when clicking outside
+            document.addEventListener('click', (e) => {
+                const chatWidget = document.getElementById('chat-widget');
+                const notificationsWidget = document.getElementById('notifications-widget');
+                
+                if (!chatWidget.contains(e.target) && window.chatSystem.isOpen) {
+                    window.chatSystem.toggleChat();
+                }
+                
+                if (!notificationsWidget.contains(e.target) && window.notificationsSystem.isOpen) {
+                    window.notificationsSystem.toggleNotifications();
+                }
+            });
+        });
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(registration) {
+        console.log('SW registered: ', registration);
+      })
+      .catch(function(registrationError) {
+        console.log('SW registration failed: ', registrationError);
+      });
+  });
+}
+        // Simple hover effects only - no excessive mouse tracking
+    </script>
+</body>
+</html> 

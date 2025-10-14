@@ -1,0 +1,17 @@
+ {
+  "name": "zylorb",
+  "version": "2.1.0",
+  "description": "ZYLORB Social Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cloudinary": "^1.41.3",
+    "dotenv": "^17.2.3",
+    "mongoose": "^8.19.1"
+  }
+}
+      

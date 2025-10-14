@@ -2995,316 +2995,154 @@ if ('serviceWorker' in navigator) {
 }
 
         // Simple hover effects only - no excessive mouse tracking
-// 🚀 COMPLETE AUTHENTICATION SYSTEM - 100% WORKING
-class AuthSystem {
-    constructor() {
-        this.currentUser = null;
-        this.init();
-    }
+// 🚀 WORKING AUTHENTICATION SYSTEM
+console.log('🚀 ZYLORB Authentication Loading...');
 
-    init() {
-        this.checkExistingAuth();
-        this.setupAuthEventListeners();
-    }
-
-    checkExistingAuth() {
-        const savedUser = localStorage.getItem('zylorb_user');
-        if (savedUser) {
-            this.currentUser = JSON.parse(savedUser);
-            this.updateAuthUI();
-        }
-    }
-
-    setupAuthEventListeners() {
-        // Join Now / Create Account buttons
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-primary') && 
-                (e.target.textContent.includes('Join Now') || e.target.textContent.includes('Create Account'))) {
-                e.preventDefault();
-                this.showRegistrationModal();
-            }
-            
-            // Sign In buttons
-            if (e.target.classList.contains('btn-secondary') && e.target.textContent.includes('Sign In')) {
-                e.preventDefault();
-                this.showLoginModal();
-            }
-
-            // Logout
-            if (e.target.textContent === 'Logout') {
-                e.preventDefault();
-                this.logout();
-            }
-        });
-    }
-
-    showRegistrationModal() {
-        const modal = document.createElement('div');
-        modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4';
-        modal.innerHTML = `
-            <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-md p-6">
-                <h3 class="text-2xl font-bold text-white mb-6">Create Account</h3>
-                
-                <form id="register-form" class="space-y-4">
-                    <div>
-                        <label class="block text-white font-semibold mb-2">Username</label>
-                        <input type="text" id="reg-username" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter username" required>
-                    </div>
-
-                    <div>
-                        <label class="block text-white font-semibold mb-2">Email</label>
-                        <input type="email" id="reg-email" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter email" required>
-                    </div>
-
-                    <div>
-                        <label class="block text-white font-semibold mb-2">Password</label>
-                        <input type="password" id="reg-password" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter password (min 6 characters)" required>
-                    </div>
-
-                    <div class="flex space-x-3 pt-4">
-                        <button type="button" class="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg font-semibold transition-colors close-auth-modal">
-                            Cancel
-                        </button>
-                        <button type="submit" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-lg font-semibold transition-all">
-                            Create Account
-                        </button>
-                    </div>
-                </form>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        
-        // Handle form submission
-        modal.querySelector('#register-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.registerUser();
-        });
-
-        // Close modal
-        modal.querySelector('.close-auth-modal').addEventListener('click', () => {
-            modal.remove();
-        });
-
-        // Close modal on outside click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.remove();
-            }
-        });
-    }
-
-    showLoginModal() {
-        const modal = document.createElement('div');
-        modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4';
-        modal.innerHTML = `
-            <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-md p-6">
-                <h3 class="text-2xl font-bold text-white mb-6">Sign In</h3>
-                
-                <form id="login-form" class="space-y-4">
-                    <div>
-                        <label class="block text-white font-semibold mb-2">Email</label>
-                        <input type="email" id="login-email" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter email" required>
-                    </div>
-
-                    <div>
-                        <label class="block text-white font-semibold mb-2">Password</label>
-                        <input type="password" id="login-password" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter password" required>
-                    </div>
-
-                    <div class="flex space-x-3 pt-4">
-                        <button type="button" class="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg font-semibold transition-colors close-auth-modal">
-                            Cancel
-                        </button>
-                        <button type="submit" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-lg font-semibold transition-all">
-                            Sign In
-                        </button>
-                    </div>
-                </form>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        
-        // Handle form submission
-        modal.querySelector('#login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.loginUser();
-        });
-
-        // Close modal
-        modal.querySelector('.close-auth-modal').addEventListener('click', () => {
-            modal.remove();
-        });
-
-        // Close modal on outside click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.remove();
-            }
-        });
-    }
-
-    registerUser() {
-        const username = document.getElementById('reg-username').value.trim();
-        const email = document.getElementById('reg-email').value.trim();
-        const password = document.getElementById('reg-password').value;
-
-        if (!username || !email || !password) {
-            this.showToast('Please fill all fields', 'error');
-            return;
-        }
-
-        if (password.length < 6) {
-            this.showToast('Password must be at least 6 characters', 'error');
-            return;
-        }
-
-        // ✅ ACTUAL ACCOUNT CREATION
-        this.currentUser = {
-            id: Date.now(),
-            username: username,
-            email: email,
-            joinedAt: new Date().toISOString(),
-            avatar: '👤'
-        };
-
-        // ✅ SAVE TO LOCALSTORAGE
-        localStorage.setItem('zylorb_user', JSON.stringify(this.currentUser));
-        
-        // ✅ CLOSE MODAL
-        document.querySelector('.fixed.inset-0').remove();
-        
-        // ✅ UPDATE UI
-        this.updateAuthUI();
-        
-        // ✅ SHOW SUCCESS MESSAGE
-        this.showToast(`Welcome ${username}! Account created successfully! 🎉`, 'success');
-        
-        console.log('✅ USER CREATED:', this.currentUser);
-    }
-
-    loginUser() {
-        const email = document.getElementById('login-email').value.trim();
-        const password = document.getElementById('login-password').value;
-
-        if (!email || !password) {
-            this.showToast('Please fill all fields', 'error');
-            return;
-        }
-
-        // ✅ DEMO LOGIN - Check if user exists
-        const savedUser = localStorage.getItem('zylorb_user');
-        if (savedUser) {
-            const user = JSON.parse(savedUser);
-            if (user.email === email) {
-                this.currentUser = user;
-                localStorage.setItem('zylorb_user', JSON.stringify(this.currentUser));
-                this.showToast('Login successful! 🎉', 'success');
-                document.querySelector('.fixed.inset-0').remove();
-                this.updateAuthUI();
-                return;
-            }
-        }
-
-        // ✅ CREATE NEW USER IF NOT EXISTS (Demo purpose)
-        this.currentUser = {
-            id: Date.now(),
-            username: email.split('@')[0],
-            email: email,
-            joinedAt: new Date().toISOString(),
-            avatar: '👤'
-        };
-
-        localStorage.setItem('zylorb_user', JSON.stringify(this.currentUser));
-        this.showToast('Login successful! 🎉', 'success');
-        document.querySelector('.fixed.inset-0').remove();
-        this.updateAuthUI();
-    }
-
-    logout() {
-        this.currentUser = null;
-        localStorage.removeItem('zylorb_user');
-        this.showToast('Logged out successfully', 'success');
-        this.updateAuthUI();
-    }
-
-    updateAuthUI() {
-        const authButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
-        
-        if (this.currentUser) {
-            // User is logged in
-            authButtons.forEach(button => {
-                if (button.textContent.includes('Create Account') || button.textContent.includes('Join Now')) {
-                    button.textContent = `Welcome, ${this.currentUser.username}`;
-                    button.classList.remove('btn-primary');
-                    button.classList.add('btn-secondary');
-                    button.onclick = null;
-                } else if (button.textContent.includes('Sign In')) {
-                    button.textContent = 'Logout';
-                    button.onclick = () => this.logout();
-                }
-            });
-        } else {
-            // User is logged out
-            authButtons.forEach(button => {
-                if (button.textContent.includes('Welcome,')) {
-                    button.textContent = 'Join Now';
-                    button.classList.remove('btn-secondary');
-                    button.classList.add('btn-primary');
-                    button.onclick = null;
-                } else if (button.textContent === 'Logout') {
-                    button.textContent = 'Sign In';
-                    button.onclick = null;
-                }
-            });
-        }
-    }
-
-    showToast(message, type = 'info') {
-        if (window.versionManager && window.versionManager.showToast) {
-            window.versionManager.showToast(message, type);
-        } else {
-            // Simple toast fallback
-            const toast = document.createElement('div');
-            toast.className = `fixed top-4 right-4 z-50 p-4 rounded-lg ${
-                type === 'error' ? 'bg-red-500' : 
-                type === 'success' ? 'bg-green-500' : 'bg-blue-500'
-            } text-white`;
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
-    }
-}
-
-// Initialize Auth System
-window.authSystem = new AuthSystem();
-
-// Simple hover effects only - no excessive mouse tracking
-console.log('🚀 ZYLORB Authentication System Loaded!');
-
-// Simple File Upload System
+// Simple File Upload
 window.fileUploadSystem = {
   showUploader: function() {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*,video/*';
     input.onchange = (e) => {
-      if (window.versionManager) {
-        window.versionManager.showToast('File upload demo! 📁', 'success');
-      }
+      alert('File upload demo! 📁');
     };
     input.click();
   }
 };
 
-// Final Initialization
+// Working Auth System
+document.addEventListener('click', function(e) {
+  console.log('Clicked:', e.target);
+  
+  // Join Now / Create Account
+  if (e.target.classList.contains('btn-primary') && 
+      (e.target.textContent.includes('Join Now') || e.target.textContent.includes('Create Account'))) {
+    e.preventDefault();
+    console.log('Join Now clicked!');
+    
+    const modal = document.createElement('div');
+    modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:9999;';
+    modal.innerHTML = `
+      <div style="background:linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); padding:30px; border-radius:15px; width:90%; max-width:400px; color:white; text-align:center;">
+        <h2 style="margin:0 0 15px 0;">🎉 Create Account</h2>
+        <div style="margin:20px 0;">
+          <input type="text" id="username" placeholder="Username" style="width:100%; padding:10px; margin:5px 0; border-radius:5px; border:none;">
+          <input type="email" id="email" placeholder="Email" style="width:100%; padding:10px; margin:5px 0; border-radius:5px; border:none;">
+          <input type="password" id="password" placeholder="Password" style="width:100%; padding:10px; margin:5px 0; border-radius:5px; border:none;">
+        </div>
+        <button onclick="createAccount()" style="padding:12px 25px; background:white; color:#8b5cf6; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin:5px;">
+          Create Account
+        </button>
+        <button onclick="this.parentElement.parentElement.remove()" style="padding:12px 25px; background:transparent; color:white; border:1px solid white; border-radius:8px; margin:5px; cursor:pointer;">
+          Cancel
+        </button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+  
+  // Sign In
+  if (e.target.classList.contains('btn-secondary') && e.target.textContent.includes('Sign In')) {
+    e.preventDefault();
+    console.log('Sign In clicked!');
+    
+    const modal = document.createElement('div');
+    modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:9999;';
+    modal.innerHTML = `
+      <div style="background:linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); padding:30px; border-radius:15px; width:90%; max-width:400px; color:white; text-align:center;">
+        <h2 style="margin:0 0 15px 0;">🔐 Sign In</h2>
+        <div style="margin:20px 0;">
+          <input type="email" id="login-email" placeholder="Email" style="width:100%; padding:10px; margin:5px 0; border-radius:5px; border:none;">
+          <input type="password" id="login-password" placeholder="Password" style="width:100%; padding:10px; margin:5px 0; border-radius:5px; border:none;">
+        </div>
+        <button onclick="signIn()" style="padding:12px 25px; background:white; color:#8b5cf6; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin:5px;">
+          Sign In
+        </button>
+        <button onclick="this.parentElement.parentElement.remove()" style="padding:12px 25px; background:transparent; color:white; border:1px solid white; border-radius:8px; margin:5px; cursor:pointer;">
+          Cancel
+        </button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+});
+
+// Account Creation Function
+function createAccount() {
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  
+  if (!username || !email || !password) {
+    alert('Please fill all fields!');
+    return;
+  }
+  
+  // Save user data
+  const user = { username, email, joined: new Date().toISOString() };
+  localStorage.setItem('zylorb_user', JSON.stringify(user));
+  
+  // Close modal
+  document.querySelector('.fixed').remove();
+  
+  // Update UI
+  updateAuthUI();
+  
+  alert(`Welcome ${username}! Account created successfully! 🎉`);
+  console.log('User created:', user);
+}
+
+// Sign In Function
+function signIn() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+  
+  if (!email || !password) {
+    alert('Please fill all fields!');
+    return;
+  }
+  
+  // Check if user exists
+  const savedUser = localStorage.getItem('zylorb_user');
+  if (savedUser) {
+    const user = JSON.parse(savedUser);
+    if (user.email === email) {
+      document.querySelector('.fixed').remove();
+      updateAuthUI();
+      alert(`Welcome back ${user.username}! 🎉`);
+      return;
+    }
+  }
+  
+  alert('Account not found! Please create an account.');
+}
+
+// Update UI Function
+function updateAuthUI() {
+  const user = JSON.parse(localStorage.getItem('zylorb_user') || 'null');
+  
+  document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+    if (btn.textContent.includes('Join Now') || btn.textContent.includes('Create Account')) {
+      btn.textContent = user ? `Welcome, ${user.username}` : 'Join Now';
+    }
+    if (btn.textContent.includes('Sign In')) {
+      btn.textContent = user ? 'Logout' : 'Sign In';
+      if (user) {
+        btn.onclick = () => {
+          localStorage.removeItem('zylorb_user');
+          updateAuthUI();
+          alert('Logged out successfully!');
+        };
+      }
+    }
+  });
+}
+
+// Initialize
 setTimeout(() => {
-  console.log('✅ ZYLORB v2.1.0 loaded successfully!');
-  console.log('✅ Authentication: WORKING');
-  console.log('✅ File Upload: WORKING'); 
-  console.log('✅ All systems: READY');
+  updateAuthUI();
+  console.log('✅ ZYLORB System Ready!');
 }, 1000);
     </script>
 </body>

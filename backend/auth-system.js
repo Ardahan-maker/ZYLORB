@@ -3,7 +3,7 @@ class AuthSystem {
     constructor() {
         this.token = localStorage.getItem('zylorb_token');
         this.user = JSON.parse(localStorage.getItem('zylorb_user') || 'null');
-        this.apiBase = 'http://localhost:5000/api';
+        this.apiBase = 'https://zylorb-backend.onrender.com/api';
         this.init();
     }
 

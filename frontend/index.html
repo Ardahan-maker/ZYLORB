@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
     <!-- PWA Manifest -->
-
-<meta name="theme-color" content="#8b5cf6">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="ZYLORB">
-<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <meta name="theme-color" content="#8b5cf6">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ZYLORB">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZYLORB - Gaming • Life • Culture • Professional</title>
     <meta name="description" content="Share your gaming highlights, daily moments, cultural experiences, and professional insights in one vibrant community platform with four distinct zones.">
     
-
     <!-- SEO Meta Tags -->
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -38,7 +37,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
     <style>
+        /* ALL YOUR EXISTING CSS STYLES - SAME AS BEFORE */
         body {
             box-sizing: border-box;
             background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
@@ -177,28 +178,24 @@
         }
         
         /* Animation for smooth transitions */
-      .zone-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1rem;
-    padding: 2rem;
-}
+        .zone-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
 
-.zone-card:hover {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
+        .zone-card:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .zone-card {
-        padding: 1.5rem;
-    }
-    
-     
-        /* Kuch bhi transform mat add karo */
-    }
-
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .zone-card {
+                padding: 1.5rem;
+            }
+        }
         
         /* Custom scrollbar */
         ::-webkit-scrollbar {
@@ -217,70 +214,73 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.5);
         }
+        
         /* Reels Section Styles */
-.reel-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1rem;
-    transition: all 0.3s ease;
-}
+        .reel-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
 
-.reel-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
+        .reel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
 
-#reels-section {
-    position: relative;
-    overflow: hidden;
-}
-/* Add smooth scrolling to entire page */
-html {
-  scroll-behavior: smooth;
-}
+        #reels-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Add smooth scrolling to entire page */
+        html {
+          scroll-behavior: smooth;
+        }
 
-/* Improve mobile touch targets */
-@media (max-width: 768px) {
-  .btn-primary, .btn-secondary {
-    min-height: 44px; /* Better touch targets */
-  }
-}
-/* Mobile Performance Optimizations */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
+        /* Improve mobile touch targets */
+        @media (max-width: 768px) {
+          .btn-primary, .btn-secondary {
+            min-height: 44px; /* Better touch targets */
+          }
+        }
+        
+        /* Mobile Performance Optimizations */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
 
-/* Optimize large media */
-.reel-card video,
-.story-content img {
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-}
+        /* Optimize large media */
+        .reel-card video,
+        .story-content img {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
 
-/* Touch improvements for mobile */
-@media (max-width: 768px) {
-    .btn-primary, 
-    .btn-secondary,
-    .zone-card button {
-        min-height: 44px;
-        min-width: 44px;
-    }
-    
-    /* Reduce blur on mobile for performance */
-    .zone-card,
-    .card-glass {
-        backdrop-filter: blur(8px);
-    }
-}
+        /* Touch improvements for mobile */
+        @media (max-width: 768px) {
+            .btn-primary, 
+            .btn-secondary,
+            .zone-card button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Reduce blur on mobile for performance */
+            .zone-card,
+            .card-glass {
+                backdrop-filter: blur(8px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -288,16 +288,16 @@ html {
     <div id="loading-screen" class="fixed inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center z-50">
         <div class="text-center">
            <!-- NEW PERFECT LOGO -->
-<div class="flex flex-col items-center justify-center mx-auto mb-4">
-    <div class="flex space-x-1">
-        <div class="w-4 h-4 bg-purple-500 transform rotate-45"></div>
-        <div class="w-4 h-4 bg-pink-500 transform rotate-45"></div>
-    </div>
-    <div class="flex space-x-1 mt-1">
-        <div class="w-4 h-4 bg-blue-500 transform rotate-45"></div>
-        <div class="w-4 h-4 bg-green-500 transform rotate-45"></div>
-    </div>
-     </div>
+           <div class="flex flex-col items-center justify-center mx-auto mb-4">
+               <div class="flex space-x-1">
+                   <div class="w-4 h-4 bg-purple-500 transform rotate-45"></div>
+                   <div class="w-4 h-4 bg-pink-500 transform rotate-45"></div>
+               </div>
+               <div class="flex space-x-1 mt-1">
+                   <div class="w-4 h-4 bg-blue-500 transform rotate-45"></div>
+                   <div class="w-4 h-4 bg-green-500 transform rotate-45"></div>
+               </div>
+           </div>
             <div class="loading-skeleton w-32 h-4 rounded mx-auto"></div>
             <p class="text-white/60 mt-2">Loading ZYLORB v2.1.0...</p>
         </div>
@@ -309,16 +309,16 @@ html {
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-3">
                     <!-- NEW PERFECT LOGO -->
-<div class="flex flex-col items-center justify-center">
-    <div class="flex space-x-1">
-        <div class="w-3 h-3 bg-purple-500 transform rotate-45"></div>
-        <div class="w-3 h-3 bg-pink-500 transform rotate-45"></div>
-    </div>
-    <div class="flex space-x-1 mt-1">
-        <div class="w-3 h-3 bg-blue-500 transform rotate-45"></div>
-        <div class="w-3 h-3 bg-green-500 transform rotate-45"></div>
-    </div>
-</div>
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="flex space-x-1">
+                            <div class="w-3 h-3 bg-purple-500 transform rotate-45"></div>
+                            <div class="w-3 h-3 bg-pink-500 transform rotate-45"></div>
+                        </div>
+                        <div class="flex space-x-1 mt-1">
+                            <div class="w-3 h-3 bg-blue-500 transform rotate-45"></div>
+                            <div class="w-3 h-3 bg-green-500 transform rotate-45"></div>
+                        </div>
+                    </div>
                     <h1 class="text-2xl font-bold text-white">ZYLORB</h1>
                     <span class="px-2 py-1 bg-green-600 text-white text-xs rounded-full">v2.1.0</span>
                 </div>
@@ -385,64 +385,64 @@ html {
         </div>
     </section>
 
-<!-- Reels/Short Videos Section -->
-<section id="reels-section" class="py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-900/50 to-pink-900/50">
-    <div class="max-w-7xl mx-auto">
-        <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold text-white flex items-center">
-                <span class="text-2xl mr-2">🎬</span>
-                Short Videos / Reels
-            </h3>
-            <button id="add-reel-btn" class="btn-primary text-sm">
-                <span class="mr-2">+</span> Create Reel
-            </button>
-        </div>
-        
-        <div id="reels-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <!-- Reel Item 1 -->
-            <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-                <div class="relative">
-                    <video class="w-full h-80 object-cover" muted loop>
-                        <source src="#" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                        <p class="text-white font-semibold">Epic Gaming Moment 🎮</p>
-                        <p class="text-white/60 text-sm">GamerPro • 2.5K views</p>
-                    </div>
-                    <div class="absolute top-2 right-2">
-                        <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs">LIVE</span>
-                    </div>
-                </div>
+    <!-- Reels/Short Videos Section -->
+    <section id="reels-section" class="py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-900/50 to-pink-900/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-white flex items-center">
+                    <span class="text-2xl mr-2">🎬</span>
+                    Short Videos / Reels
+                </h3>
+                <button id="add-reel-btn" class="btn-primary text-sm">
+                    <span class="mr-2">+</span> Create Reel
+                </button>
             </div>
             
-            <!-- Reel Item 2 -->
-            <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-                <div class="relative">
-                    <video class="w-full h-80 object-cover" muted loop>
-                        <source src="#" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                        <p class="text-white font-semibold">Morning Routine ✨</p>
-                        <p class="text-white/60 text-sm">LifeStyler • 1.8K views</p>
+            <div id="reels-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Reel Item 1 -->
+                <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+                    <div class="relative">
+                        <video class="w-full h-80 object-cover" muted loop>
+                            <source src="#" type="video/mp4">
+                        </video>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <p class="text-white font-semibold">Epic Gaming Moment 🎮</p>
+                            <p class="text-white/60 text-sm">GamerPro • 2.5K views</p>
+                        </div>
+                        <div class="absolute top-2 right-2">
+                            <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs">LIVE</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Reel Item 3 -->
-            <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-                <div class="relative">
-                    <video class="w-full h-80 object-cover" muted loop>
-                        <source src="#" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                        <p class="text-white font-semibold">Cultural Dance 🎭</p>
-                        <p class="text-white/60 text-sm">CultureKing • 3.2K views</p>
+                
+                <!-- Reel Item 2 -->
+                <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+                    <div class="relative">
+                        <video class="w-full h-80 object-cover" muted loop>
+                            <source src="#" type="video/mp4">
+                        </video>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <p class="text-white font-semibold">Morning Routine ✨</p>
+                            <p class="text-white/60 text-sm">LifeStyler • 1.8K views</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reel Item 3 -->
+                <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+                    <div class="relative">
+                        <video class="w-full h-80 object-cover" muted loop>
+                            <source src="#" type="video/mp4">
+                        </video>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <p class="text-white font-semibold">Cultural Dance 🎭</p>
+                            <p class="text-white/60 text-sm">CultureKing • 3.2K views</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- News & Bulletins -->
     <section id="news-section" class="py-6 px-4 sm:px-6 lg:px-8 bg-black/10">
@@ -704,7 +704,7 @@ html {
                         <!-- Media Upload -->
                         <div>
                             <label class="block text-white font-semibold mb-3">Media (Demo)</label>
-                            <div class="media-upload-area border-2 border-dashed border-white/20 rounded-lg p-8 text-center hover:border-white/40 transition-colors cursor-pointer" onclick="window.fileUploadSystem.showUploader()"></div>
+                            <div class="media-upload-area border-2 border-dashed border-white/20 rounded-lg p-8 text-center hover:border-white/40 transition-colors cursor-pointer" onclick="window.fileUploadSystem.showUploader()">
                                 <svg class="w-12 h-12 text-white/60 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                                 </svg>
@@ -801,16 +801,16 @@ html {
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
                        <!-- NEW PERFECT LOGO -->
-<div class="flex flex-col items-center justify-center">
-    <div class="flex space-x-1">
-        <div class="w-2 h-2 bg-purple-500 transform rotate-45"></div>
-        <div class="w-2 h-2 bg-pink-500 transform rotate-45"></div>
-    </div>
-    <div class="flex space-x-1 mt-1">
-        <div class="w-2 h-2 bg-blue-500 transform rotate-45"></div>
-        <div class="w-2 h-2 bg-green-500 transform rotate-45"></div>
-    </div>
-</div>
+                       <div class="flex flex-col items-center justify-center">
+                           <div class="flex space-x-1">
+                               <div class="w-2 h-2 bg-purple-500 transform rotate-45"></div>
+                               <div class="w-2 h-2 bg-pink-500 transform rotate-45"></div>
+                           </div>
+                           <div class="flex space-x-1 mt-1">
+                               <div class="w-2 h-2 bg-blue-500 transform rotate-45"></div>
+                               <div class="w-2 h-2 bg-green-500 transform rotate-45"></div>
+                           </div>
+                       </div>
                         <span class="text-white font-bold text-lg">ZYLORB</span>
                     </div>
                     <p class="text-white/80 text-sm">Your world, four zones. Connect, share, and discover.</p>
@@ -870,16 +870,16 @@ html {
                 <div class="flex items-center justify-between mb-6">
                     <div class="flex items-center space-x-3">
                         <!-- NEW PERFECT LOGO -->
-<div class="flex flex-col items-center justify-center">
-    <div class="flex space-x-1">
-        <div class="w-3 h-3 bg-purple-500 transform rotate-45"></div>
-        <div class="w-3 h-3 bg-pink-500 transform rotate-45"></div>
-    </div>
-    <div class="flex space-x-1 mt-1">
-        <div class="w-3 h-3 bg-blue-500 transform rotate-45"></div>
-        <div class="w-3 h-3 bg-green-500 transform rotate-45"></div>
-    </div>
-</div>
+                        <div class="flex flex-col items-center justify-center">
+                            <div class="flex space-x-1">
+                                <div class="w-3 h-3 bg-purple-500 transform rotate-45"></div>
+                                <div class="w-3 h-3 bg-pink-500 transform rotate-45"></div>
+                            </div>
+                            <div class="flex space-x-1 mt-1">
+                                <div class="w-3 h-3 bg-blue-500 transform rotate-45"></div>
+                                <div class="w-3 h-3 bg-green-500 transform rotate-45"></div>
+                            </div>
+                        </div>
                         <div>
                             <h3 class="text-2xl font-bold text-white">ZYLORB</h3>
                             <p class="text-white/60">Version Information</p>
@@ -1111,24 +1111,24 @@ html {
         class ContentModeration {
             constructor() {
                 // MY NAME IS MUDDASIR - AND I AM BLOCKING ADULT AND SEXUAL CONTENT
-this.blockedKeywords = [
-   // Adult content
-    'porn', 'porno', 'xxx', 'nsfw', 'adult', 'nude', 'naked',
-    'sex', 'sexual', 'hentai', 'erotic', 'explicit', 'xxxvideo',
-    'fuck', 'dick', 'pussy', 'ass', 'boobs', 'tits', 'cum',
-    'blowjob', 'handjob', 'masturbat', 'orgasm', 'penis', 'vagina',
-    'sexy', 'hot', 'seductive', 'provocative', 'onlyfans',
-    'camgirl', 'strip', 'nudist', 'bare', 'bikini', 'lingerie',
-    'hotgirl', 'sexvideo', 'adultvideo', 'pornvideo',
-    
-    // Violence & hate speech
-    'kill', 'murder', 'violence', 'attack', 'hurt', 'harm',
-    'hate', 'racist', 'racism', 'discriminat', 'nazi',
-    
-    // Drugs & illegal
-    'drug', 'weed', 'marijuana', 'cocaine', 'heroin', 'lsd',
-    'illegal', 'weapon', 'gun', 'bomb', 'terror'
-];
+                this.blockedKeywords = [
+                   // Adult content
+                    'porn', 'porno', 'xxx', 'nsfw', 'adult', 'nude', 'naked',
+                    'sex', 'sexual', 'hentai', 'erotic', 'explicit', 'xxxvideo',
+                    'fuck', 'dick', 'pussy', 'ass', 'boobs', 'tits', 'cum',
+                    'blowjob', 'handjob', 'masturbat', 'orgasm', 'penis', 'vagina',
+                    'sexy', 'hot', 'seductive', 'provocative', 'onlyfans',
+                    'camgirl', 'strip', 'nudist', 'bare', 'bikini', 'lingerie',
+                    'hotgirl', 'sexvideo', 'adultvideo', 'pornvideo',
+                    
+                    // Violence & hate speech
+                    'kill', 'murder', 'violence', 'attack', 'hurt', 'harm',
+                    'hate', 'racist', 'racism', 'discriminat', 'nazi',
+                    
+                    // Drugs & illegal
+                    'drug', 'weed', 'marijuana', 'cocaine', 'heroin', 'lsd',
+                    'illegal', 'weapon', 'gun', 'bomb', 'terror'
+                ];
             }
 
             scanTextContent(text) {
@@ -1332,249 +1332,251 @@ ${this.features.map(f => `• ${f}`).join('\n')}
                 }, 5000);
             }
         }
-// 🔐 COMPLETE AUTHENTICATION SYSTEM - 100% WORKING
-class AuthSystem {
-    constructor() {
-        this.demoMode = true; // ✅ PERMANENT DEMO MODE
-        this.token = localStorage.getItem('authToken');
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-        this.init();
-    }
 
-    init() {
-        this.setupAuthEventListeners();
-        this.updateAuthUI();
-        console.log('✅ AuthSystem initialized in DEMO mode');
-    }
-
-    setupAuthEventListeners() {
-        // Direct click handlers - 100% guaranteed
-        document.addEventListener('click', (e) => {
-            // Join Now / Create Account buttons
-            if (e.target.classList.contains('btn-primary') && 
-                (e.target.textContent.includes('Join Now') || e.target.textContent.includes('Create Account'))) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('🎯 Join Now clicked');
-                this.showRegistrationModal();
+        // 🔐 COMPLETE AUTHENTICATION SYSTEM - 100% WORKING
+        class AuthSystem {
+            constructor() {
+                this.demoMode = true; // ✅ PERMANENT DEMO MODE
+                this.token = localStorage.getItem('authToken');
+                this.currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+                this.init();
             }
-            
-            // Sign In buttons
-            if (e.target.classList.contains('btn-secondary') && e.target.textContent.includes('Sign In')) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('🎯 Sign In clicked');
-                this.showLoginModal();
-            }
-        });
-    }
 
-    showRegistrationModal() {
-        const modal = document.createElement('div');
-        modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4';
-        modal.innerHTML = `
-            <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-md p-6">
-                <h3 class="text-2xl font-bold text-white mb-6">Create Account</h3>
+            init() {
+                this.setupAuthEventListeners();
+                this.updateAuthUI();
+                console.log('✅ AuthSystem initialized in DEMO mode');
+            }
+
+            setupAuthEventListeners() {
+                // Direct click handlers - 100% guaranteed
+                document.addEventListener('click', (e) => {
+                    // Join Now / Create Account buttons
+                    if (e.target.classList.contains('btn-primary') && 
+                        (e.target.textContent.includes('Join Now') || e.target.textContent.includes('Create Account'))) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('🎯 Join Now clicked');
+                        this.showRegistrationModal();
+                    }
+                    
+                    // Sign In buttons
+                    if (e.target.classList.contains('btn-secondary') && e.target.textContent.includes('Sign In')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('🎯 Sign In clicked');
+                        this.showLoginModal();
+                    }
+                });
+            }
+
+            showRegistrationModal() {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4';
+                modal.innerHTML = `
+                    <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-md p-6">
+                        <h3 class="text-2xl font-bold text-white mb-6">Create Account</h3>
+                        
+                        <form id="register-form" class="space-y-4">
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Username</label>
+                                <input type="text" id="reg-username" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter username" required>
+                            </div>
+
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Email</label>
+                                <input type="email" id="reg-email" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter email" required>
+                            </div>
+
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Password</label>
+                                <input type="password" id="reg-password" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter password (min 6 characters)" required>
+                            </div>
+
+                            <div class="flex space-x-3 pt-4">
+                                <button type="button" class="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg font-semibold transition-colors close-modal">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-lg font-semibold transition-all">
+                                    Create Account
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                `;
                 
-                <form id="register-form" class="space-y-4">
-                    <div>
-                        <label class="block text-white font-semibold mb-2">Username</label>
-                        <input type="text" id="reg-username" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter username" required>
-                    </div>
-
-                    <div>
-                        <label class="block text-white font-semibold mb-2">Email</label>
-                        <input type="email" id="reg-email" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter email" required>
-                    </div>
-
-                    <div>
-                        <label class="block text-white font-semibold mb-2">Password</label>
-                        <input type="password" id="reg-password" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter password (min 6 characters)" required>
-                    </div>
-
-                    <div class="flex space-x-3 pt-4">
-                        <button type="button" class="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg font-semibold transition-colors close-modal">
-                            Cancel
-                        </button>
-                        <button type="submit" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-lg font-semibold transition-all">
-                            Create Account
-                        </button>
-                    </div>
-                </form>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        
-        // Handle form submission - DEMO MODE
-        modal.querySelector('#register-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.registerUser();
-        });
-
-        // Close modal
-        modal.querySelector('.close-modal').addEventListener('click', () => {
-            modal.remove();
-        });
-
-        // Close modal on outside click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.remove();
-            }
-        });
-    }
-
-    showLoginModal() {
-        const modal = document.createElement('div');
-        modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4';
-        modal.innerHTML = `
-            <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-md p-6">
-                <h3 class="text-2xl font-bold text-white mb-6">Sign In</h3>
+                document.body.appendChild(modal);
                 
-                <form id="login-form" class="space-y-4">
-                    <div>
-                        <label class="block text-white font-semibold mb-2">Email</label>
-                        <input type="email" id="login-email" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter email" required>
-                    </div>
+                // Handle form submission - DEMO MODE
+                modal.querySelector('#register-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.registerUser();
+                });
 
-                    <div>
-                        <label class="block text-white font-semibold mb-2">Password</label>
-                        <input type="password" id="login-password" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter password" required>
-                    </div>
+                // Close modal
+                modal.querySelector('.close-modal').addEventListener('click', () => {
+                    modal.remove();
+                });
 
-                    <div class="flex space-x-3 pt-4">
-                        <button type="button" class="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg font-semibold transition-colors close-modal">
-                            Cancel
-                        </button>
-                        <button type="submit" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-lg font-semibold transition-all">
-                            Sign In
-                        </button>
-                    </div>
-                </form>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        
-        // Handle form submission - DEMO MODE
-        modal.querySelector('#login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.loginUser();
-        });
-
-        // Close modal
-        modal.querySelector('.close-modal').addEventListener('click', () => {
-            modal.remove();
-        });
-
-        // Close modal on outside click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.remove();
+                // Close modal on outside click
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.remove();
+                    }
+                });
             }
-        });
-    }
 
-    async registerUser() {
-        const username = document.getElementById('reg-username').value.trim();
-        const email = document.getElementById('reg-email').value.trim();
-        const password = document.getElementById('reg-password').value;
+            showLoginModal() {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4';
+                modal.innerHTML = `
+                    <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-md p-6">
+                        <h3 class="text-2xl font-bold text-white mb-6">Sign In</h3>
+                        
+                        <form id="login-form" class="space-y-4">
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Email</label>
+                                <input type="email" id="login-email" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter email" required>
+                            </div>
 
-        if (!username || !email || !password) {
-            this.showToast('Please fill all fields', 'error');
-            return;
-        }
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Password</label>
+                                <input type="password" id="login-password" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Enter password" required>
+                            </div>
 
-        if (password.length < 6) {
-            this.showToast('Password must be at least 6 characters', 'error');
-            return;
-        }
+                            <div class="flex space-x-3 pt-4">
+                                <button type="button" class="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg font-semibold transition-colors close-modal">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-lg font-semibold transition-all">
+                                    Sign In
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Handle form submission - DEMO MODE
+                modal.querySelector('#login-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.loginUser();
+                });
 
-        // ✅ DEMO SUCCESS - No API call
-        this.currentUser = { username, email };
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-        this.showToast(`Welcome ${username}! Account created successfully! 🎉`, 'success');
-        
-        // Close modal
-        document.querySelector('.fixed')?.remove();
-        this.updateAuthUI();
-    }
+                // Close modal
+                modal.querySelector('.close-modal').addEventListener('click', () => {
+                    modal.remove();
+                });
 
-    async loginUser() {
-        const email = document.getElementById('login-email').value.trim();
-        const password = document.getElementById('login-password').value;
+                // Close modal on outside click
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.remove();
+                    }
+                });
+            }
 
-        if (!email || !password) {
-            this.showToast('Please fill all fields', 'error');
-            return;
-        }
+            async registerUser() {
+                const username = document.getElementById('reg-username').value.trim();
+                const email = document.getElementById('reg-email').value.trim();
+                const password = document.getElementById('reg-password').value;
 
-        // ✅ DEMO SUCCESS - No API call
-        this.currentUser = { username: 'DemoUser', email };
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-        this.showToast('Login successful! 🎉', 'success');
-        
-        // Close modal
-        document.querySelector('.fixed')?.remove();
-        this.updateAuthUI();
-    }
-
-    logout() {
-        this.currentUser = null;
-        localStorage.removeItem('currentUser');
-        this.showToast('Logged out successfully', 'success');
-        this.updateAuthUI();
-    }
-
-    updateAuthUI() {
-        const authButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
-        
-        if (this.currentUser) {
-            // User is logged in
-            authButtons.forEach(button => {
-                if (button.textContent.includes('Create Account') || button.textContent.includes('Join Now')) {
-                    button.textContent = `Welcome, ${this.currentUser.username}`;
-                    button.classList.remove('btn-primary');
-                    button.classList.add('btn-secondary');
-                } else if (button.textContent.includes('Sign In')) {
-                    button.textContent = 'Logout';
-                    button.onclick = () => this.logout();
+                if (!username || !email || !password) {
+                    this.showToast('Please fill all fields', 'error');
+                    return;
                 }
-            });
-        } else {
-            // User is logged out
-            authButtons.forEach(button => {
-                if (button.textContent.includes('Welcome,')) {
-                    button.textContent = 'Join Now';
-                    button.classList.remove('btn-secondary');
-                    button.classList.add('btn-primary');
-                    button.onclick = null;
-                } else if (button.textContent === 'Logout') {
-                    button.textContent = 'Sign In';
-                    button.onclick = null;
-                }
-            });
-        }
-    }
 
-    showToast(message, type = 'info') {
-        // Use VersionManager's toast if available, else create simple one
-        if (window.versionManager && window.versionManager.showToast) {
-            window.versionManager.showToast(message, type);
-        } else {
-            // Simple toast fallback
-            const toast = document.createElement('div');
-            toast.className = `fixed top-4 right-4 z-50 p-4 rounded-lg ${
-                type === 'error' ? 'bg-red-500' : 
-                type === 'success' ? 'bg-green-500' : 'bg-blue-500'
-            } text-white`;
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
+                if (password.length < 6) {
+                    this.showToast('Password must be at least 6 characters', 'error');
+                    return;
+                }
+
+                // ✅ DEMO SUCCESS - No API call
+                this.currentUser = { username, email };
+                localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                this.showToast(`Welcome ${username}! Account created successfully! 🎉`, 'success');
+                
+                // Close modal
+                document.querySelector('.fixed')?.remove();
+                this.updateAuthUI();
+            }
+
+            async loginUser() {
+                const email = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
+
+                if (!email || !password) {
+                    this.showToast('Please fill all fields', 'error');
+                    return;
+                }
+
+                // ✅ DEMO SUCCESS - No API call
+                this.currentUser = { username: 'DemoUser', email };
+                localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                this.showToast('Login successful! 🎉', 'success');
+                
+                // Close modal
+                document.querySelector('.fixed')?.remove();
+                this.updateAuthUI();
+            }
+
+            logout() {
+                this.currentUser = null;
+                localStorage.removeItem('currentUser');
+                this.showToast('Logged out successfully', 'success');
+                this.updateAuthUI();
+            }
+
+            updateAuthUI() {
+                const authButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
+                
+                if (this.currentUser) {
+                    // User is logged in
+                    authButtons.forEach(button => {
+                        if (button.textContent.includes('Create Account') || button.textContent.includes('Join Now')) {
+                            button.textContent = `Welcome, ${this.currentUser.username}`;
+                            button.classList.remove('btn-primary');
+                            button.classList.add('btn-secondary');
+                        } else if (button.textContent.includes('Sign In')) {
+                            button.textContent = 'Logout';
+                            button.onclick = () => this.logout();
+                        }
+                    });
+                } else {
+                    // User is logged out
+                    authButtons.forEach(button => {
+                        if (button.textContent.includes('Welcome,')) {
+                            button.textContent = 'Join Now';
+                            button.classList.remove('btn-secondary');
+                            button.classList.add('btn-primary');
+                            button.onclick = null;
+                        } else if (button.textContent === 'Logout') {
+                            button.textContent = 'Sign In';
+                            button.onclick = null;
+                        }
+                    });
+                }
+            }
+
+            showToast(message, type = 'info') {
+                // Use VersionManager's toast if available, else create simple one
+                if (window.versionManager && window.versionManager.showToast) {
+                    window.versionManager.showToast(message, type);
+                } else {
+                    // Simple toast fallback
+                    const toast = document.createElement('div');
+                    toast.className = `fixed top-4 right-4 z-50 p-4 rounded-lg ${
+                        type === 'error' ? 'bg-red-500' : 
+                        type === 'success' ? 'bg-green-500' : 'bg-blue-500'
+                    } text-white`;
+                    toast.textContent = message;
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 3000);
+                }
+            }
         }
-    }
-}
+
         // Mobile menu functionality
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobile-menu');
@@ -2980,71 +2982,106 @@ class AuthSystem {
             }
         }
 
-        
-// Service Worker Registration
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js')
-      .then(function(registration) {
-        console.log('SW registered: ', registration);
-      })
-      .catch(function(registrationError) {
-        console.log('SW registration failed: ', registrationError);
-      });
-  });
-}
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js')
+              .then(function(registration) {
+                console.log('SW registered: ', registration);
+              })
+              .catch(function(registrationError) {
+                console.log('SW registration failed: ', registrationError);
+              });
+          });
+        }
+
         // Simple hover effects only - no excessive mouse tracking
         // 🚀 FINAL WORKING AUTH SYSTEM
-console.log('🚀 Final auth system loaded!');
+        console.log('🚀 Final auth system loaded!');
 
-// Simple modal functions
-function showAuthModal(title, message, successMessage) {
-    const modal = document.createElement('div');
-    modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:9999;';
-    modal.innerHTML = `
-        <div style="background:linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); padding:30px; border-radius:15px; width:90%; max-width:400px; color:white; text-align:center;">
-            <h2 style="margin:0 0 15px 0;">${title}</h2>
-            <p style="margin:0 0 20px 0;">${message}</p>
-            <button onclick="closeModalSuccess('${successMessage}')" 
-                    style="padding:12px 25px; background:white; color:#8b5cf6; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin:5px;">
-                Continue
-            </button>
-            <button onclick="closeModal()" 
-                    style="padding:12px 25px; background:transparent; color:white; border:1px solid white; border-radius:8px; margin:5px; cursor:pointer;">
-                Cancel
-            </button>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
+        // Simple modal functions
+        function showAuthModal(title, message, successMessage) {
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:9999;';
+            modal.innerHTML = `
+                <div style="background:linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); padding:30px; border-radius:15px; width:90%; max-width:400px; color:white; text-align:center;">
+                    <h2 style="margin:0 0 15px 0;">${title}</h2>
+                    <p style="margin:0 0 20px 0;">${message}</p>
+                    <button onclick="closeModalSuccess('${successMessage}')" 
+                            style="padding:12px 25px; background:white; color:#8b5cf6; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin:5px;">
+                        Continue
+                    </button>
+                    <button onclick="closeModal()" 
+                            style="padding:12px 25px; background:transparent; color:white; border:1px solid white; border-radius:8px; margin:5px; cursor:pointer;">
+                        Cancel
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
 
-function closeModal() {
-    const modal = document.querySelector('div[style*="position:fixed"]');
-    if (modal) modal.remove();
-}
+        function closeModal() {
+            const modal = document.querySelector('div[style*="position:fixed"]');
+            if (modal) modal.remove();
+        }
 
-function closeModalSuccess(message) {
-    closeModal();
-    alert(message);
-}
+        function closeModalSuccess(message) {
+            closeModal();
+            alert(message);
+        }
 
-// Click handlers
-document.addEventListener('click', function(e) {
-    // Join Now / Create Account
-    if (e.target.classList.contains('btn-primary') && 
-        (e.target.textContent.includes('Join Now') || e.target.textContent.includes('Create Account'))) {
-        e.preventDefault();
-        showAuthModal('🎉 Welcome to ZYLORB!', 'Create your account to get started', 'Account created successfully! 🎉');
-    }
-    
-    // Sign In
-    if (e.target.classList.contains('btn-secondary') && e.target.textContent.includes('Sign In')) {
-        e.preventDefault();
-        showAuthModal('🔐 Sign In', 'Enter your credentials to continue', 'Signed in successfully! 🎉');
-    }
-});
+        // Click handlers
+        document.addEventListener('click', function(e) {
+            // Join Now / Create Account
+            if (e.target.classList.contains('btn-primary') && 
+                (e.target.textContent.includes('Join Now') || e.target.textContent.includes('Create Account'))) {
+                e.preventDefault();
+                showAuthModal('🎉 Welcome to ZYLORB!', 'Create your account to get started', 'Account created successfully! 🎉');
+            }
+            
+            // Sign In
+            if (e.target.classList.contains('btn-secondary') && e.target.textContent.includes('Sign In')) {
+                e.preventDefault();
+                showAuthModal('🔐 Sign In', 'Enter your credentials to continue', 'Signed in successfully! 🎉');
+            }
+        });
 
-console.log('✅ Final auth system ready!');
+        console.log('✅ Final auth system ready!');
+
+        // Initialize all systems when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize systems
+            window.contentModeration = new ContentModeration();
+            window.versionManager = new VersionManager();
+            window.authSystem = new AuthSystem();
+            window.storiesSystem = new StoriesSystem();
+            window.newsSystem = new NewsSystem();
+            window.userProfilesSystem = new UserProfilesSystem();
+            window.chatSystem = new ChatSystem();
+            window.notificationsSystem = new NotificationsSystem();
+            window.tagSystem = new TagSystem();
+            window.postCreation = new PostCreationSystem();
+
+            // Hide loading screen
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+            }, 2000);
+
+            // Mobile menu functionality
+            document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+            // Add event listeners for zone buttons
+            document.querySelectorAll('.btn-primary').forEach(button => {
+                if (button.textContent.includes('Enter')) {
+                    button.addEventListener('click', function() {
+                        const zone = this.closest('.zone-card').id;
+                        window.versionManager.showToast(`Entering ${zone.replace('-', ' ')}! 🚀`, 'success');
+                    });
+                }
+            });
+
+            console.log('🎉 All systems initialized successfully!');
+        });
     </script>
 </body>
-</html> 
+</html>

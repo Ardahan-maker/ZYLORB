@@ -454,7 +454,8 @@
         .media-preview img, .media-preview video {
             width: 100%;
             max-height: 400px;
-            object-fit: cover;
+            object-fit: contain;
+            background: #000;
         }
         
         .remove-media {
@@ -711,6 +712,7 @@
             border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
+            position: relative;
         }
         
         .profile-post img, .profile-post video {
@@ -722,6 +724,17 @@
         .profile-post-text {
             padding: 10px;
             font-size: 14px;
+        }
+        
+        .profile-post-zone {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
         }
         
         /* Story Creation Modal */
@@ -764,6 +777,198 @@
             z-index: 90;
         }
         
+        /* Chat System */
+        .chat-system {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 90;
+        }
+        
+        .chat-header {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-size: 14px;
+        }
+        
+        .message.sent {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            color: white;
+        }
+        
+        .message.received {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .chat-input-container {
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 10px 15px;
+            color: white;
+            outline: none;
+        }
+        
+        /* Live Stream System */
+        .live-stream-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .live-stream-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 20px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .live-stream-video {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #ef4444;
+            font-weight: bold;
+        }
+        
+        .live-indicator::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+        
+        /* Reels System */
+        .reels-section {
+            margin-bottom: 20px;
+        }
+        
+        .reels-container {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .reel {
+            flex: 0 0 auto;
+            width: 120px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .reel-video {
+            width: 120px;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+        }
+        
+        .reel-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .reel-username {
+            margin-top: 5px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* User Menu */
+        .user-menu {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 90;
+        }
+        
+        .user-menu-item {
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .user-menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .post-options {
@@ -781,6 +986,11 @@
             
             .profile-posts {
                 grid-template-columns: 1fr;
+            }
+            
+            .chat-system {
+                width: 300px;
+                height: 400px;
             }
         }
     </style>
@@ -807,6 +1017,31 @@
     <div id="real-time-notification" class="real-time-notification">
         <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse-soft"></div>
         <div class="text-white font-medium" id="notification-text">New activity in your network</div>
+    </div>
+
+    <!-- Chat System -->
+    <div id="chat-system" class="chat-system">
+        <div class="chat-header">
+            <div class="flex items-center gap-3">
+                <div class="user-avatar bg-gradient-to-r from-green-500 to-blue-500" id="chat-user-avatar">U</div>
+                <div>
+                    <div class="font-semibold" id="chat-username">User Name</div>
+                    <div class="text-white/60 text-sm">Online</div>
+                </div>
+            </div>
+            <button class="text-white/60 hover:text-white" onclick="hideChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be added here -->
+        </div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" placeholder="Type a message..." id="chat-input">
+            <button class="btn-primary" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
     </div>
 
     <!-- Header/Navigation -->
@@ -846,16 +1081,35 @@
                 <div class="hidden items-center space-x-4" id="user-profile">
                     <div class="flex items-center space-x-3">
                         <div class="relative">
-                            <div class="user-avatar bg-gradient-to-r from-green-500 to-blue-500 cursor-pointer tooltip" data-tooltip="Your Profile" onclick="showProfilePage()" id="header-user-avatar">
+                            <div class="user-avatar bg-gradient-to-r from-green-500 to-blue-500 cursor-pointer tooltip" data-tooltip="Your Profile" onclick="toggleUserMenu()" id="header-user-avatar">
                                 <span class="text-white font-bold" id="header-user-initial">U</span>
                             </div>
                             <div class="notification-badge" id="header-notification-count">3</div>
                         </div>
                         <span class="text-white font-semibold cursor-pointer" id="header-username" onclick="showProfilePage()">User</span>
                     </div>
-                    <button class="btn-secondary" onclick="logout()">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    <button class="btn-secondary" onclick="showChat()">
+                        <i class="fas fa-comments mr-2"></i>Chat
                     </button>
+                    <button class="btn-secondary" onclick="showLiveStreamModal()">
+                        <i class="fas fa-broadcast-tower mr-2"></i>Go Live
+                    </button>
+                </div>
+
+                <!-- User Menu -->
+                <div id="user-menu" class="user-menu">
+                    <div class="user-menu-item" onclick="showProfilePage()">
+                        <i class="fas fa-user mr-2"></i>My Profile
+                    </div>
+                    <div class="user-menu-item" onclick="showSettings()">
+                        <i class="fas fa-cog mr-2"></i>Settings
+                    </div>
+                    <div class="user-menu-item" onclick="showChat()">
+                        <i class="fas fa-comments mr-2"></i>Messages
+                    </div>
+                    <div class="user-menu-item" onclick="logout()">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </div>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -1178,6 +1432,14 @@
 
             <!-- Zone Content -->
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Reels Section -->
+                <div class="reels-section">
+                    <h2 class="text-2xl font-bold text-white mb-4">Gaming Reels</h2>
+                    <div class="reels-container" id="gaming-reels-container">
+                        <!-- Reels will be dynamically added here -->
+                    </div>
+                </div>
+
                 <!-- Stories Section -->
                 <div class="stories-container" id="gaming-stories-container">
                     <!-- Stories will be dynamically added here -->
@@ -1210,6 +1472,10 @@
                                     <div class="option-button" onclick="showStoryCreationModal('gaming')">
                                         <i class="fas fa-feather"></i>
                                         <span>Story</span>
+                                    </div>
+                                    <div class="option-button" onclick="createReel('gaming')">
+                                        <i class="fas fa-film"></i>
+                                        <span>Reel</span>
                                     </div>
                                 </div>
                                 <button class="btn-primary" onclick="createNewPost('gaming')">Post</button>
@@ -1253,6 +1519,14 @@
 
             <!-- Zone Content -->
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Reels Section -->
+                <div class="reels-section">
+                    <h2 class="text-2xl font-bold text-white mb-4">Life Reels</h2>
+                    <div class="reels-container" id="life-reels-container">
+                        <!-- Reels will be dynamically added here -->
+                    </div>
+                </div>
+
                 <!-- Stories Section -->
                 <div class="stories-container" id="life-stories-container">
                     <!-- Stories will be dynamically added here -->
@@ -1285,6 +1559,10 @@
                                     <div class="option-button" onclick="showStoryCreationModal('life')">
                                         <i class="fas fa-feather"></i>
                                         <span>Story</span>
+                                    </div>
+                                    <div class="option-button" onclick="createReel('life')">
+                                        <i class="fas fa-film"></i>
+                                        <span>Reel</span>
                                     </div>
                                 </div>
                                 <button class="btn-primary" onclick="createNewPost('life')">Post</button>
@@ -1328,6 +1606,14 @@
 
             <!-- Zone Content -->
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Reels Section -->
+                <div class="reels-section">
+                    <h2 class="text-2xl font-bold text-white mb-4">Culture Reels</h2>
+                    <div class="reels-container" id="culture-reels-container">
+                        <!-- Reels will be dynamically added here -->
+                    </div>
+                </div>
+
                 <!-- Stories Section -->
                 <div class="stories-container" id="culture-stories-container">
                     <!-- Stories will be dynamically added here -->
@@ -1360,6 +1646,10 @@
                                     <div class="option-button" onclick="showStoryCreationModal('culture')">
                                         <i class="fas fa-feather"></i>
                                         <span>Story</span>
+                                    </div>
+                                    <div class="option-button" onclick="createReel('culture')">
+                                        <i class="fas fa-film"></i>
+                                        <span>Reel</span>
                                     </div>
                                 </div>
                                 <button class="btn-primary" onclick="createNewPost('culture')">Post</button>
@@ -1403,6 +1693,14 @@
 
             <!-- Zone Content -->
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Reels Section -->
+                <div class="reels-section">
+                    <h2 class="text-2xl font-bold text-white mb-4">Professional Reels</h2>
+                    <div class="reels-container" id="professional-reels-container">
+                        <!-- Reels will be dynamically added here -->
+                    </div>
+                </div>
+
                 <!-- Stories Section -->
                 <div class="stories-container" id="professional-stories-container">
                     <!-- Stories will be dynamically added here -->
@@ -1435,6 +1733,10 @@
                                     <div class="option-button" onclick="showStoryCreationModal('professional')">
                                         <i class="fas fa-feather"></i>
                                         <span>Story</span>
+                                    </div>
+                                    <div class="option-button" onclick="createReel('professional')">
+                                        <i class="fas fa-film"></i>
+                                        <span>Reel</span>
                                     </div>
                                 </div>
                                 <button class="btn-primary" onclick="createNewPost('professional')">Post</button>
@@ -1585,6 +1887,60 @@
                     </div>
                 </div>
                 <button class="btn-primary" onclick="createNewStory()">Add to Story</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIVE STREAM MODAL -->
+    <div id="live-stream-modal" class="live-stream-modal">
+        <div class="live-stream-content">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-white">Go Live</h3>
+                <button class="text-white/60 hover:text-white" onclick="hideLiveStreamModal()">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <div class="flex items-start space-x-4 mb-6">
+                <div class="user-avatar bg-gradient-to-r from-purple-500 to-pink-500" id="live-user-avatar">
+                    <span id="live-user-initial">U</span>
+                </div>
+                <div>
+                    <div class="text-white font-semibold" id="live-username">User Name</div>
+                    <div class="text-white/60 text-sm">Start a live stream</div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-white/80 mb-2">Stream Title</label>
+                    <input type="text" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Enter stream title" id="stream-title">
+                </div>
+                
+                <div>
+                    <label class="block text-white/80 mb-2">Zone</label>
+                    <select class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" id="stream-zone">
+                        <option value="gaming">Gaming Zone</option>
+                        <option value="life">Life Zone</option>
+                        <option value="culture">Culture Zone</option>
+                        <option value="professional">Professional Zone</option>
+                    </select>
+                </div>
+                
+                <div class="live-stream-video" id="live-preview">
+                    <div class="text-center">
+                        <i class="fas fa-video text-4xl mb-2"></i>
+                        <div>Live Stream Preview</div>
+                        <div class="text-sm text-white/60 mt-2">Stream will start when you click "Go Live"</div>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button class="btn-secondary flex-1" onclick="hideLiveStreamModal()">Cancel</button>
+                    <button class="btn-primary flex-1" onclick="startLiveStream()">
+                        <i class="fas fa-broadcast-tower mr-2"></i>Go Live
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -1748,9 +2104,16 @@
                 culture: [],
                 professional: []
             },
+            reels: {
+                gaming: [],
+                life: [],
+                culture: [],
+                professional: []
+            },
             users: [],
             notifications: [],
             liveStreams: [],
+            chats: [],
             authMode: 'signup',
             currentMedia: {
                 gaming: null,
@@ -1764,7 +2127,8 @@
             currentStoryIndex: 0,
             storyInterval: null,
             realTimeInterval: null,
-            currentSharePost: null
+            currentSharePost: null,
+            currentChat: null
         };
 
         // Initialize the platform
@@ -1773,6 +2137,9 @@
         });
 
         function initializePlatform() {
+            // Load data from localStorage
+            loadFromLocalStorage();
+            
             // Simulate loading progress
             simulateLoading();
             
@@ -1781,8 +2148,10 @@
             initializeZoneSystem();
             initializePostSystem();
             initializeStorySystem();
+            initializeReelsSystem();
+            initializeChatSystem();
+            initializeLiveStreamSystem();
             initializeRealTimeFeatures();
-            initializeDatabase();
             
             console.log('✅ ZYLORB Platform Fully Initialized');
         }
@@ -1809,6 +2178,34 @@
                     progressBar.style.width = progress + '%';
                 }
             }, 200);
+        }
+
+        // Local Storage Management
+        function saveToLocalStorage() {
+            const data = {
+                users: ZYLORB_STATE.users,
+                posts: ZYLORB_STATE.posts,
+                stories: ZYLORB_STATE.stories,
+                reels: ZYLORB_STATE.reels,
+                notifications: ZYLORB_STATE.notifications,
+                liveStreams: ZYLORB_STATE.liveStreams,
+                chats: ZYLORB_STATE.chats
+            };
+            localStorage.setItem('zylorb_data', JSON.stringify(data));
+        }
+
+        function loadFromLocalStorage() {
+            const data = localStorage.getItem('zylorb_data');
+            if (data) {
+                const parsed = JSON.parse(data);
+                ZYLORB_STATE.users = parsed.users || [];
+                ZYLORB_STATE.posts = parsed.posts || { gaming: [], life: [], culture: [], professional: [] };
+                ZYLORB_STATE.stories = parsed.stories || { gaming: [], life: [], culture: [], professional: [] };
+                ZYLORB_STATE.reels = parsed.reels || { gaming: [], life: [], culture: [], professional: [] };
+                ZYLORB_STATE.notifications = parsed.notifications || [];
+                ZYLORB_STATE.liveStreams = parsed.liveStreams || [];
+                ZYLORB_STATE.chats = parsed.chats || [];
+            }
         }
 
         // Toast Notification System
@@ -1855,6 +2252,22 @@
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
         }
+
+        // User Menu Toggle
+        function toggleUserMenu() {
+            const userMenu = document.getElementById('user-menu');
+            userMenu.style.display = userMenu.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Close user menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const userMenu = document.getElementById('user-menu');
+            const userAvatar = document.getElementById('header-user-avatar');
+            
+            if (userMenu && userAvatar && !userMenu.contains(event.target) && !userAvatar.contains(event.target)) {
+                userMenu.style.display = 'none';
+            }
+        });
 
         // Auth System
         function showAuthModal(mode = 'signup') {
@@ -1911,6 +2324,12 @@
                     return;
                 }
                 
+                // Check if user already exists
+                if (ZYLORB_STATE.users.find(u => u.email === email)) {
+                    showToast('User with this email already exists', 'error');
+                    return;
+                }
+                
                 // Create real user account
                 ZYLORB_STATE.currentUser = {
                     id: Date.now(),
@@ -1920,7 +2339,10 @@
                     joinDate: new Date().toISOString(),
                     posts: [],
                     likes: 0,
-                    comments: 0
+                    comments: 0,
+                    bio: 'Welcome to my ZYLORB profile!',
+                    followers: [],
+                    following: []
                 };
                 
                 // Add to users array
@@ -1930,6 +2352,9 @@
                 updateUIForLoggedInUser();
                 hideAuthModal();
                 showToast(`Welcome to ZYLORB, ${name}!`, 'success');
+                
+                // Save to localStorage
+                saveToLocalStorage();
                 
                 // Start real-time features
                 startRealTimeFeatures();
@@ -1994,6 +2419,11 @@
                 const storyAvatar = document.getElementById('story-user-avatar');
                 const storyInitial = document.getElementById('story-user-initial');
                 const storyUsername = document.getElementById('story-username');
+                const liveAvatar = document.getElementById('live-user-avatar');
+                const liveInitial = document.getElementById('live-user-initial');
+                const liveUsername = document.getElementById('live-username');
+                const chatAvatar = document.getElementById('chat-user-avatar');
+                const chatUsername = document.getElementById('chat-username');
                 
                 if (avatar && initial && ZYLORB_STATE.currentUser) {
                     avatar.textContent = ZYLORB_STATE.currentUser.avatar;
@@ -2010,6 +2440,17 @@
                     storyAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
                     storyInitial.textContent = ZYLORB_STATE.currentUser.avatar;
                     storyUsername.textContent = ZYLORB_STATE.currentUser.name;
+                }
+                
+                if (liveAvatar && liveInitial && liveUsername && ZYLORB_STATE.currentUser) {
+                    liveAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
+                    liveInitial.textContent = ZYLORB_STATE.currentUser.avatar;
+                    liveUsername.textContent = ZYLORB_STATE.currentUser.name;
+                }
+                
+                if (chatAvatar && chatUsername && ZYLORB_STATE.currentUser) {
+                    chatAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
+                    chatUsername.textContent = ZYLORB_STATE.currentUser.name;
                 }
             });
         }
@@ -2029,6 +2470,10 @@
             ZYLORB_STATE.isLoggedIn = false;
             updateUIForLoggedInUser();
             showHomePage();
+            
+            // Close user menu
+            const userMenu = document.getElementById('user-menu');
+            if (userMenu) userMenu.style.display = 'none';
             
             // Stop real-time features
             stopRealTimeFeatures();
@@ -2113,23 +2558,37 @@
             userPosts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.className = 'profile-post';
-                postElement.onclick = () => enterZone(post.zone);
+                postElement.onclick = () => {
+                    hideProfilePage();
+                    enterZone(post.zone);
+                };
                 
+                let content = '';
                 if (post.media) {
-                    postElement.innerHTML = post.media.type === 'image' ? 
-                        `<img src="${post.media.url}" alt="Post media">` :
-                        `<video><source src="${post.media.url}" type="video/mp4"></video>`;
+                    if (post.media.type === 'image') {
+                        content = `<img src="${post.media.url}" alt="Post media">`;
+                    } else {
+                        content = `<video><source src="${post.media.url}" type="video/mp4"></video>`;
+                    }
                 } else {
-                    postElement.innerHTML = `
+                    content = `
                         <div class="profile-post-text">
                             <p>${post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content}</p>
-                            <div class="text-white/60 text-xs mt-2">${post.zone} • ${post.timestamp}</div>
                         </div>
                     `;
                 }
                 
+                postElement.innerHTML = `
+                    ${content}
+                    <div class="profile-post-zone">${post.zone}</div>
+                `;
+                
                 profilePosts.appendChild(postElement);
             });
+        }
+
+        function showSettings() {
+            showToast('Settings page would open here', 'info');
         }
 
         // Zone Navigation
@@ -2180,15 +2639,20 @@
         function loadZoneContent(zone) {
             const feed = document.getElementById(`${zone}-posts-feed`);
             const storiesContainer = document.getElementById(`${zone}-stories-container`);
+            const reelsContainer = document.getElementById(`${zone}-reels-container`);
             
             if (!feed) return;
             
             // Clear existing content
             feed.innerHTML = '';
             if (storiesContainer) storiesContainer.innerHTML = '';
+            if (reelsContainer) reelsContainer.innerHTML = '';
             
             // Load stories
             loadStories(zone);
+            
+            // Load reels
+            loadReels(zone);
             
             // Add posts
             if (ZYLORB_STATE.posts[zone] && ZYLORB_STATE.posts[zone].length > 0) {
@@ -2229,6 +2693,25 @@
             }
         }
 
+        function loadReels(zone) {
+            const reelsContainer = document.getElementById(`${zone}-reels-container`);
+            if (!reelsContainer) return;
+            
+            // Add reels
+            if (ZYLORB_STATE.reels[zone] && ZYLORB_STATE.reels[zone].length > 0) {
+                ZYLORB_STATE.reels[zone].forEach(reel => {
+                    const reelElement = createReelElement(reel, zone);
+                    reelsContainer.appendChild(reelElement);
+                });
+            } else {
+                reelsContainer.innerHTML = `
+                    <div class="text-center py-4 w-full">
+                        <p class="text-white/60">No reels yet. Be the first to create one!</p>
+                    </div>
+                `;
+            }
+        }
+
         function createStoryElement(story, zone, isCurrentUser = false) {
             const storyEl = document.createElement('div');
             storyEl.className = 'story';
@@ -2253,6 +2736,23 @@
             }
             
             return storyEl;
+        }
+
+        function createReelElement(reel, zone) {
+            const reelEl = document.createElement('div');
+            reelEl.className = 'reel';
+            reelEl.onclick = () => viewReel(reel, zone);
+            
+            reelEl.innerHTML = `
+                <div class="reel-video">
+                    <video>
+                        <source src="${reel.media.url}" type="video/mp4">
+                    </video>
+                </div>
+                <div class="reel-username">${reel.user.name}</div>
+            `;
+            
+            return reelEl;
         }
 
         function createPostElement(post, zone) {
@@ -2359,6 +2859,9 @@
                         timestamp: new Date().toISOString()
                     });
                     updateNotificationCount();
+                    
+                    // Save to localStorage
+                    saveToLocalStorage();
                 }
             }
         }
@@ -2425,6 +2928,9 @@
                     });
                     updateNotificationCount();
                 }
+                
+                // Save to localStorage
+                saveToLocalStorage();
             }
         }
 
@@ -2588,6 +3094,9 @@
                 post.media = null;
                 loadZoneContent(zone);
                 showToast('Media removed from post', 'info');
+                
+                // Save to localStorage
+                saveToLocalStorage();
             }
         }
 
@@ -2672,6 +3181,9 @@
             
             // Real-time notification for followers
             showRealTimeNotification('Your post has been published!');
+            
+            // Save to localStorage
+            saveToLocalStorage();
         }
 
         function createNewPostFromModal() {
@@ -2731,6 +3243,9 @@
             
             // Real-time notification for followers
             showRealTimeNotification('Your post has been published!');
+            
+            // Save to localStorage
+            saveToLocalStorage();
         }
 
         // Story System
@@ -2803,6 +3318,9 @@
             loadZoneContent(zone);
             
             showToast('Story added! It will disappear in 24 hours.', 'success');
+            
+            // Save to localStorage
+            saveToLocalStorage();
         }
 
         function viewStory(story, zone) {
@@ -2830,11 +3348,11 @@
             if (story.media) {
                 if (story.media.type === 'image') {
                     mediaContainer.innerHTML = `
-                        <img src="${story.media.url}" alt="Story" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${story.media.url}" alt="Story" style="width: 100%; height: 100%; object-fit: contain; background: #000;">
                     `;
                 } else if (story.media.type === 'video') {
                     mediaContainer.innerHTML = `
-                        <video autoplay controls style="width: 100%; height: 100%; object-fit: cover;">
+                        <video autoplay controls style="width: 100%; height: 100%; object-fit: contain; background: #000;">
                             <source src="${story.media.url}" type="video/mp4">
                         </video>
                     `;
@@ -2888,6 +3406,236 @@
             }
             
             ZYLORB_STATE.currentStory = null;
+        }
+
+        // Reels System
+        function createReel(zone) {
+            if (!ZYLORB_STATE.isLoggedIn) {
+                showToast('Please sign in to create reels', 'error');
+                return;
+            }
+            
+            // For demo purposes, we'll simulate creating a reel
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'video/*';
+            fileInput.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const objectUrl = URL.createObjectURL(file);
+                    
+                    const newReel = {
+                        id: Date.now(),
+                        user: {
+                            id: ZYLORB_STATE.currentUser.id,
+                            name: ZYLORB_STATE.currentUser.name,
+                            avatar: ZYLORB_STATE.currentUser.avatar,
+                            color: getZoneColor(zone)
+                        },
+                        media: { type: 'video', url: objectUrl, file: file },
+                        timestamp: 'Just now',
+                        likes: 0,
+                        comments: []
+                    };
+                    
+                    // Add to reels array
+                    if (!ZYLORB_STATE.reels[zone]) {
+                        ZYLORB_STATE.reels[zone] = [];
+                    }
+                    ZYLORB_STATE.reels[zone].unshift(newReel);
+                    
+                    // Reload zone content
+                    loadZoneContent(zone);
+                    
+                    showToast('Reel created successfully!', 'success');
+                    
+                    // Save to localStorage
+                    saveToLocalStorage();
+                }
+            };
+            fileInput.click();
+        }
+
+        function viewReel(reel, zone) {
+            // For demo purposes, we'll show the reel in a modal
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.background = 'rgba(0,0,0,0.9)';
+            modal.style.zIndex = '1000';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            
+            modal.innerHTML = `
+                <div style="position: relative; max-width: 400px; max-height: 80%;">
+                    <video controls autoplay style="width: 100%; height: 100%; border-radius: 12px;">
+                        <source src="${reel.media.url}" type="video/mp4">
+                    </video>
+                    <button style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        // Chat System
+        function showChat() {
+            if (!ZYLORB_STATE.isLoggedIn) {
+                showToast('Please sign in to use chat', 'error');
+                return;
+            }
+            
+            const chatSystem = document.getElementById('chat-system');
+            chatSystem.style.display = 'flex';
+            
+            // Load chat messages
+            loadChatMessages();
+        }
+
+        function hideChat() {
+            const chatSystem = document.getElementById('chat-system');
+            chatSystem.style.display = 'none';
+        }
+
+        function loadChatMessages() {
+            const chatMessages = document.getElementById('chat-messages');
+            if (!chatMessages) return;
+            
+            chatMessages.innerHTML = '';
+            
+            // For demo, create some sample messages
+            const sampleMessages = [
+                { text: 'Hey there! Welcome to ZYLORB!', sent: false, time: '2:30 PM' },
+                { text: 'Thanks! This platform looks amazing!', sent: true, time: '2:31 PM' },
+                { text: 'Let me know if you need any help getting started!', sent: false, time: '2:32 PM' }
+            ];
+            
+            sampleMessages.forEach(msg => {
+                const messageEl = document.createElement('div');
+                messageEl.className = `message ${msg.sent ? 'sent' : 'received'}`;
+                messageEl.innerHTML = `
+                    <div>${msg.text}</div>
+                    <div style="font-size: 10px; margin-top: 5px; opacity: 0.7;">${msg.time}</div>
+                `;
+                chatMessages.appendChild(messageEl);
+            });
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendMessage() {
+            const chatInput = document.getElementById('chat-input');
+            const messageText = chatInput.value.trim();
+            
+            if (!messageText) {
+                showToast('Please enter a message', 'error');
+                return;
+            }
+            
+            const chatMessages = document.getElementById('chat-messages');
+            if (!chatMessages) return;
+            
+            // Create new message
+            const messageEl = document.createElement('div');
+            messageEl.className = 'message sent';
+            const now = new Date();
+            const time = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            messageEl.innerHTML = `
+                <div>${messageText}</div>
+                <div style="font-size: 10px; margin-top: 5px; opacity: 0.7;">${time}</div>
+            `;
+            
+            chatMessages.appendChild(messageEl);
+            chatInput.value = '';
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Simulate reply after 1 second
+            setTimeout(() => {
+                const replyEl = document.createElement('div');
+                replyEl.className = 'message received';
+                const replies = [
+                    'That sounds great!',
+                    'I totally agree with you!',
+                    'Let me know if you need any help!',
+                    'This feature is amazing!'
+                ];
+                const randomReply = replies[Math.floor(Math.random() * replies.length)];
+                
+                replyEl.innerHTML = `
+                    <div>${randomReply}</div>
+                    <div style="font-size: 10px; margin-top: 5px; opacity: 0.7;">${time}</div>
+                `;
+                
+                chatMessages.appendChild(replyEl);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+
+        // Live Stream System
+        function showLiveStreamModal() {
+            if (!ZYLORB_STATE.isLoggedIn) {
+                showToast('Please sign in to go live', 'error');
+                return;
+            }
+            
+            const modal = document.getElementById('live-stream-modal');
+            modal.style.display = 'flex';
+        }
+
+        function hideLiveStreamModal() {
+            const modal = document.getElementById('live-stream-modal');
+            modal.style.display = 'none';
+        }
+
+        function startLiveStream() {
+            const title = document.getElementById('stream-title').value.trim();
+            const zone = document.getElementById('stream-zone').value;
+            
+            if (!title) {
+                showToast('Please enter a stream title', 'error');
+                return;
+            }
+            
+            // Create new live stream
+            const newStream = {
+                id: Date.now(),
+                user: {
+                    id: ZYLORB_STATE.currentUser.id,
+                    name: ZYLORB_STATE.currentUser.name,
+                    avatar: ZYLORB_STATE.currentUser.avatar,
+                    color: getZoneColor(zone)
+                },
+                title: title,
+                zone: zone,
+                viewers: 0,
+                isLive: true,
+                timestamp: 'Just now'
+            };
+            
+            // Add to live streams array
+            ZYLORB_STATE.liveStreams.unshift(newStream);
+            
+            // Hide modal
+            hideLiveStreamModal();
+            
+            // Show success message
+            showToast('Live stream started successfully!', 'success');
+            
+            // Real-time notification
+            showRealTimeNotification('You are now live!');
+            
+            // Save to localStorage
+            saveToLocalStorage();
         }
 
         // Share System
@@ -2960,6 +3708,9 @@
                     });
                     updateNotificationCount();
                 }
+                
+                // Save to localStorage
+                saveToLocalStorage();
             }
         }
 
@@ -2988,6 +3739,9 @@
                         timestamp: new Date().toISOString()
                     });
                     updateNotificationCount();
+                    
+                    // Save to localStorage
+                    saveToLocalStorage();
                 }
                 
                 // Update online users count
@@ -3065,38 +3819,20 @@
             console.log('📱 Story System Initialized');
         }
 
-        function initializeRealTimeFeatures() {
-            console.log('⚡ Real-time Features Initialized');
+        function initializeReelsSystem() {
+            console.log('🎬 Reels System Initialized');
         }
 
-        function initializeDatabase() {
-            // Initialize with some sample data for demonstration
-            const sampleUsers = [
-                {
-                    id: 1,
-                    name: 'ProGamer99',
-                    email: 'gamer@example.com',
-                    avatar: 'P',
-                    joinDate: new Date().toISOString(),
-                    posts: [],
-                    likes: 0,
-                    comments: 0
-                },
-                {
-                    id: 2,
-                    name: 'EverydayAdventurer',
-                    email: 'life@example.com',
-                    avatar: 'E',
-                    joinDate: new Date().toISOString(),
-                    posts: [],
-                    likes: 0,
-                    comments: 0
-                }
-            ];
-            
-            ZYLORB_STATE.users = sampleUsers;
-            
-            console.log('💾 Database System Initialized');
+        function initializeChatSystem() {
+            console.log('💬 Chat System Initialized');
+        }
+
+        function initializeLiveStreamSystem() {
+            console.log('📡 Live Stream System Initialized');
+        }
+
+        function initializeRealTimeFeatures() {
+            console.log('⚡ Real-time Features Initialized');
         }
 
     </script>

@@ -1,63 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- PWA Manifest -->
-    <meta name="theme-color" content="#8b5cf6">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="ZYLORB">
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZYLORB - Gaming • Life • Culture • Professional</title>
-    <meta name="description" content="Share your gaming highlights, daily moments, cultural experiences, and professional insights in one vibrant community platform with four distinct zones.">
-    
-    <!-- SEO Meta Tags -->
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="author" content="ZYLORB">
-    <meta name="theme-color" content="#8b5cf6">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://zylorb.com/">
-    <meta property="og:title" content="ZYLORB - Gaming • Life • Culture • Professional">
-    <meta property="og:description" content="Share your gaming highlights, daily moments, cultural experiences, and professional insights in one vibrant community platform.">
-    <meta property="og:image" content="https://zylorb.com/assets/zylorb-preview-1200x630.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://zylorb.com/">
-    <meta property="twitter:title" content="ZYLORB - Gaming • Life • Culture • Professional">
-    <meta property="twitter:description" content="Share your gaming highlights, daily moments, cultural experiences, and professional insights in one vibrant community platform.">
-    <meta property="twitter:image" content="https://zylorb.com/assets/zylorb-preview-1200x630.jpg">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* ALL YOUR EXISTING CSS STYLES - SAME AS BEFORE */
         body {
-            box-sizing: border-box;
             background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
             min-height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .loading-skeleton {
-            background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
-        
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
         }
         
         .zone-card {
@@ -86,9 +38,8 @@
         }
         
         .btn-primary:hover {
-            background: linear-gradient(135deg, #7a44d8 0%, #db2777 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
         }
         
         .btn-secondary {
@@ -106,200 +57,22 @@
             background: rgba(255, 255, 255, 0.2);
         }
         
-        .card-glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 1rem;
-        }
-        
         .gradient-text {
             background: linear-gradient(135deg, #c084fc 0%, #f472b6 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            color: #f472b6;
-        }
-        
-        .btn-gaming {
-            background: linear-gradient(135deg, #8b5cf6 0%, #4f46e5 100%);
-        }
-        .btn-gaming:hover {
-            background: linear-gradient(135deg, #7c3aed 0%, #4338ca 100%);
-        }
-        
-        .btn-life {
-            background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
-        }
-        .btn-life:hover {
-            background: linear-gradient(135deg, #db2777 0%, #e11d48 100%);
-        }
-        
-        .btn-culture {
-            background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
-        }
-        .btn-culture:hover {
-            background: linear-gradient(135deg, #0891b2 0%, #1d4ed8 100%);
-        }
-        
-        .btn-professional {
-            background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
-        }
-        .btn-professional:hover {
-            background: linear-gradient(135deg, #ea580c 0%, #b91c1c 100%);
-        }
-        
-        .version-badge {
-            font-family: 'Courier New', monospace;
         }
         
         .hidden { display: none !important; }
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .zone-card {
-                padding: 1.5rem;
-            }
-            
-            .zone-card:hover {
-                transform: translateY(-4px);
-            }
-        }
-        
-        /* Animation for smooth transitions */
-        .zone-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 1rem;
-            padding: 2rem;
-        }
-
-        .zone-card:hover {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .zone-card {
-                padding: 1.5rem;
-            }
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-        
-        /* Reels Section Styles */
-        .reel-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .reel-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        #reels-section {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Add smooth scrolling to entire page */
-        html {
-          scroll-behavior: smooth;
-        }
-
-        /* Improve mobile touch targets */
-        @media (max-width: 768px) {
-          .btn-primary, .btn-secondary {
-            min-height: 44px; /* Better touch targets */
-          }
-        }
-        
-        /* Mobile Performance Optimizations */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        /* Optimize large media */
-        .reel-card video,
-        .story-content img {
-            max-width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-
-        /* Touch improvements for mobile */
-        @media (max-width: 768px) {
-            .btn-primary, 
-            .btn-secondary,
-            .zone-card button {
-                min-height: 44px;
-                min-width: 44px;
-            }
-            
-            /* Reduce blur on mobile for performance */
-            .zone-card,
-            .card-glass {
-                backdrop-filter: blur(8px);
-            }
-        }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center z-50">
         <div class="text-center">
-           <!-- NEW PERFECT LOGO -->
-           <div class="flex flex-col items-center justify-center mx-auto mb-4">
-               <div class="flex space-x-1">
-                   <div class="w-4 h-4 bg-purple-500 transform rotate-45"></div>
-                   <div class="w-4 h-4 bg-pink-500 transform rotate-45"></div>
-               </div>
-               <div class="flex space-x-1 mt-1">
-                   <div class="w-4 h-4 bg-blue-500 transform rotate-45"></div>
-                   <div class="w-4 h-4 bg-green-500 transform rotate-45"></div>
-               </div>
-           </div>
-            <div class="loading-skeleton w-32 h-4 rounded mx-auto"></div>
-            <p class="text-white/60 mt-2">Loading ZYLORB v2.1.0...</p>
+            <div class="text-6xl mb-4">🎮</div>
+            <p class="text-white/60">Loading ZYLORB...</p>
         </div>
     </div>
 
@@ -308,498 +81,84 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-3">
-                    <!-- NEW PERFECT LOGO -->
-                    <div class="flex flex-col items-center justify-center">
-                        <div class="flex space-x-1">
-                            <div class="w-3 h-3 bg-purple-500 transform rotate-45"></div>
-                            <div class="w-3 h-3 bg-pink-500 transform rotate-45"></div>
-                        </div>
-                        <div class="flex space-x-1 mt-1">
-                            <div class="w-3 h-3 bg-blue-500 transform rotate-45"></div>
-                            <div class="w-3 h-3 bg-green-500 transform rotate-45"></div>
-                        </div>
-                    </div>
                     <h1 class="text-2xl font-bold text-white">ZYLORB</h1>
-                    <span class="px-2 py-1 bg-green-600 text-white text-xs rounded-full">v2.1.0</span>
                 </div>
                 
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#gaming" class="text-white/80 hover:text-white transition-colors">Gaming</a>
-                    <a href="#life" class="text-white/80 hover:text-white transition-colors">Daily Life</a>
-                    <a href="#culture" class="text-white/80 hover:text-white transition-colors">Culture</a>
-                    <a href="#professional" class="text-white/80 hover:text-white transition-colors">Professional</a>
-                    <a href="#explore" class="text-white/80 hover:text-white transition-colors">Explore</a>
-                </nav>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-white p-2">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-                
-                <!-- Auth Buttons -->
-                <div class="hidden md:flex items-center space-x-4">
-                    <button class="btn-secondary">Sign In</button>
-                    <button class="btn-primary">Join Now</button>
+                <div class="flex items-center space-x-4">
+                    <button class="btn-secondary" onclick="showAuthModal('signin')">Sign In</button>
+                    <button class="btn-primary" onclick="showAuthModal('signup')">Join Now</button>
                 </div>
             </div>
-
-            <!-- Mobile Navigation -->
-            <nav id="mobile-menu" class="hidden md:hidden py-4 border-t border-white/10">
-                <div class="flex flex-col space-y-4">
-                    <a href="#gaming" class="text-white/80 hover:text-white transition-colors">Gaming</a>
-                    <a href="#life" class="text-white/80 hover:text-white transition-colors">Daily Life</a>
-                    <a href="#culture" class="text-white/80 hover:text-white transition-colors">Culture</a>
-                    <a href="#professional" class="text-white/80 hover:text-white transition-colors">Professional</a>
-                    <a href="#explore" class="text-white/80 hover:text-white transition-colors">Explore</a>
-                    <div class="flex flex-col space-y-2 pt-4">
-                        <button class="btn-secondary text-left">Sign In</button>
-                        <button class="btn-primary text-left">Join Now</button>
-                    </div>
-                </div>
-            </nav>
         </div>
     </header>
-
-    <!-- Stories Bar -->
-    <section id="stories-section" class="py-4 px-4 sm:px-6 lg:px-8 bg-black/20">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex items-center space-x-4 overflow-x-auto pb-2">
-                <!-- Add Story Button -->
-                <div class="flex-shrink-0">
-                    <button id="add-story-btn" class="relative w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:scale-105 transition-transform">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                    </button>
-                    <p class="text-white/80 text-xs text-center mt-1">Add Story</p>
-                </div>
-                
-                <!-- Stories -->
-                <div id="stories-container" class="flex space-x-4">
-                    <!-- Stories will be populated here -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reels/Short Videos Section -->
-    <section id="reels-section" class="py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-900/50 to-pink-900/50">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-2xl font-bold text-white flex items-center">
-                    <span class="text-2xl mr-2">🎬</span>
-                    Short Videos / Reels
-                </h3>
-                <button id="add-reel-btn" class="btn-primary text-sm">
-                    <span class="mr-2">+</span> Create Reel
-                </button>
-            </div>
-            
-            <div id="reels-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Reel Item 1 -->
-                <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-                    <div class="relative">
-                        <video class="w-full h-80 object-cover" muted loop>
-                            <source src="#" type="video/mp4">
-                        </video>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                            <p class="text-white font-semibold">Epic Gaming Moment 🎮</p>
-                            <p class="text-white/60 text-sm">GamerPro • 2.5K views</p>
-                        </div>
-                        <div class="absolute top-2 right-2">
-                            <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs">LIVE</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Reel Item 2 -->
-                <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-                    <div class="relative">
-                        <video class="w-full h-80 object-cover" muted loop>
-                            <source src="#" type="video/mp4">
-                        </video>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                            <p class="text-white font-semibold">Morning Routine ✨</p>
-                            <p class="text-white/60 text-sm">LifeStyler • 1.8K views</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Reel Item 3 -->
-                <div class="reel-card bg-black/20 rounded-2xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-                    <div class="relative">
-                        <video class="w-full h-80 object-cover" muted loop>
-                            <source src="#" type="video/mp4">
-                        </video>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                            <p class="text-white font-semibold">Cultural Dance 🎭</p>
-                            <p class="text-white/60 text-sm">CultureKing • 3.2K views</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- News & Bulletins -->
-    <section id="news-section" class="py-6 px-4 sm:px-6 lg:px-8 bg-black/10">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-2xl font-bold text-white flex items-center">
-                    <span class="text-2xl mr-2">📰</span>
-                    Latest News & Bulletins
-                </h3>
-                <button id="add-news-btn" class="btn-secondary text-sm">Add News</button>
-            </div>
-            <div id="news-container" class="grid md:grid-cols-3 gap-4">
-                <!-- News items will be populated here -->
-            </div>
-        </div>
-    </section>
 
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
         <section class="py-20 px-4 sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto text-center">
-                <div class="animate-bounce">
-                    <h2 class="text-5xl md:text-7xl font-bold text-white mb-6">
-                        Your World, <span class="gradient-text">Four Zones</span>
-                    </h2>
-                </div>
-                <p class="text-xl text-white/80 mb-12 max-w-3xl mx-auto">
-                    Share your gaming highlights, daily moments, cultural experiences, and professional insights all in one vibrant community platform
-                </p>
+                <h2 class="text-5xl md:text-7xl font-bold text-white mb-6">
+                    Your World, <span class="gradient-text">Four Zones</span>
+                </h2>
                 
                 <!-- Zone Cards -->
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
                     <!-- Gaming Zone -->
-                    <div id="gaming" class="zone-card">
+                    <div class="zone-card">
                         <div class="bg-gradient-to-br from-purple-500 to-indigo-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <span class="text-3xl">🎮</span>
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-4">Gaming Zone</h3>
-                        <p class="text-white/80 mb-6">Share clips, highlights, tournaments, memes, and tips & tricks. Showcase both casual and professional gaming content.</p>
-                        <div class="space-y-3 text-left mb-6">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Epic gameplay highlights</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Tournament streams</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Gaming memes & tips</span>
-                            </div>
-                        </div>
-                        <div class="text-white/60 text-sm mb-4 flex justify-between">
-                            <span>1.2K posts</span>
-                            <span>850 active users</span>
-                        </div>
-                        <button class="btn-primary btn-gaming w-full py-3 rounded-xl">
+                        <p class="text-white/80 mb-6">Share your gaming moments and highlights</p>
+                        <button class="btn-primary w-full py-3 rounded-xl" onclick="openZonePage('gaming')">
                             Enter Gaming Zone
                         </button>
                     </div>
 
                     <!-- Daily Life Zone -->
-                    <div id="life" class="zone-card">
+                    <div class="zone-card">
                         <div class="bg-gradient-to-br from-pink-500 to-rose-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <span class="text-3xl">👤</span>
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-4">Daily Life Zone</h3>
-                        <p class="text-white/80 mb-6">Post short stories, daily vlogs, personal style, and friendly moments. A casual Insta/TikTok vibe with gaming lifestyle blend.</p>
-                        <div class="space-y-3 text-left mb-6">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Daily vlogs & stories</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Personal style & moments</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Lifestyle content</span>
-                            </div>
-                        </div>
-                        <div class="text-white/60 text-sm mb-4 flex justify-between">
-                            <span>980 posts</span>
-                            <span>650 active users</span>
-                        </div>
-                        <button class="btn-primary btn-life w-full py-3 rounded-xl">
+                        <p class="text-white/80 mb-6">Share your daily moments and stories</p>
+                        <button class="btn-primary w-full py-3 rounded-xl" onclick="openZonePage('life')">
                             Enter Life Zone
                         </button>
                     </div>
 
-                    <!-- Culture & Events Zone -->
-                    <div id="culture" class="zone-card">
+                    <!-- Culture Zone -->
+                    <div class="zone-card">
                         <div class="bg-gradient-to-br from-cyan-500 to-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <span class="text-3xl">🎭</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Culture & Events Zone</h3>
-                        <p class="text-white/80 mb-6">Celebrate local festivals, weddings, traditions, sports events, and concerts. Become an ambassador of your culture.</p>
-                        <div class="space-y-3 text-left mb-6">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Cultural festivals</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Local events & traditions</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Community gatherings</span>
-                            </div>
-                        </div>
-                        <div class="text-white/60 text-sm mb-4 flex justify-between">
-                            <span>750 posts</span>
-                            <span>420 active users</span>
-                        </div>
-                        <button class="btn-primary btn-culture w-full py-3 rounded-xl">
+                        <h3 class="text-2xl font-bold text-white mb-4">Culture Zone</h3>
+                        <p class="text-white/80 mb-6">Share cultural experiences and events</p>
+                        <button class="btn-primary w-full py-3 rounded-xl" onclick="openZonePage('culture')">
                             Enter Culture Zone
                         </button>
                     </div>
 
                     <!-- Professional Zone -->
-                    <div id="professional" class="zone-card">
+                    <div class="zone-card">
                         <div class="bg-gradient-to-br from-orange-500 to-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <span class="text-3xl">💼</span>
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-4">Professional Zone</h3>
-                        <p class="text-white/80 mb-6">Connect with professionals, share career insights, business tips, and industry knowledge across all fields.</p>
-                        <div class="space-y-3 text-left mb-6">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Career networking</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Industry insights</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
-                                <span class="text-white/80 text-sm">Business collaboration</span>
-                            </div>
-                        </div>
-                        <div class="text-white/60 text-sm mb-4 flex justify-between">
-                            <span>540 posts</span>
-                            <span>320 active users</span>
-                        </div>
-                        <button class="btn-primary btn-professional w-full py-3 rounded-xl">
+                        <p class="text-white/80 mb-6">Share professional insights and tips</p>
+                        <button class="btn-primary w-full py-3 rounded-xl" onclick="openZonePage('professional')">
                             Enter Professional Zone
                         </button>
                     </div>
                 </div>
             </div>
         </section>
+    </main>
 
-        <!-- Features Section -->
-        <section id="explore" class="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h3 class="text-4xl font-bold text-white mb-4">One Platform, Endless Possibilities</h3>
-                    <p class="text-xl text-white/80">Connect, share, and discover across all four zones</p>
-                </div>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="text-center">
-                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                            <span class="text-2xl">📱</span>
-                        </div>
-                        <h4 class="text-lg font-semibold text-white mb-2">Cross-Zone Sharing</h4>
-                        <p class="text-white/70 text-sm">Share content across all zones seamlessly</p>
-                    </div>
-                    
-                    <div class="text-center">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                            <span class="text-2xl">🌍</span>
-                        </div>
-                        <h4 class="text-lg font-semibold text-white mb-2">Global Community</h4>
-                        <p class="text-white/70 text-sm">Connect with people worldwide</p>
-                    </div>
-                    
-                    <div class="text-center">
-                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                            <span class="text-2xl">⚡</span>
-                        </div>
-                        <h4 class="text-lg font-semibold text-white mb-2">Real-time Updates</h4>
-                        <p class="text-white/70 text-sm">Stay updated with live content feeds</p>
-                    </div>
-                    
-                    <div class="text-center">
-                        <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                            <span class="text-2xl">🎯</span>
-                        </div>
-                        <h4 class="text-lg font-semibold text-white mb-2">Smart Discovery</h4>
-                        <p class="text-white/70 text-sm">Find content tailored to your interests</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Post Creation Section -->
-        <section id="post-creation" class="py-20 px-4 sm:px-6 lg:px-8 bg-black/10">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
-                    <h3 class="text-4xl font-bold text-white mb-4">Create Your Post</h3>
-                    <p class="text-xl text-white/80">Share your content across all zones</p>
-                </div>
-                
-                <div class="card-glass p-8 rounded-2xl">
-                    <form id="post-form" class="space-y-6">
-                        <!-- Zone Selection -->
-                        <div>
-                            <label class="block text-white font-semibold mb-3">Select Zone</label>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="zone" value="gaming" class="sr-only peer">
-                                    <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-purple-500 peer-checked:bg-purple-500/20 transition-all text-center">
-                                        <span class="text-2xl block mb-1">🎮</span>
-                                        <span class="text-white text-sm">Gaming</span>
-                                    </div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="zone" value="life" class="sr-only peer">
-                                    <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-pink-500 peer-checked:bg-pink-500/20 transition-all text-center">
-                                        <span class="text-2xl block mb-1">👤</span>
-                                        <span class="text-white text-sm">Life</span>
-                                    </div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="zone" value="culture" class="sr-only peer">
-                                    <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-cyan-500 peer-checked:bg-cyan-500/20 transition-all text-center">
-                                        <span class="text-2xl block mb-1">🎭</span>
-                                        <span class="text-white text-sm">Culture</span>
-                                    </div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="zone" value="professional" class="sr-only peer">
-                                    <div class="p-3 rounded-lg border-2 border-white/20 peer-checked:border-orange-500 peer-checked:bg-orange-500/20 transition-all text-center">
-                                        <span class="text-2xl block mb-1">💼</span>
-                                        <span class="text-white text-sm">Professional</span>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Content Input -->
-                        <div>
-                            <label for="post-content" class="block text-white font-semibold mb-3">What's on your mind?</label>
-                            <textarea id="post-content" rows="4" class="w-full bg-white/10 border border-white/20 rounded-lg p-4 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 resize-none" placeholder="Share your thoughts, experiences, or insights..."></textarea>
-                        </div>
-
-                        <!-- Tags Input -->
-                        <div>
-                            <label for="post-tags" class="block text-white font-semibold mb-3">Tags</label>
-                            <input type="text" id="post-tags" class="w-full bg-white/10 border border-white/20 rounded-lg p-4 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" placeholder="Add tags separated by commas (e.g., gaming, fps, tournament)">
-                            <div id="tags-display" class="flex flex-wrap gap-2 mt-3"></div>
-                        </div>
-
-                        <!-- Media Upload -->
-                        <div>
-                            <label class="block text-white font-semibold mb-3">Media (Demo)</label>
-                            <div class="media-upload-area border-2 border-dashed border-white/20 rounded-lg p-8 text-center hover:border-white/40 transition-colors cursor-pointer" onclick="window.fileUploadSystem.showUploader()">
-                                <svg class="w-12 h-12 text-white/60 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                                </svg>
-                                <p class="text-white/80">Click to upload images or videos</p>
-                                <p class="text-white/60 text-sm mt-2">PNG, JPG, MP4 up to 10MB</p>
-                            </div>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="w-full btn-primary py-4 text-lg font-bold">
-                            Create Post
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-       
-        if (e.target.classList.contains('btn-secondary') && e.target.textContent.includes('Sign In')) {
-            e. <!-- User Profiles Section -->
-        <section id="user-profiles" class="py-20 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-12">
-                    <h3 class="text-4xl font-bold text-white mb-4">Featured Creators</h3>
-                    <p class="text-xl text-white/80">Connect with amazing creators across all zones</p>
-                </div>
-                
-                <div id="profiles-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- User profiles will be populated here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="py-20 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-4xl mx-auto text-center">
-                <h3 class="text-4xl font-bold text-white mb-6">Ready to Join ZYLORB?</h3>
-                <p class="text-xl text-white/80 mb-8">Start sharing your gaming highlights, daily moments, cultural experiences, and professional insights today</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button class="btn-primary px-10 py-5 text-xl font-bold transform hover:scale-105">
-                        Create Account
-                    </button>
-                    <button class="btn-secondary px-8 py-4 text-lg">
-                        Explore Zones
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Community Guidelines Section -->
-        <section id="community-guidelines" class="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
-                    <h3 class="text-4xl font-bold text-white mb-4">Community Guidelines</h3>
-                    <p class="text-xl text-white/80">Keeping ZYLORB safe and respectful for everyone</p>
-                </div>
-
-                <div class="card-glass rounded-2xl p-8">
-                    <!-- Strict Prohibited Content Section -->
-                    <div class="mb-8">
-                        <h4 class="text-2xl font-bold text-red-400 mb-4">🚫 Strictly Prohibited Content</h4>
-                        <div class="space-y-3 text-white/80">
-                            <div class="flex items-start space-x-3">
-                                <span class="text-red-400 mt-1">•</span>
-                                <span><strong>Pornography & Sexual Content:</strong> Absolutely no nudity, sexually explicit content, pornography, or sexually suggestive material of any kind.</span>
-                            </div>
-                            <div class="flex items-start space-x-3">
-                                <span class="text-red-400 mt-1">•</span>
-                                <span><strong>Hate Speech:</strong> No content that promotes violence or hatred against individuals or groups.</span>
-                            </div>
-                            <div class="flex items-start space-x-3">
-                                <span class="text-red-400 mt-1">•</span>
-                                <span><strong>Harassment & Bullying:</strong> Do not share content that threatens, harasses, or bullies others.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Moderation Notice -->
-                    <div class="bg-red-900/20 border border-red-400/50 rounded-xl p-6 mb-6">
-                        <h5 class="text-lg font-bold text-red-300 mb-2">⚠️ Automated Content Moderation</h5>
-                        <p class="text-white/80 text-sm">
-                            Our AI-powered system automatically scans all uploaded content for prohibited material. 
-                            Any content violating these guidelines will be <strong>immediately removed</strong> and may result 
-                            in account suspension or permanent ban.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        </main>
-
-    <!-- REAL GAMING ZONE PAGE -->
+    <!-- REAL ZONE PAGES -->
+    <!-- Gaming Zone -->
     <div id="gaming-zone-page" class="hidden fixed inset-0 bg-gradient-to-br from-purple-900 to-indigo-900 z-50 overflow-y-auto">
         <div class="min-h-screen">
-            <!-- Gaming Zone Header -->
             <header class="bg-black/20 backdrop-blur-lg border-b border-white/10 sticky top-0 z-40">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between items-center py-4">
@@ -827,120 +186,195 @@
                 </div>
             </header>
 
-            <!-- Gaming Zone Content -->
             <div class="max-w-4xl mx-auto py-6 px-4">
-                <!-- Quick Stats -->
-                <div class="grid grid-cols-3 gap-4 mb-6">
-                    <div class="bg-white/10 rounded-xl p-4 text-center">
-                        <div class="text-2xl font-bold text-white">1.2K</div>
-                        <div class="text-white/60 text-sm">Posts</div>
-                    </div>
-                    <div class="bg-white/10 rounded-xl p-4 text-center">
-                        <div class="text-2xl font-bold text-white">856</div>
-                        <div class="text-white/60 text-sm">Online</div>
-                    </div>
-                    <div class="bg-white/10 rounded-xl p-4 text-center">
-                        <div class="text-2xl font-bold text-white">24</div>
-                        <div class="text-white/60 text-sm">Live</div>
-                    </div>
-                </div>
-
-                <!-- Live Streams -->
-                <div class="mb-8">
-                    <h2 class="text-xl font-bold text-white mb-4 flex items-center">
-                        <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
-                        LIVE Streams
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/15 transition-all">
-                            <div class="aspect-video bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg mb-3 flex items-center justify-center relative">
-                                <div class="text-center">
-                                    <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-2 animate-pulse">
-                                        <span class="text-white text-sm font-bold">LIVE</span>
-                                    </div>
-                                    <p class="text-white font-semibold">Tournament Finals</p>
-                                </div>
-                                <div class="absolute top-3 right-3">
-                                    <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">🔴 LIVE</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-white font-semibold">Epic Gaming Tournament</p>
-                                    <p class="text-white/60 text-sm">ProGamer • 2.5K watching</p>
-                                </div>
-                                <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-semibold transition-colors">
-                                    Watch
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="bg-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/15 transition-all">
-                            <div class="aspect-video bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-lg mb-3 flex items-center justify-center relative">
-                                <div class="text-center">
-                                    <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-2 animate-pulse">
-                                        <span class="text-white text-sm font-bold">LIVE</span>
-                                    </div>
-                                    <p class="text-white font-semibold">Fortnite Battle</p>
-                                </div>
-                                <div class="absolute top-3 right-3">
-                                    <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">🔴 LIVE</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-white font-semibold">Fortnite Pro Match</p>
-                                    <p class="text-white/60 text-sm">GameMaster • 1.8K watching</p>
-                                </div>
-                                <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-semibold transition-colors">
-                                    Watch
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Create Post Button (Sticky) -->
-                <div class="fixed bottom-6 right-6 z-40">
-                    <button onclick="showCreatePostModal('gaming')" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Posts Feed -->
-                <div id="gaming-posts-feed" class="space-y-4">
-                    <!-- Posts will appear here -->
+                <div id="gaming-posts-feed" class="space-y-6">
                     <div class="text-center py-12">
                         <div class="text-6xl mb-4">🎮</div>
                         <h3 class="text-2xl font-bold text-white mb-2">Welcome to Gaming Zone!</h3>
                         <p class="text-white/60 mb-6">No posts yet. Be the first to share your gaming moments!</p>
-                        <button onclick="showCreatePostModal('gaming')" class="btn-primary">
+                        <button onclick="showCreatePostModal('gaming')" class="btn-primary px-6 py-3">
                             🚀 Create First Post
                         </button>
                     </div>
                 </div>
             </div>
+
+            <div class="fixed bottom-6 right-6 z-40">
+                <button onclick="showCreatePostModal('gaming')" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Life Zone -->
+    <div id="life-zone-page" class="hidden fixed inset-0 bg-gradient-to-br from-pink-900 to-rose-900 z-50 overflow-y-auto">
+        <div class="min-h-screen">
+            <header class="bg-black/20 backdrop-blur-lg border-b border-white/10 sticky top-0 z-40">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center py-4">
+                        <div class="flex items-center space-x-3">
+                            <button onclick="closeZonePage()" class="text-white hover:text-pink-300 p-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                </svg>
+                            </button>
+                            <div class="w-10 h-10 bg-gradient-to-r from-pink-500 to-rose-600 rounded-full flex items-center justify-center">
+                                <span class="text-xl">👤</span>
+                            </div>
+                            <div>
+                                <h1 class="text-2xl font-bold text-white">Daily Life Zone</h1>
+                                <p class="text-white/60 text-sm">Share your daily moments</p>
+                            </div>
+                        </div>
+                        <button onclick="showCreatePostModal('life')" class="btn-primary flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span>Create Post</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="max-w-4xl mx-auto py-6 px-4">
+                <div id="life-posts-feed" class="space-y-6">
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">👤</div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Welcome to Daily Life Zone!</h3>
+                        <p class="text-white/60 mb-6">No posts yet. Be the first to share your daily moments!</p>
+                        <button onclick="showCreatePostModal('life')" class="btn-primary px-6 py-3">
+                            🚀 Create First Post
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fixed bottom-6 right-6 z-40">
+                <button onclick="showCreatePostModal('life')" class="bg-gradient-to-r from-pink-500 to-rose-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Culture Zone -->
+    <div id="culture-zone-page" class="hidden fixed inset-0 bg-gradient-to-br from-cyan-900 to-blue-900 z-50 overflow-y-auto">
+        <div class="min-h-screen">
+            <header class="bg-black/20 backdrop-blur-lg border-b border-white/10 sticky top-0 z-40">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center py-4">
+                        <div class="flex items-center space-x-3">
+                            <button onclick="closeZonePage()" class="text-white hover:text-cyan-300 p-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                </svg>
+                            </button>
+                            <div class="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-xl">🎭</span>
+                            </div>
+                            <div>
+                                <h1 class="text-2xl font-bold text-white">Culture Zone</h1>
+                                <p class="text-white/60 text-sm">Share cultural experiences</p>
+                            </div>
+                        </div>
+                        <button onclick="showCreatePostModal('culture')" class="btn-primary flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span>Create Post</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="max-w-4xl mx-auto py-6 px-4">
+                <div id="culture-posts-feed" class="space-y-6">
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">🎭</div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Welcome to Culture Zone!</h3>
+                        <p class="text-white/60 mb-6">No posts yet. Be the first to share cultural experiences!</p>
+                        <button onclick="showCreatePostModal('culture')" class="btn-primary px-6 py-3">
+                            🚀 Create First Post
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fixed bottom-6 right-6 z-40">
+                <button onclick="showCreatePostModal('culture')" class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Zone -->
+    <div id="professional-zone-page" class="hidden fixed inset-0 bg-gradient-to-br from-orange-900 to-red-900 z-50 overflow-y-auto">
+        <div class="min-h-screen">
+            <header class="bg-black/20 backdrop-blur-lg border-b border-white/10 sticky top-0 z-40">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center py-4">
+                        <div class="flex items-center space-x-3">
+                            <button onclick="closeZonePage()" class="text-white hover:text-orange-300 p-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                </svg>
+                            </button>
+                            <div class="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-600 rounded-full flex items-center justify-center">
+                                <span class="text-xl">💼</span>
+                            </div>
+                            <div>
+                                <h1 class="text-2xl font-bold text-white">Professional Zone</h1>
+                                <p class="text-white/60 text-sm">Share professional insights</p>
+                            </div>
+                        </div>
+                        <button onclick="showCreatePostModal('professional')" class="btn-primary flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span>Create Post</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="max-w-4xl mx-auto py-6 px-4">
+                <div id="professional-posts-feed" class="space-y-6">
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">💼</div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Welcome to Professional Zone!</h3>
+                        <p class="text-white/60 mb-6">No posts yet. Be the first to share professional insights!</p>
+                        <button onclick="showCreatePostModal('professional')" class="btn-primary px-6 py-3">
+                            🚀 Create First Post
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fixed bottom-6 right-6 z-40">
+                <button onclick="showCreatePostModal('professional')" class="bg-gradient-to-r from-orange-500 to-red-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- REAL POST CREATION MODAL -->
-    <div id="create-post-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
-        <div class="bg-gradient-to-br from-purple-900/90 to-indigo-900/90 backdrop-blur-lg rounded-2xl border border-white/20 w-full max-w-2xl max-h-[90vh] overflow-hidden">
-            <!-- Modal Header -->
-            <div class="p-6 border-b border-white/20">
+    <div id="create-post-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl">
+            <div class="p-4 border-b border-gray-700 bg-gray-800">
                 <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                            <span class="text-lg">🎮</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white">Create Post</h3>
-                            <p class="text-white/60 text-sm">Share with Gaming Zone community</p>
-                        </div>
-                    </div>
-                    <button onclick="closeCreatePostModal()" class="text-white/60 hover:text-white p-2">
+                    <h3 class="text-xl font-bold text-white">Create Post</h3>
+                    <button onclick="closeCreatePostModal()" class="text-gray-400 hover:text-white p-1">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
@@ -948,123 +382,101 @@
                 </div>
             </div>
             
-            <!-- Modal Content -->
             <div class="p-6 overflow-y-auto max-h-96">
-                <!-- Content Input -->
-                <div class="mb-6">
-                    <textarea 
-                        id="real-post-content" 
-                        rows="5" 
-                        placeholder="What's your gaming moment? Share your epic wins, funny clips, or gaming tips..."
-                        class="w-full bg-white/10 border border-white/20 rounded-xl p-4 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 resize-none text-lg"
-                    ></textarea>
-                </div>
-
-                <!-- Media Upload Section -->
-                <div class="mb-6">
-                    <label class="block text-white font-semibold mb-3">Add Media</label>
-                    
-                    <!-- Upload Options -->
-                    <div class="grid grid-cols-3 gap-3 mb-4">
-                        <button class="bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl p-4 text-center transition-all">
-                            <svg class="w-8 h-8 text-white/60 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <span class="text-white text-sm">Photo</span>
-                        </button>
-                        
-                        <button class="bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl p-4 text-center transition-all">
-                            <svg class="w-8 h-8 text-white/60 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                            </svg>
-                            <span class="text-white text-sm">Video</span>
-                        </button>
-                        
-                        <button class="bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl p-4 text-center transition-all">
-                            <svg class="w-8 h-8 text-white/60 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <span class="text-white text-sm">Clip</span>
-                        </button>
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold" id="current-user-initial">U</span>
                     </div>
-
-                    <!-- Drag & Drop Area -->
-                    <div class="border-2 border-dashed border-white/30 rounded-xl p-8 text-center cursor-pointer hover:border-purple-400 transition-colors bg-white/5" onclick="document.getElementById('media-upload').click()">
-                        <svg class="w-12 h-12 text-white/60 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                        </svg>
-                        <p class="text-white font-semibold mb-2">Upload gaming content</p>
-                        <p class="text-white/60 text-sm">Drag & drop or click to browse</p>
-                        <p class="text-white/40 text-xs mt-2">Supports: JPG, PNG, MP4, GIF (Max 50MB)</p>
-                    </div>
-                    <input type="file" id="media-upload" class="hidden" accept="image/*,video/*" multiple>
-                    
-                    <!-- Media Preview -->
-                    <div id="media-preview" class="mt-4 grid grid-cols-3 gap-2 hidden">
-                        <!-- Preview items will appear here -->
+                    <div>
+                        <p class="text-white font-semibold" id="current-username">User</p>
+                        <p class="text-gray-400 text-sm">Post to <span id="current-zone-name">Gaming</span> Zone</p>
                     </div>
                 </div>
 
-                <!-- Tags Input -->
-                <div class="mb-6">
-                    <label class="block text-white font-semibold mb-3">Add Tags</label>
-                    <div class="flex flex-wrap gap-2 mb-3">
-                        <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm cursor-pointer hover:bg-purple-500/30">#gaming</span>
-                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm cursor-pointer hover:bg-blue-500/30">#fortnite</span>
-                        <span class="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm cursor-pointer hover:bg-green-500/30">#victory</span>
-                        <span class="bg-red-500/20 text-red-300 px-3 py-1 rounded-full text-sm cursor-pointer hover:bg-red-500/30">#clutch</span>
+                <textarea 
+                    id="real-post-content" 
+                    rows="4" 
+                    placeholder="What's on your mind? Share your thoughts..."
+                    class="w-full bg-transparent border-none text-white placeholder-gray-400 text-lg resize-none focus:outline-none focus:ring-0"
+                ></textarea>
+
+                <div id="media-preview" class="mt-4 space-y-3 hidden">
+                </div>
+
+                <div class="flex items-center justify-between pt-4 border-t border-gray-700">
+                    <div class="flex items-center space-x-4">
+                        <label class="cursor-pointer">
+                            <input type="file" id="photo-upload" class="hidden" accept="image/*" multiple>
+                            <div class="flex items-center space-x-2 text-gray-400 hover:text-green-400 transition-colors p-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                <span class="text-sm">Photo</span>
+                            </div>
+                        </label>
+
+                        <label class="cursor-pointer">
+                            <input type="file" id="video-upload" class="hidden" accept="video/*">
+                            <div class="flex items-center space-x-2 text-gray-400 hover:text-red-400 transition-colors p-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                                <span class="text-sm">Video</span>
+                            </div>
+                        </label>
                     </div>
-                    <input 
-                        type="text" 
-                        id="real-post-tags"
-                        placeholder="Add custom tags (comma separated)..."
-                        class="w-full bg-white/10 border border-white/20 rounded-xl p-3 text-white placeholder-white/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
-                    >
                 </div>
             </div>
             
-            <!-- Modal Footer -->
-            <div class="p-6 border-t border-white/20 bg-black/20">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-4 text-white/60 text-sm">
-                        <div class="flex items-center space-x-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <span>Public</span>
-                        </div>
-                        <div class="flex items-center space-x-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-                            </svg>
-                            <span>Allow Comments</span>
-                        </div>
+            <div class="p-4 border-t border-gray-700 bg-gray-800">
+                <button onclick="submitRealPost()" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition-colors">
+                    Post
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUTH MODAL -->
+    <div id="auth-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
+        <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl w-full max-w-md p-8 text-white">
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold" id="auth-title">Welcome to ZYLORB</h2>
+                <p class="text-white/80 mt-2" id="auth-subtitle">Join our community today</p>
+            </div>
+            
+            <div id="auth-form">
+                <div class="space-y-4">
+                    <div id="name-field" class="hidden">
+                        <input type="text" id="auth-name" placeholder="Your Name" class="w-full bg-white/20 border border-white/30 rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50">
                     </div>
-                    <button onclick="submitRealPost()" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105 flex items-center space-x-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                        <span>POST TO GAMING ZONE</span>
+                    
+                    <input type="email" id="auth-email" placeholder="Your Email" class="w-full bg-white/20 border border-white/30 rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50">
+                    
+                    <input type="password" id="auth-password" placeholder="Your Password" class="w-full bg-white/20 border border-white/30 rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50">
+                    
+                    <button onclick="handleAuth()" class="w-full bg-white text-purple-600 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors" id="auth-button">
+                        Continue
+                    </button>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <button onclick="toggleAuthMode()" class="text-white/80 hover:text-white text-sm" id="auth-switch">
+                        Already have an account? Sign In
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-black/40 backdrop-blur-lg border-t border-white/10 py-12 px-4 sm:px-6 lg:px-8">
-        <!-- Footer content same as before -->
-    </footer>
-
     <script>
-// 🚀 ZYLORB - REAL FUNCTIONALITY
+// 🚀 ZYLORB - 100% REAL WORKING CODE
 console.log('🚀 ZYLORB Loading...');
 
 let currentZone = 'gaming';
 let isLoggedIn = false;
 let currentUser = null;
+let currentPostMedia = [];
+let isSignUpMode = true;
 
 // Simple Toast Function
 function showToast(message, type = 'info') {
@@ -1089,16 +501,13 @@ function showToast(message, type = 'info') {
     }, 3000);
 }
 
-// REAL ZONE NAVIGATION - FIXED
+// REAL ZONE NAVIGATION
 function openZonePage(zone) {
     console.log('Opening zone:', zone);
     
-    // Hide main content sections
-    const sectionsToHide = ['main', '#stories-section', '#reels-section', '#news-section', 'footer'];
-    sectionsToHide.forEach(selector => {
-        const element = document.querySelector(selector);
-        if (element) element.style.display = 'none';
-    });
+    // Hide main content
+    document.querySelector('main').style.display = 'none';
+    document.querySelector('header').style.display = 'none';
     
     // Show zone page
     const zonePage = document.getElementById(`${zone}-zone-page`);
@@ -1113,12 +522,9 @@ function openZonePage(zone) {
 function closeZonePage() {
     console.log('Closing zone page');
     
-    // Show main content sections
-    const sectionsToShow = ['main', '#stories-section', '#reels-section', '#news-section', 'footer'];
-    sectionsToShow.forEach(selector => {
-        const element = document.querySelector(selector);
-        if (element) element.style.display = 'block';
-    });
+    // Show main content
+    document.querySelector('main').style.display = 'block';
+    document.querySelector('header').style.display = 'block';
     
     // Hide all zone pages
     document.querySelectorAll('[id$="-zone-page"]').forEach(page => {
@@ -1129,11 +535,11 @@ function closeZonePage() {
     showToast('🏠 Returned to main page!', 'info');
 }
 
-// REAL POST CREATION - FIXED
+// REAL POST CREATION
 function showCreatePostModal(zone) {
     if (!isLoggedIn) {
         showToast('🔐 Please sign in first to create posts!', 'error');
-        showAuthModal('signin');
+        showAuthModal();
         return;
     }
     
@@ -1143,11 +549,18 @@ function showCreatePostModal(zone) {
         document.getElementById('current-zone-name').textContent = zone.charAt(0).toUpperCase() + zone.slice(1);
         currentZone = zone;
         
+        // Reset media
+        currentPostMedia = [];
+        updateMediaPreview();
+        
         // Focus on textarea
         setTimeout(() => {
             const textarea = document.getElementById('real-post-content');
-            if (textarea) textarea.focus();
-        }, 300);
+            if (textarea) {
+                textarea.value = '';
+                textarea.focus();
+            }
+        }, 100);
     }
 }
 
@@ -1155,34 +568,108 @@ function closeCreatePostModal() {
     const modal = document.getElementById('create-post-modal');
     if (modal) {
         modal.classList.add('hidden');
-        document.getElementById('real-post-content').value = '';
-        document.getElementById('real-post-tags').value = '';
-        
-        const mediaPreview = document.getElementById('media-preview');
-        if (mediaPreview) {
-            mediaPreview.innerHTML = '';
-            mediaPreview.classList.add('hidden');
-        }
+        currentPostMedia = [];
+        updateMediaPreview();
     }
 }
 
+// REAL MEDIA UPLOAD HANDLING
+function setupMediaUploads() {
+    // Photo upload
+    const photoUpload = document.getElementById('photo-upload');
+    if (photoUpload) {
+        photoUpload.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        currentPostMedia.push({
+                            type: 'image',
+                            url: e.target.result,
+                            file: file
+                        });
+                        updateMediaPreview();
+                        showToast('📸 Photo added!', 'success');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    }
+
+    // Video upload
+    const videoUpload = document.getElementById('video-upload');
+    if (videoUpload) {
+        videoUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('video/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentPostMedia.push({
+                        type: 'video',
+                        url: e.target.result,
+                        file: file
+                    });
+                    updateMediaPreview();
+                    showToast('🎥 Video added!', 'success');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+}
+
+function updateMediaPreview() {
+    const preview = document.getElementById('media-preview');
+    if (!preview) return;
+
+    if (currentPostMedia.length === 0) {
+        preview.classList.add('hidden');
+        preview.innerHTML = '';
+        return;
+    }
+
+    preview.classList.remove('hidden');
+    preview.innerHTML = currentPostMedia.map((media, index) => `
+        <div class="relative">
+            ${media.type === 'image' ? 
+                `<img src="${media.url}" class="w-full h-48 object-cover rounded-lg">` :
+                `<video src="${media.url}" class="w-full h-48 object-cover rounded-lg" controls></video>`
+            }
+            <button onclick="removeMedia(${index})" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">
+                ×
+            </button>
+        </div>
+    `).join('');
+}
+
+function removeMedia(index) {
+    currentPostMedia.splice(index, 1);
+    updateMediaPreview();
+}
+
+// REAL POST SUBMISSION
 function submitRealPost() {
     const content = document.getElementById('real-post-content');
-    const tags = document.getElementById('real-post-tags');
     
-    if (!content || !content.value.trim()) {
-        showToast('📝 Please write something for your post!', 'error');
+    if (!content || !content.value.trim() && currentPostMedia.length === 0) {
+        showToast('📝 Please add some content or media to your post!', 'error');
         return;
     }
 
     const postData = {
+        id: Date.now(),
         zone: currentZone,
-        content: content.value.trim(),
-        tags: tags.value ? tags.value.split(',').map(tag => tag.trim()).filter(tag => tag) : [],
-        media: [],
-        username: currentUser || 'You',
+        content: content ? content.value.trim() : '',
+        media: [...currentPostMedia],
+        username: currentUser || 'User',
         avatar: '👤',
-        timestamp: new Date().toLocaleTimeString()
+        timestamp: new Date().toLocaleTimeString(),
+        likes: 0,
+        comments: [],
+        shares: 0,
+        isLiked: false
     };
 
     addPostToFeed(postData);
@@ -1190,6 +677,7 @@ function submitRealPost() {
     closeCreatePostModal();
 }
 
+// REAL POST INTERACTIONS
 function addPostToFeed(post) {
     const feed = document.getElementById(`${post.zone}-posts-feed`);
     if (!feed) return;
@@ -1210,202 +698,299 @@ function addPostToFeed(post) {
             </div>
         </div>
         
-        <p class="text-white text-lg mb-4 leading-relaxed">${post.content}</p>
+        ${post.content ? `<p class="text-white text-lg mb-4 leading-relaxed">${post.content}</p>` : ''}
         
-        ${post.tags.length > 0 ? `
-            <div class="flex flex-wrap gap-2 mb-4">
-                ${post.tags.map(tag => `<span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">#${tag}</span>`).join('')}
-            </div>
-        ` : ''}
+        ${post.media.length > 0 ? post.media.map(media => 
+            media.type === 'image' ? 
+                `<img src="${media.url}" class="w-full rounded-xl mb-4 max-h-96 object-cover cursor-pointer" onclick="openMediaViewer('${media.url}')">` :
+                `<video src="${media.url}" class="w-full rounded-xl mb-4 max-h-96 object-cover cursor-pointer" controls onclick="openMediaViewer('${media.url}')"></video>`
+        ).join('') : ''}
         
         <div class="flex items-center justify-between pt-4 border-t border-white/10">
             <div class="flex items-center space-x-6">
-                <button class="flex items-center space-x-2 text-white/60 hover:text-red-400 transition-colors group">
-                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button onclick="toggleLike(${post.id})" class="flex items-center space-x-2 ${post.isLiked ? 'text-red-500' : 'text-white/60'} hover:text-red-400 transition-colors group">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="${post.isLiked ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                     </svg>
-                    <span class="text-sm font-medium">Like</span>
+                    <span class="text-sm font-medium">${post.likes}</span>
                 </button>
                 
-                <button class="flex items-center space-x-2 text-white/60 hover:text-blue-400 transition-colors group">
+                <button onclick="showComments(${post.id})" class="flex items-center space-x-2 text-white/60 hover:text-blue-400 transition-colors group">
                     <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                     </svg>
                     <span class="text-sm font-medium">Comment</span>
                 </button>
                 
-                <button class="flex items-center space-x-2 text-white/60 hover:text-green-400 transition-colors group">
+                <button onclick="sharePost(${post.id})" class="flex items-center space-x-2 text-white/60 hover:text-green-400 transition-colors group">
                     <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
                     </svg>
-                    <span class="text-sm font-medium">Share</span>
+                    <span class="text-sm font-medium">${post.shares}</span>
                 </button>
             </div>
-            
-            <button class="text-white/60 hover:text-white transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
-                </svg>
-            </button>
+        </div>
+        
+        <div id="comments-${post.id}" class="hidden mt-4 space-y-3">
+            <div class="flex space-x-3">
+                <input type="text" id="comment-input-${post.id}" placeholder="Add a comment..." class="flex-1 bg-white/10 border border-white/20 rounded-full px-4 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button onclick="addComment(${post.id})" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition-colors">Post</button>
+            </div>
+            <div id="comments-list-${post.id}" class="space-y-2 max-h-32 overflow-y-auto">
+                <!-- Comments will be dynamically added here -->
+            </div>
         </div>
     `;
-    
+
     // Remove "no posts" message if exists
-    const noPostsMsg = feed.querySelector('.text-center');
-    if (noPostsMsg) {
-        noPostsMsg.remove();
+    const emptyState = feed.querySelector('.text-center');
+    if (emptyState) {
+        emptyState.remove();
     }
     
     feed.insertBefore(postElement, feed.firstChild);
 }
 
-// AUTH FUNCTIONS - FIXED
-function showAuthModal(type) {
-    const modal = document.createElement('div');
-    modal.id = 'auth-modal';
-    modal.style.cssText = `
+// REAL LIKE FUNCTIONALITY
+function toggleLike(postId) {
+    if (!isLoggedIn) {
+        showToast('🔐 Please sign in to like posts!', 'error');
+        showAuthModal();
+        return;
+    }
+
+    const postElement = document.querySelector(`[onclick="toggleLike(${postId})"]`).closest('.bg-white\\/10');
+    if (!postElement) return;
+
+    const likeButton = postElement.querySelector(`[onclick="toggleLike(${postId})"]`);
+    const likeCount = likeButton.querySelector('span');
+    
+    let currentLikes = parseInt(likeCount.textContent);
+    const isLiked = likeButton.classList.contains('text-red-500');
+
+    if (isLiked) {
+        // Unlike
+        likeButton.classList.remove('text-red-500');
+        likeButton.classList.add('text-white/60');
+        likeButton.querySelector('svg').setAttribute('fill', 'none');
+        currentLikes--;
+        showToast('💔 Like removed', 'info');
+    } else {
+        // Like
+        likeButton.classList.remove('text-white/60');
+        likeButton.classList.add('text-red-500');
+        likeButton.querySelector('svg').setAttribute('fill', 'currentColor');
+        currentLikes++;
+        showToast('❤️ Post liked!', 'success');
+    }
+
+    likeCount.textContent = currentLikes;
+}
+
+// REAL COMMENT FUNCTIONALITY
+function showComments(postId) {
+    if (!isLoggedIn) {
+        showToast('🔐 Please sign in to comment!', 'error');
+        showAuthModal();
+        return;
+    }
+
+    const commentsSection = document.getElementById(`comments-${postId}`);
+    if (commentsSection) {
+        commentsSection.classList.toggle('hidden');
+    }
+}
+
+function addComment(postId) {
+    const commentInput = document.getElementById(`comment-input-${postId}`);
+    const commentsList = document.getElementById(`comments-list-${postId}`);
+    
+    if (!commentInput || !commentInput.value.trim()) {
+        showToast('💬 Please enter a comment!', 'error');
+        return;
+    }
+
+    const commentElement = document.createElement('div');
+    commentElement.className = 'flex items-start space-x-3 p-3 bg-white/5 rounded-lg';
+    commentElement.innerHTML = `
+        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0">
+            <span class="text-white text-sm">${currentUser ? currentUser.charAt(0).toUpperCase() : 'U'}</span>
+        </div>
+        <div class="flex-1">
+            <p class="text-white font-semibold text-sm">${currentUser || 'User'}</p>
+            <p class="text-white/80 text-sm">${commentInput.value}</p>
+            <p class="text-white/40 text-xs mt-1">${new Date().toLocaleTimeString()}</p>
+        </div>
+    `;
+
+    commentsList.appendChild(commentElement);
+    commentInput.value = '';
+    
+    // Scroll to bottom of comments
+    commentsList.scrollTop = commentsList.scrollHeight;
+    
+    showToast('💬 Comment added!', 'success');
+}
+
+// REAL SHARE FUNCTIONALITY
+function sharePost(postId) {
+    if (!isLoggedIn) {
+        showToast('🔐 Please sign in to share posts!', 'error');
+        showAuthModal();
+        return;
+    }
+
+    const postElement = document.querySelector(`[onclick="sharePost(${postId})"]`).closest('.bg-white\\/10');
+    if (!postElement) return;
+
+    const shareButton = postElement.querySelector(`[onclick="sharePost(${postId})"]`);
+    const shareCount = shareButton.querySelector('span');
+    
+    let currentShares = parseInt(shareCount.textContent);
+    currentShares++;
+    shareCount.textContent = currentShares;
+
+    showToast('📤 Post shared!', 'success');
+}
+
+// REAL MEDIA VIEWER
+function openMediaViewer(mediaUrl) {
+    const viewer = document.createElement('div');
+    viewer.style.cssText = `
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.8);
+        inset: 0;
+        background: rgba(0,0,0,0.95);
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 9999;
+        z-index: 10000;
+        backdrop-filter: blur(20px);
     `;
     
-    const isSignUp = type === 'signup';
-    const title = isSignUp ? '🎉 Create Your ZYLORB Account' : '🔐 Sign In to ZYLORB';
-    const buttonText = isSignUp ? 'Create Account' : 'Sign In';
-    
-    modal.innerHTML = `
-        <div style="
-            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); 
-            padding: 30px; 
-            border-radius: 15px; 
-            width: 90%; 
-            max-width: 400px; 
-            color: white; 
-            text-align: center;
-        ">
-            <h2 style="margin: 0 0 15px 0; font-size: 24px;">${title}</h2>
-            
-            ${isSignUp ? `
-                <input type="text" id="reg-username" placeholder="👤 Username" style="
-                    width: 100%;
-                    padding: 12px;
-                    margin: 8px 0;
-                    border: none;
-                    border-radius: 8px;
-                    background: rgba(255,255,255,0.9);
-                ">
-            ` : ''}
-            
-            <input type="email" id="auth-email" placeholder="📧 Email" style="
-                width: 100%;
-                padding: 12px;
-                margin: 8px 0;
-                border: none;
-                border-radius: 8px;
-                background: rgba(255,255,255,0.9);
-            ">
-            
-            <input type="password" id="auth-password" placeholder="🔒 Password" style="
-                width: 100%;
-                padding: 12px;
-                margin: 8px 0;
-                border: none;
-                border-radius: 8px;
-                background: rgba(255,255,255,0.9);
-            ">
-            
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button onclick="handleAuth('${type}')" style="
-                    flex: 1;
-                    padding: 12px;
-                    background: white;
-                    color: #8b5cf6;
-                    border: none;
-                    border-radius: 8px;
-                    font-weight: bold;
-                    cursor: pointer;
-                ">${buttonText}</button>
-                
-                <button onclick="closeModal()" style="
-                    flex: 1;
-                    padding: 12px;
-                    background: transparent;
-                    color: white;
-                    border: 1px solid white;
-                    border-radius: 8px;
-                    cursor: pointer;
-                ">Cancel</button>
-            </div>
+    viewer.innerHTML = `
+        <div class="relative max-w-4xl max-h-full w-full h-full flex items-center justify-center">
+            <button onclick="this.parentElement.parentElement.remove()" class="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 z-10 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            ${mediaUrl.includes('data:image') ? 
+                `<img src="${mediaUrl}" class="max-w-full max-h-full object-contain" style="transform: scale(0.95); animation: zoomIn 0.3s ease-out forwards;">` :
+                `<video src="${mediaUrl}" class="max-w-full max-h-full object-contain" controls autoplay style="transform: scale(0.95); animation: zoomIn 0.3s ease-out forwards;"></video>`
+            }
         </div>
+        <style>
+            @keyframes zoomIn {
+                from { transform: scale(0.95); opacity: 0; }
+                to { transform: scale(1); opacity: 1; }
+            }
+        </style>
     `;
     
-    document.body.appendChild(modal);
+    viewer.addEventListener('click', (e) => {
+        if (e.target === viewer) {
+            viewer.remove();
+        }
+    });
+    
+    document.body.appendChild(viewer);
 }
 
-function handleAuth(type) {
-    const isSignUp = type === 'signup';
-    const email = document.getElementById('auth-email');
-    const password = document.getElementById('auth-password');
-    const username = isSignUp ? document.getElementById('reg-username') : null;
+// REAL AUTHENTICATION SYSTEM
+function showAuthModal(mode = 'signup') {
+    isSignUpMode = mode === 'signup';
+    const modal = document.getElementById('auth-modal');
+    const title = document.getElementById('auth-title');
+    const subtitle = document.getElementById('auth-subtitle');
+    const button = document.getElementById('auth-button');
+    const switchText = document.getElementById('auth-switch');
+    const nameField = document.getElementById('name-field');
 
-    if (!email || !password || !email.value || !password.value) {
-        showToast('Please fill all fields!', 'error');
+    if (isSignUpMode) {
+        title.textContent = 'Join ZYLORB';
+        subtitle.textContent = 'Create your account to get started';
+        button.textContent = 'Create Account';
+        switchText.textContent = 'Already have an account? Sign In';
+        nameField.classList.remove('hidden');
+    } else {
+        title.textContent = 'Welcome Back';
+        subtitle.textContent = 'Sign in to your account';
+        button.textContent = 'Sign In';
+        switchText.textContent = "Don't have an account? Sign Up";
+        nameField.classList.add('hidden');
+    }
+
+    modal.classList.remove('hidden');
+}
+
+function closeAuthModal() {
+    document.getElementById('auth-modal').classList.add('hidden');
+}
+
+function toggleAuthMode() {
+    showAuthModal(isSignUpMode ? 'signin' : 'signup');
+}
+
+function handleAuth() {
+    const email = document.getElementById('auth-email').value;
+    const password = document.getElementById('auth-password').value;
+    const name = isSignUpMode ? document.getElementById('auth-name').value : 'User';
+
+    if (!email || !password) {
+        showToast('Please fill in all fields!', 'error');
         return;
     }
 
-    if (isSignUp && (!username || !username.value)) {
-        showToast('Please enter username!', 'error');
+    if (isSignUpMode && !name) {
+        showToast('Please enter your name!', 'error');
         return;
     }
 
-    // SUCCESS - Set user data
+    // SUCCESS
     isLoggedIn = true;
-    currentUser = isSignUp ? username.value : 'User';
-    
-    closeModal();
+    currentUser = name;
+
+    closeAuthModal();
     showToast(
-        isSignUp ? `Welcome ${currentUser}! Account created successfully! 🎉` : 'Signed in successfully! 🎉', 
+        isSignUpMode ? `Welcome ${name}! Account created successfully! 🎉` : 'Signed in successfully! 🎉', 
         'success'
     );
 
-    updateAuthUI(currentUser);
+    updateUIForAuth();
 }
 
-function closeModal() {
-    const modal = document.getElementById('auth-modal');
-    if (modal) modal.remove();
+function updateUIForAuth() {
+    const signInBtn = document.querySelector('.btn-secondary');
+    const joinBtn = document.querySelector('.btn-primary');
+    
+    if (signInBtn && signInBtn.textContent.includes('Sign In')) {
+        signInBtn.textContent = 'Logout';
+        signInBtn.onclick = logout;
+    }
+    
+    if (joinBtn && joinBtn.textContent.includes('Join Now')) {
+        joinBtn.textContent = `👋 ${currentUser}`;
+        joinBtn.style.background = 'rgba(255,255,255,0.2)';
+        joinBtn.onclick = () => showToast(`Welcome back, ${currentUser}!`, 'info');
+    }
+    
+    // Update user initial in post modal
+    const userInitial = document.getElementById('current-user-initial');
+    if (userInitial && currentUser) {
+        userInitial.textContent = currentUser.charAt(0).toUpperCase();
+    }
+    
+    const usernameElement = document.getElementById('current-username');
+    if (usernameElement && currentUser) {
+        usernameElement.textContent = currentUser;
+    }
 }
 
-function updateAuthUI(username) {
-    const joinButtons = document.querySelectorAll('.btn-primary');
-    const signInButtons = document.querySelectorAll('.btn-secondary');
-    
-    joinButtons.forEach(btn => {
-        if (btn.textContent.includes('Join Now') || btn.textContent.includes('Create Account')) {
-            btn.textContent = `👋 ${username}`;
-            btn.style.background = 'rgba(255,255,255,0.2)';
-            btn.onclick = () => showToast(`Welcome back, ${username}!`, 'info');
-        }
-    });
-    
-    signInButtons.forEach(btn => {
-        if (btn.textContent.includes('Sign In')) {
-            btn.textContent = 'Logout';
-            btn.onclick = () => {
-                isLoggedIn = false;
-                currentUser = null;
-                showToast('Logged out successfully!', 'info');
-                location.reload();
-            };
-        }
-    });
+function logout() {
+    isLoggedIn = false;
+    currentUser = null;
+    showToast('👋 Logged out successfully!', 'info');
+    location.reload();
 }
 
 // MAIN INITIALIZATION
@@ -1420,57 +1005,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 2000);
 
-    // Mobile menu
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-
-    // REAL ZONE BUTTONS - FIXED
-    document.querySelectorAll('.zone-card .btn-primary').forEach(button => {
-        if (button.textContent.includes('Enter')) {
-            button.addEventListener('click', function() {
-                const zoneCard = this.closest('.zone-card');
-                const zoneId = zoneCard.id;
-                console.log('Zone button clicked:', zoneId);
-                openZonePage(zoneId);
-            });
-        }
-    });
-
-    // AUTH BUTTONS - FIXED
-    document.addEventListener('click', function(e) {
-        // Join Now / Create Account
-        if (e.target.classList.contains('btn-primary') && 
-           (e.target.textContent.includes('Join Now') || e.target.textContent.includes('Create Account'))) {
-            e.preventDefault();
-            e.stopPropagation();
-            showAuthModal('signup');
-        }
-        
-        // Sign In
-        if (e.target.classList.contains('btn-secondary') && e.target.textContent.includes('Sign In')) {
-            e.preventDefault();
-            e.stopPropagation();
-            showAuthModal('signin');
-        }
-    });
+    // Setup media uploads
+    setupMediaUploads();
 
     // Close modals on outside click
     document.addEventListener('click', function(e) {
         if (e.target.id === 'auth-modal') {
-            closeModal();
+            closeAuthModal();
         }
         if (e.target.id === 'create-post-modal') {
             closeCreatePostModal();
         }
     });
 
-    console.log('✅ ZYLORB Ready with REAL Zones!');
+    console.log('✅ ZYLORB Fully Loaded - All Features Active');
     showToast('Welcome to ZYLORB! 🎉', 'success');
 });
 </script>

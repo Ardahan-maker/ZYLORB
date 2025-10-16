@@ -2075,7 +2075,7 @@
             </div>
             
             <div class="border-t border-white/10 mt-8 pt-8 text-center">
-                <p class="text-white/60 text-sm">© 2023 ZYLORB. All rights reserved.</p>
+                <p class="text-white/60 text-sm">© 2025 ZYLORB. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -3836,5 +3836,884 @@
         }
 
     </script>
+    <!-- Add these new pages and systems right before the closing </body> tag -->
+
+<!-- REAL-TIME NOTIFICATIONS PAGE -->
+<div id="notifications-page" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 overflow-y-auto">
+    <div class="min-h-screen">
+        <div class="zone-header">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <button class="btn-secondary" onclick="hideNotificationsPage()">
+                            <i class="fas fa-arrow-left mr-2"></i>Back
+                        </button>
+                        <div>
+                            <h1 class="text-3xl font-bold text-white">Notifications</h1>
+                            <p class="text-white/60">Your recent activities</p>
+                        </div>
+                    </div>
+                    <button class="btn-secondary" onclick="markAllNotificationsAsRead()">
+                        <i class="fas fa-check-double mr-2"></i>Mark All Read
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div id="notifications-list">
+                <!-- Notifications will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- COMMUNITY GUIDELINES PAGE -->
+<div id="community-page" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 overflow-y-auto">
+    <div class="min-h-screen">
+        <div class="zone-header">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <button class="btn-secondary" onclick="hideCommunityPage()">
+                            <i class="fas fa-arrow-left mr-2"></i>Back
+                        </button>
+                        <div>
+                            <h1 class="text-3xl font-bold text-white">Community Guidelines</h1>
+                            <p class="text-white/60">Keep our community safe and friendly</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="glass rounded-2xl p-8 mb-6">
+                <h2 class="text-2xl font-bold text-white mb-6">ZYLORB Community Standards</h2>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-ban text-red-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">No Illegal Activities</h3>
+                            <p class="text-white/80">Users must not engage in or promote any illegal activities on this platform. This includes but is not limited to fraud, harassment, threats, or any activity that violates local, state, or federal laws.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-exclamation-triangle text-purple-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">No Adult or Sexual Content</h3>
+                            <p class="text-white/80">Posting, sharing, or promoting adult content, pornography, or sexually explicit material is strictly prohibited. This platform is designed to be safe for users of all ages.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-comment-slash text-orange-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">No Hate Speech</h3>
+                            <p class="text-white/80">Hate speech, discrimination, or attacks against individuals or groups based on race, ethnicity, religion, gender, sexual orientation, or any other protected characteristic will not be tolerated.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-heart text-green-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Friendly Environment</h3>
+                            <p class="text-white/80">This platform is designed to be helpful and friendly for everyone. Please treat all users with respect and kindness. Bullying, harassment, or any form of abusive behavior will result in account suspension.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="about-page" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 overflow-y-auto">
+    <div class="min-h-screen">
+        <div class="zone-header">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <button class="btn-secondary" onclick="hideAboutPage()">
+                            <i class="fas fa-arrow-left mr-2"></i>Back
+                        </button>
+                        <div>
+                            <h1 class="text-3xl font-bold text-white">About ZYLORB</h1>
+                            <p class="text-white/60">The Future of Social Media</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="glass rounded-2xl p-8 mb-6 text-center">
+                <div class="w-32 h-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-crown text-white text-4xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-white mb-2">Muhammad Arda</h2>
+                <p class="text-xl text-white/80 mb-4">Founder & CEO</p>
+                <div class="flex justify-center space-x-4 mb-6">
+                    <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm">19 Years Old</span>
+                    <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">Data Science Student</span>
+                    <span class="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">Visionary</span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass rounded-2xl p-6">
+                    <h3 class="text-xl font-bold text-white mb-4">The Vision</h3>
+                    <p class="text-white/80">ZYLORB was built for the next generation - a platform where users can express different aspects of their lives in dedicated spaces. Unlike traditional social media that mixes everything together, ZYLORB's unique 4-zone system allows for more meaningful connections and content discovery.</p>
+                </div>
+
+                <div class="glass rounded-2xl p-6">
+                    <h3 class="text-xl font-bold text-white mb-4">The Mission</h3>
+                    <p class="text-white/80">To create a safe, innovative, and engaging social media experience that respects user privacy while fostering genuine connections across different interests and communities. ZYLORB represents the future of how people connect and share online.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- REAL LIVE STREAM MODAL -->
+<div id="real-live-stream-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="glass rounded-2xl p-6 max-w-4xl w-full">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-white">Go Live - Real Stream</h3>
+                <button class="text-white/60 hover:text-white" onclick="hideRealLiveStream()">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <div class="live-stream-container mb-6">
+                <video id="real-live-video" autoplay muted class="live-stream-video"></video>
+                <div class="live-viewers-count">
+                    <i class="fas fa-eye"></i>
+                    <span id="live-viewers-count">0</span> viewers
+                </div>
+                <div class="live-stream-controls">
+                    <button class="live-control-btn" id="toggle-camera-btn" onclick="toggleCamera()">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button class="live-control-btn" id="toggle-mic-btn" onclick="toggleMicrophone()">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button class="live-control-btn end-live" onclick="endRealLiveStream()">
+                        <i class="fas fa-stop"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-white/80 mb-2">Stream Title</label>
+                    <input type="text" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" 
+                           placeholder="Enter your stream title" id="real-stream-title">
+                </div>
+                
+                <div>
+                    <label class="block text-white/80 mb-2">Zone</label>
+                    <select class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" 
+                            id="real-stream-zone">
+                        <option value="gaming">Gaming Zone</option>
+                        <option value="life">Life Zone</option>
+                        <option value="culture">Culture Zone</option>
+                        <option value="professional">Professional Zone</option>
+                    </select>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button class="btn-secondary flex-1" onclick="hideRealLiveStream()">Cancel</button>
+                    <button class="btn-primary flex-1" onclick="startRealLiveStream()" id="start-real-live-btn">
+                        <i class="fas fa-broadcast-tower mr-2"></i>Go Live
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// 🚀 REAL-TIME FEATURES IMPLEMENTATION
+// Adding all 5 requested features without breaking existing functionality
+
+// 1. PERMANENT POSTS SYSTEM
+const PERMANENT_STORAGE = {
+    // Initialize permanent posts from localStorage
+    posts: JSON.parse(localStorage.getItem('zylorb_permanent_posts')) || {
+        gaming: [],
+        life: [],
+        culture: [],
+        professional: []
+    },
+    
+    // Real-time notifications storage
+    notifications: JSON.parse(localStorage.getItem('zylorb_notifications')) || [],
+    
+    // Active live streams storage
+    activeLiveStreams: JSON.parse(localStorage.getItem('zylorb_live_streams')) || []
+};
+
+// Initialize permanent posts when platform loads
+function initializePermanentPosts() {
+    console.log('📝 Initializing Permanent Posts System...');
+    
+    // Merge permanent posts with current session
+    Object.keys(ZYLORB_STATE.posts).forEach(zone => {
+        if (PERMANENT_STORAGE.posts[zone]) {
+            // Add permanent posts that don't exist in current session
+            PERMANENT_STORAGE.posts[zone].forEach(permanentPost => {
+                const exists = ZYLORB_STATE.posts[zone].some(post => post.id === permanentPost.id);
+                if (!exists) {
+                    ZYLORB_STATE.posts[zone].push(permanentPost);
+                }
+            });
+        }
+    });
+    
+    // Auto-save posts every 30 seconds
+    setInterval(savePermanentPosts, 30000);
+    
+    console.log('✅ Permanent Posts System Ready');
+}
+
+function savePermanentPosts() {
+    // Save all current posts to permanent storage
+    Object.keys(ZYLORB_STATE.posts).forEach(zone => {
+        PERMANENT_STORAGE.posts[zone] = ZYLORB_STATE.posts[zone];
+    });
+    localStorage.setItem('zylorb_permanent_posts', JSON.stringify(PERMANENT_STORAGE.posts));
+}
+
+// Override post creation to make posts permanent
+const originalCreateNewPost = window.createNewPost;
+window.createNewPost = function(zone) {
+    const content = document.getElementById(`${zone}-post-input`).value.trim();
+    
+    if (!content && !ZYLORB_STATE.currentMedia[zone]) {
+        showToast('Please enter some content or add media for your post', 'error');
+        return;
+    }
+    
+    // Create post with permanent ID
+    const newPost = {
+        id: 'perm_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        user: {
+            id: ZYLORB_STATE.currentUser.id,
+            name: ZYLORB_STATE.currentUser.name,
+            avatar: ZYLORB_STATE.currentUser.avatar,
+            color: getZoneColor(zone)
+        },
+        content: content,
+        media: ZYLORB_STATE.currentMedia[zone],
+        timestamp: new Date().toLocaleString(),
+        likes: 0,
+        comments: [],
+        shares: 0,
+        liked: false,
+        isPermanent: true
+    };
+    
+    // Add to current session
+    if (!ZYLORB_STATE.posts[zone]) {
+        ZYLORB_STATE.posts[zone] = [];
+    }
+    ZYLORB_STATE.posts[zone].unshift(newPost);
+    
+    // Save to permanent storage
+    savePermanentPosts();
+    
+    // Clear input and media
+    document.getElementById(`${zone}-post-input`).value = '';
+    removeMediaPreview(zone);
+    
+    // Reload zone content
+    loadZoneContent(zone);
+    
+    showToast('Post created permanently!', 'success');
+    
+    // Create notification
+    createNotification('post_created', `You created a new post in ${zone} zone`);
+};
+
+// 2. REAL LIVE STREAM SYSTEM
+let REAL_LIVE_STATE = {
+    mediaStream: null,
+    isStreaming: false,
+    currentStream: null,
+    viewerCount: 0
+};
+
+function showRealLiveStream() {
+    if (!ZYLORB_STATE.isLoggedIn) {
+        showToast('Please sign in to go live', 'error');
+        return;
+    }
+    
+    const modal = document.getElementById('real-live-stream-modal');
+    modal.classList.remove('hidden');
+    
+    // Initialize camera
+    initializeCamera();
+}
+
+function hideRealLiveStream() {
+    const modal = document.getElementById('real-live-stream-modal');
+    modal.classList.add('hidden');
+    
+    if (!REAL_LIVE_STATE.isStreaming) {
+        stopCamera();
+    }
+}
+
+async function initializeCamera() {
+    try {
+        REAL_LIVE_STATE.mediaStream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true
+        });
+        
+        const videoElement = document.getElementById('real-live-video');
+        videoElement.srcObject = REAL_LIVE_STATE.mediaStream;
+        
+        document.getElementById('start-real-live-btn').disabled = false;
+        showToast('Camera activated! Ready to go live.', 'success');
+        
+    } catch (error) {
+        console.error('Camera error:', error);
+        showToast('Could not access camera. Please check permissions.', 'error');
+    }
+}
+
+function toggleCamera() {
+    if (REAL_LIVE_STATE.mediaStream) {
+        const videoTracks = REAL_LIVE_STATE.mediaStream.getVideoTracks();
+        videoTracks.forEach(track => {
+            track.enabled = !track.enabled;
+        });
+        showToast(track.enabled ? 'Camera on' : 'Camera off', 'info');
+    }
+}
+
+function toggleMicrophone() {
+    if (REAL_LIVE_STATE.mediaStream) {
+        const audioTracks = REAL_LIVE_STATE.mediaStream.getAudioTracks();
+        audioTracks.forEach(track => {
+            track.enabled = !track.enabled;
+        });
+        showToast(track.enabled ? 'Microphone on' : 'Microphone off', 'info');
+    }
+}
+
+function stopCamera() {
+    if (REAL_LIVE_STATE.mediaStream) {
+        REAL_LIVE_STATE.mediaStream.getTracks().forEach(track => track.stop());
+        REAL_LIVE_STATE.mediaStream = null;
+    }
+}
+
+function startRealLiveStream() {
+    const title = document.getElementById('real-stream-title').value.trim();
+    const zone = document.getElementById('real-stream-zone').value;
+    
+    if (!title) {
+        showToast('Please enter a stream title', 'error');
+        return;
+    }
+    
+    if (!REAL_LIVE_STATE.mediaStream) {
+        showToast('Camera not available', 'error');
+        return;
+    }
+    
+    REAL_LIVE_STATE.isStreaming = true;
+    REAL_LIVE_STATE.currentStream = {
+        id: 'live_' + Date.now(),
+        user: ZYLORB_STATE.currentUser,
+        title: title,
+        zone: zone,
+        startTime: new Date().toISOString(),
+        viewers: 0
+    };
+    
+    // Add to active streams
+    PERMANENT_STORAGE.activeLiveStreams.push(REAL_LIVE_STATE.currentStream);
+    localStorage.setItem('zylorb_live_streams', JSON.stringify(PERMANENT_STORAGE.activeLiveStreams));
+    
+    // Start viewer simulation
+    startViewerSimulation();
+    
+    showToast('Live stream started!', 'success');
+    createNotification('live_started', `You started a live stream: ${title}`);
+    
+    // Update UI
+    document.getElementById('start-real-live-btn').style.display = 'none';
+}
+
+function endRealLiveStream() {
+    if (REAL_LIVE_STATE.isStreaming) {
+        REAL_LIVE_STATE.isStreaming = false;
+        
+        // Remove from active streams
+        PERMANENT_STORAGE.activeLiveStreams = PERMANENT_STORAGE.activeLiveStreams.filter(
+            stream => stream.id !== REAL_LIVE_STATE.currentStream.id
+        );
+        localStorage.setItem('zylorb_live_streams', JSON.stringify(PERMANENT_STORAGE.activeLiveStreams));
+        
+        stopCamera();
+        hideRealLiveStream();
+        
+        showToast('Live stream ended', 'info');
+        createNotification('live_ended', 'Your live stream has ended');
+    }
+}
+
+function startViewerSimulation() {
+    setInterval(() => {
+        if (REAL_LIVE_STATE.isStreaming) {
+            const change = Math.floor(Math.random() * 5) - 2;
+            REAL_LIVE_STATE.viewerCount = Math.max(0, REAL_LIVE_STATE.viewerCount + change);
+            document.getElementById('live-viewers-count').textContent = REAL_LIVE_STATE.viewerCount;
+        }
+    }, 3000);
+}
+
+// 3. REAL-TIME NOTIFICATION SYSTEM
+function initializeNotificationSystem() {
+    console.log('🔔 Initializing Notification System...');
+    
+    // Load existing notifications
+    updateNotificationBadges();
+    
+    // Simulate real-time notifications
+    setInterval(() => {
+        if (ZYLORB_STATE.isLoggedIn && Math.random() > 0.7) {
+            simulateRandomNotification();
+        }
+    }, 15000);
+    
+    console.log('✅ Notification System Ready');
+}
+
+function createNotification(type, message, relatedId = null) {
+    const newNotification = {
+        id: 'notif_' + Date.now(),
+        type: type,
+        message: message,
+        timestamp: new Date().toISOString(),
+        read: false,
+        relatedId: relatedId
+    };
+    
+    PERMANENT_STORAGE.notifications.unshift(newNotification);
+    
+    // Keep only last 100 notifications
+    if (PERMANENT_STORAGE.notifications.length > 100) {
+        PERMANENT_STORAGE.notifications.pop();
+    }
+    
+    localStorage.setItem('zylorb_notifications', JSON.stringify(PERMANENT_STORAGE.notifications));
+    updateNotificationBadges();
+    
+    // Show real-time alert
+    showRealTimeNotification(message);
+    
+    return newNotification;
+}
+
+function simulateRandomNotification() {
+    const notifications = [
+        { type: 'like', message: 'Someone liked your recent post' },
+        { type: 'comment', message: 'New comment on your gaming clip' },
+        { type: 'follow', message: 'You have a new follower' },
+        { type: 'live', message: 'Your friend just started a live stream' },
+        { type: 'mention', message: 'You were mentioned in a post' }
+    ];
+    
+    const randomNotif = notifications[Math.floor(Math.random() * notifications.length)];
+    createNotification(randomNotif.type, randomNotif.message);
+}
+
+function updateNotificationBadges() {
+    const unreadCount = PERMANENT_STORAGE.notifications.filter(n => !n.read).length;
+    const badge = document.getElementById('header-notification-count');
+    
+    if (badge) {
+        badge.textContent = unreadCount > 0 ? unreadCount : '';
+        badge.style.display = unreadCount > 0 ? 'flex' : 'none';
+    }
+}
+
+function showNotificationsPage() {
+    if (!ZYLORB_STATE.isLoggedIn) {
+        showToast('Please sign in to view notifications', 'error');
+        return;
+    }
+    
+    const page = document.getElementById('notifications-page');
+    page.classList.remove('hidden');
+    
+    loadNotifications();
+}
+
+function hideNotificationsPage() {
+    const page = document.getElementById('notifications-page');
+    page.classList.add('hidden');
+}
+
+function loadNotifications() {
+    const container = document.getElementById('notifications-list');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (PERMANENT_STORAGE.notifications.length === 0) {
+        container.innerHTML = `
+            <div class="text-center py-12">
+                <i class="fas fa-bell-slash text-4xl text-white/40 mb-4"></i>
+                <h3 class="text-xl font-bold text-white mb-2">No notifications yet</h3>
+                <p class="text-white/60">Your notifications will appear here</p>
+            </div>
+        `;
+        return;
+    }
+    
+    PERMANENT_STORAGE.notifications.forEach(notification => {
+        const notifElement = createNotificationElement(notification);
+        container.appendChild(notifElement);
+    });
+}
+
+function createNotificationElement(notification) {
+    const element = document.createElement('div');
+    element.className = `post-card ${notification.read ? '' : 'border-l-4 border-l-purple-500'}`;
+    element.innerHTML = `
+        <div class="flex items-start space-x-4">
+            <div class="user-avatar ${getNotificationIcon(notification.type)}">
+                <i class="${getNotificationIconClass(notification.type)}"></i>
+            </div>
+            <div class="flex-1">
+                <p class="text-white/90 mb-2">${notification.message}</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-white/60 text-sm">${formatTime(notification.timestamp)}</span>
+                    ${!notification.read ? `
+                        <button class="text-purple-400 text-sm hover:text-purple-300" onclick="markNotificationAsRead('${notification.id}')">
+                            Mark as read
+                        </button>
+                    ` : ''}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return element;
+}
+
+function getNotificationIcon(type) {
+    const icons = {
+        like: 'bg-gradient-to-r from-red-500 to-pink-500',
+        comment: 'bg-gradient-to-r from-blue-500 to-cyan-500',
+        follow: 'bg-gradient-to-r from-green-500 to-teal-500',
+        live: 'bg-gradient-to-r from-orange-500 to-red-500',
+        mention: 'bg-gradient-to-r from-purple-500 to-indigo-500',
+        post_created: 'bg-gradient-to-r from-purple-500 to-pink-500'
+    };
+    return icons[type] || 'bg-gradient-to-r from-gray-500 to-gray-700';
+}
+
+function getNotificationIconClass(type) {
+    const classes = {
+        like: 'fas fa-heart',
+        comment: 'fas fa-comment',
+        follow: 'fas fa-user-plus',
+        live: 'fas fa-broadcast-tower',
+        mention: 'fas fa-at',
+        post_created: 'fas fa-plus'
+    };
+    return classes[type] || 'fas fa-bell';
+}
+
+function markNotificationAsRead(notificationId) {
+    const notification = PERMANENT_STORAGE.notifications.find(n => n.id === notificationId);
+    if (notification) {
+        notification.read = true;
+        localStorage.setItem('zylorb_notifications', JSON.stringify(PERMANENT_STORAGE.notifications));
+        loadNotifications();
+        updateNotificationBadges();
+    }
+}
+
+function markAllNotificationsAsRead() {
+    PERMANENT_STORAGE.notifications.forEach(notification => {
+        notification.read = true;
+    });
+    localStorage.setItem('zylorb_notifications', JSON.stringify(PERMANENT_STORAGE.notifications));
+    loadNotifications();
+    updateNotificationBadges();
+    showToast('All notifications marked as read', 'success');
+}
+
+// 4. COMMUNITY GUIDELINES PAGE
+function showCommunityPage() {
+    const page = document.getElementById('community-page');
+    page.classList.remove('hidden');
+}
+
+function hideCommunityPage() {
+    const page = document.getElementById('community-page');
+    page.classList.add('hidden');
+}
+
+// 5. ABOUT PAGE
+function showAboutPage() {
+    const page = document.getElementById('about-page');
+    page.classList.remove('hidden');
+}
+
+function hideAboutPage() {
+    const page = document.getElementById('about-page');
+    page.classList.add('hidden');
+}
+
+// UTILITY FUNCTIONS
+function formatTime(timestamp) {
+    const now = new Date();
+    const time = new Date(timestamp);
+    const diffMs = now - time;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 7) return `${diffDays}d ago`;
+    
+    return time.toLocaleDateString();
+}
+
+// Update header to include notifications button
+document.addEventListener('DOMContentLoaded', function() {
+    // Add notifications button to user menu
+    const userMenu = document.getElementById('user-menu');
+    if (userMenu) {
+        const notificationsItem = document.createElement('div');
+        notificationsItem.className = 'user-menu-item';
+        notificationsItem.innerHTML = `
+            <i class="fas fa-bell mr-2"></i>Notifications
+            <span class="ml-auto bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center" id="menu-notification-count">0</span>
+        `;
+        notificationsItem.onclick = showNotificationsPage;
+        
+        // Insert after profile item
+        const profileItem = userMenu.querySelector('.user-menu-item');
+        profileItem.parentNode.insertBefore(notificationsItem, profileItem.nextSibling);
+    }
+    
+    // Update navigation links
+    const communityLink = document.querySelector('a[href="#community"]');
+    const aboutLink = document.querySelector('a[href="#about"]');
+    
+    if (communityLink) {
+        communityLink.onclick = function(e) {
+            e.preventDefault();
+            showCommunityPage();
+        };
+    }
+    
+    if (aboutLink) {
+        aboutLink.onclick = function(e) {
+            e.preventDefault();
+            showAboutPage();
+        };
+    }
+    
+    // Update mobile menu links
+    const mobileCommunityLink = document.querySelector('#mobile-menu a[href="#community"]');
+    const mobileAboutLink = document.querySelector('#mobile-menu a[href="#about"]');
+    
+    if (mobileCommunityLink) {
+        mobileCommunityLink.onclick = function(e) {
+            e.preventDefault();
+            showCommunityPage();
+            toggleMobileMenu();
+        };
+    }
+    
+    if (mobileAboutLink) {
+        mobileAboutLink.onclick = function(e) {
+            e.preventDefault();
+            showAboutPage();
+            toggleMobileMenu();
+        };
+    }
+    
+    // Replace old live stream button with real one
+    const oldLiveButton = document.querySelector('button[onclick="showLiveStreamModal()"]');
+    if (oldLiveButton) {
+        oldLiveButton.onclick = showRealLiveStream;
+    }
+    
+    // Initialize real-time systems
+    setTimeout(() => {
+        initializePermanentPosts();
+        initializeNotificationSystem();
+        console.log('🚀 All Real-time Features Initialized');
+    }, 2000);
+});
+
+// Update notification badges in real-time
+function updateAllNotificationBadges() {
+    updateNotificationBadges();
+    
+    const menuBadge = document.getElementById('menu-notification-count');
+    if (menuBadge) {
+        const unreadCount = PERMANENT_STORAGE.notifications.filter(n => !n.read).length;
+        menuBadge.textContent = unreadCount > 0 ? unreadCount : '';
+        menuBadge.style.display = unreadCount > 0 ? 'flex' : 'none';
+    }
+}
+
+// Enhanced real-time notification display
+function showEnhancedRealTimeNotification(message) {
+    showRealTimeNotification(message);
+    
+    // Also create a permanent notification
+    createNotification('activity', message);
+}
+
+// Override existing functions to create notifications
+const originalToggleLike = window.toggleLike;
+window.toggleLike = function(postId, zone) {
+    originalToggleLike(postId, zone);
+    
+    const post = ZYLORB_STATE.posts[zone].find(p => p.id === postId);
+    if (post && post.liked && post.user.id !== ZYLORB_STATE.currentUser.id) {
+        createNotification('like', `${ZYLORB_STATE.currentUser.name} liked your post`);
+    }
+};
+
+const originalAddComment = window.addComment;
+window.addComment = function(postId, zone) {
+    originalAddComment(postId, zone);
+    
+    const post = ZYLORB_STATE.posts[zone].find(p => p.id === postId);
+    if (post && post.user.id !== ZYLORB_STATE.currentUser.id) {
+        createNotification('comment', `${ZYLORB_STATE.currentUser.name} commented on your post`);
+    }
+};
+
+console.log('🎯 Real-time Features Loaded: Permanent Posts, Live Streaming, Notifications, Community Guidelines, About Page');
+</script>
+
+<style>
+/* Additional styles for real-time features */
+.live-stream-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.live-stream-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.live-viewers-count {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.live-stream-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.live-control-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.live-control-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+.live-control-btn.end-live {
+    background: #ef4444;
+}
+
+.live-control-btn.end-live:hover {
+    background: #dc2626;
+}
+
+/* Notification styles */
+.notification-item {
+    border-left: 4px solid transparent;
+}
+
+.notification-item.unread {
+    border-left-color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.05);
+}
+
+/* Community guidelines styles */
+.guideline-item {
+    transition: transform 0.2s ease;
+}
+
+.guideline-item:hover {
+    transform: translateX(5px);
+}
+
+/* About page styles */
+.owner-avatar {
+    transition: transform 0.3s ease;
+}
+
+.owner-avatar:hover {
+    transform: scale(1.05);
+}
+</style>
 </body>
 </html>

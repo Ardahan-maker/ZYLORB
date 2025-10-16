@@ -6,7 +6,7 @@
     <title>ZYLORB - World's First 4-Zone Social Media Platform</title>
     
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -3389,119 +3389,133 @@ console.log('🎯 All Real-time Fixes Loaded: Persistent Auth, Enhanced Profiles
         });
 
         // Auth System
-        function showAuthModal(mode = 'signup') {
-            ZYLORB_STATE.authMode = mode;
-            const modal = document.getElementById('auth-modal');
-            const title = document.getElementById('auth-modal-title');
-            const subtitle = document.getElementById('auth-modal-subtitle');
-            const submitBtn = document.getElementById('auth-submit-btn');
-            const switchText = document.getElementById('auth-switch-text');
-            const switchLink = document.getElementById('auth-switch-link');
-            const nameField = document.getElementById('name-field');
-            
-            if (mode === 'signup') {
-                title.textContent = 'Join ZYLORB';
-                subtitle.textContent = 'Create your account to explore all four zones';
-                submitBtn.textContent = 'Create Account';
-                switchText.innerHTML = 'Already have an account? ';
-                switchLink.textContent = 'Sign In';
-                nameField.classList.remove('hidden');
-            } else {
-                title.textContent = 'Welcome Back';
-                subtitle.textContent = 'Sign in to your ZYLORB account';
-                submitBtn.textContent = 'Sign In';
-                switchText.innerHTML = 'Don\'t have an account? ';
-                switchLink.textContent = 'Create Account';
-                nameField.classList.add('hidden');
-            }
-            
-            modal.classList.remove('hidden');
+      function showAuthModal(mode = 'signup') {
+    console.log('Opening auth modal in mode:', mode);
+    
+    ZYLORB_STATE.authMode = mode;
+    const modal = document.getElementById('auth-modal');
+    
+    if (!modal) {
+        console.error('Auth modal not found');
+        return;
+    }
+    
+    // Use setTimeout to ensure DOM is ready
+    setTimeout(() => {
+        const title = document.getElementById('auth-modal-title');
+        const subtitle = document.getElementById('auth-modal-subtitle');
+        const submitBtn = document.getElementById('auth-submit-btn');
+        const switchText = document.getElementById('auth-switch-text');
+        const switchLink = document.getElementById('auth-switch-link');
+        const nameField = document.getElementById('name-field');
+        
+        console.log('Auth modal elements:', {title, subtitle, submitBtn, switchText, switchLink, nameField});
+        
+        if (mode === 'signup') {
+            if (title) title.textContent = 'Join ZYLORB';
+            if (subtitle) subtitle.textContent = 'Create your account to explore all four zones';
+            if (submitBtn) submitBtn.textContent = 'Create Account';
+            if (switchText) switchText.innerHTML = 'Already have an account? ';
+            if (switchLink) switchLink.textContent = 'Sign In';
+            if (nameField) nameField.classList.remove('hidden');
+        } else {
+            if (title) title.textContent = 'Welcome Back';
+            if (subtitle) subtitle.textContent = 'Sign in to your ZYLORB account';
+            if (submitBtn) submitBtn.textContent = 'Sign In';
+            if (switchText) switchText.innerHTML = 'Don\'t have an account? ';
+            if (switchLink) switchLink.textContent = 'Create Account';
+            if (nameField) nameField.classList.add('hidden');
         }
+        
+        modal.classList.remove('hidden');
+        console.log('Auth modal opened successfully');
+    }, 100);
+}
 
-        function hideAuthModal() {
-            const modal = document.getElementById('auth-modal');
-            modal.classList.add('hidden');
+      function hideAuthModal() {
+    const modal = document.getElementById('auth-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        console.log('Auth modal closed');
+    }
+}
+       function handleAuthSubmit(e) {
+    e.preventDefault();
+    console.log('Auth form submitted in mode:', ZYLORB_STATE.authMode);
+    
+    const email = document.getElementById('auth-email')?.value;
+    const password = document.getElementById('auth-password')?.value;
+    const terms = document.getElementById('auth-terms')?.checked;
+    
+    if (!email || !password) {
+        showToast('Please enter your email and password', 'error');
+        return;
+    }
+    
+    if (ZYLORB_STATE.authMode === 'signup') {
+        const name = document.getElementById('auth-name')?.value;
+        
+        if (!name) {
+            showToast('Please enter your name', 'error');
+            return;
         }
-
-        function handleAuthSubmit(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('auth-email').value;
-            const password = document.getElementById('auth-password').value;
-            const terms = document.getElementById('auth-terms').checked;
-            
-            if (ZYLORB_STATE.authMode === 'signup') {
-                const name = document.getElementById('auth-name').value;
-                
-                if (!name || !email || !password) {
-                    showToast('Please fill in all fields', 'error');
-                    return;
-                }
-                
-                if (!terms) {
-                    showToast('Please agree to the terms and conditions', 'error');
-                    return;
-                }
-                
-                // Check if user already exists
-                if (ZYLORB_STATE.users.find(u => u.email === email)) {
-                    showToast('User with this email already exists', 'error');
-                    return;
-                }
-                
-                // Create real user account
-                ZYLORB_STATE.currentUser = {
-                    id: Date.now(),
-                    name: name,
-                    email: email,
-                    avatar: name.charAt(0).toUpperCase(),
-                    joinDate: new Date().toISOString(),
-                    posts: [],
-                    likes: 0,
-                    comments: 0,
-                    bio: 'Welcome to my ZYLORB profile!',
-                    followers: [],
-                    following: []
-                };
-                
-                // Add to users array
-                ZYLORB_STATE.users.push(ZYLORB_STATE.currentUser);
-                
-                ZYLORB_STATE.isLoggedIn = true;
-                updateUIForLoggedInUser();
-                hideAuthModal();
-                showToast(`Welcome to ZYLORB, ${name}!`, 'success');
-                
-                // Save to localStorage
-                saveToLocalStorage();
-                
-                // Start real-time features
-                startRealTimeFeatures();
-                
-            } else {
-                // Real sign in
-                if (!email || !password) {
-                    showToast('Please enter your email and password', 'error');
-                    return;
-                }
-                
-                // Check if user exists
-                const user = ZYLORB_STATE.users.find(u => u.email === email);
-                if (user) {
-                    ZYLORB_STATE.currentUser = user;
-                    ZYLORB_STATE.isLoggedIn = true;
-                    updateUIForLoggedInUser();
-                    hideAuthModal();
-                    showToast('Welcome back!', 'success');
-                    
-                    // Start real-time features
-                    startRealTimeFeatures();
-                } else {
-                    showToast('Invalid email or password', 'error');
-                }
-            }
+        
+        if (!terms) {
+            showToast('Please agree to the terms and conditions', 'error');
+            return;
         }
-
+        
+        if (ZYLORB_STATE.users.find(u => u.email === email)) {
+            showToast('User with this email already exists', 'error');
+            return;
+        }
+        
+        // Create user
+        ZYLORB_STATE.currentUser = {
+            id: 'user_' + Date.now(),
+            name: name,
+            email: email,
+            avatar: name.charAt(0).toUpperCase(),
+            joinDate: new Date().toISOString(),
+            posts: [],
+            likes: 0,
+            comments: 0,
+            bio: 'Welcome to my ZYLORB profile!',
+            followers: [],
+            following: [],
+            profilePic: null
+        };
+        
+        ZYLORB_STATE.users.push(ZYLORB_STATE.currentUser);
+        ZYLORB_STATE.isLoggedIn = true;
+        
+        // Save to persistent storage
+        localStorage.setItem('zylorb_current_user', JSON.stringify(ZYLORB_STATE.currentUser));
+        saveToLocalStorage();
+        
+        updateUIForLoggedInUser();
+        hideAuthModal();
+        showToast(`Welcome to ZYLORB, ${name}!`, 'success');
+        startRealTimeFeatures();
+        
+    } else {
+        // Sign in
+        const user = ZYLORB_STATE.users.find(u => u.email === email);
+        if (user) {
+            ZYLORB_STATE.currentUser = user;
+            ZYLORB_STATE.isLoggedIn = true;
+            
+            localStorage.setItem('zylorb_current_user', JSON.stringify(ZYLORB_STATE.currentUser));
+            
+            updateUIForLoggedInUser();
+            hideAuthModal();
+            showToast('Welcome back!', 'success');
+            startRealTimeFeatures();
+        } else {
+            showToast('Invalid email or password', 'error');
+        }
+    }
+}
         function updateUIForLoggedInUser() {
             const authButtons = document.getElementById('auth-buttons');
             const userProfile = document.getElementById('user-profile');
@@ -3772,7 +3786,7 @@ console.log('🎯 All Real-time Fixes Loaded: Persistent Auth, Enhanced Profiles
             
             // Load reels
             loadReels(zone);
-            
+           
             // Add posts
             if (ZYLORB_STATE.posts[zone] && ZYLORB_STATE.posts[zone].length > 0) {
                 ZYLORB_STATE.posts[zone].forEach(post => {
@@ -3811,25 +3825,115 @@ console.log('🎯 All Real-time Fixes Loaded: Persistent Auth, Enhanced Profiles
                 });
             }
         }
-
-        function loadReels(zone) {
-            const reelsContainer = document.getElementById(`${zone}-reels-container`);
-            if (!reelsContainer) return;
-            
-            // Add reels
-            if (ZYLORB_STATE.reels[zone] && ZYLORB_STATE.reels[zone].length > 0) {
-                ZYLORB_STATE.reels[zone].forEach(reel => {
-                    const reelElement = createReelElement(reel, zone);
-                    reelsContainer.appendChild(reelElement);
-                });
-            } else {
-                reelsContainer.innerHTML = `
-                    <div class="text-center py-4 w-full">
-                        <p class="text-white/60">No reels yet. Be the first to create one!</p>
-                    </div>
-                `;
+// Sample reels function - YEH LOADREELS SE PEHLE ADD KAREN
+function createSampleReelsForZone(zone) {
+    console.log('Creating sample reels for:', zone);
+    const sampleReels = {
+        gaming: [
+            {
+                id: 'reel_1',
+                user: {
+                    id: 'user_1',
+                    name: 'ProGamer',
+                    avatar: 'P',
+                    color: 'from-purple-500 to-pink-500'
+                },
+                media: {
+                    type: 'video',
+                    url: 'https://assets.mixkit.co/videos/preview/mixkit-gamer-playing-a-video-game-44751-large.mp4'
+                },
+                title: 'Epic Gaming Moment!',
+                likes: 245,
+                comments: 12,
+                timestamp: '2 hours ago'
             }
-        }
+        ],
+        life: [
+            {
+                id: 'reel_2',
+                user: {
+                    id: 'user_2',
+                    name: 'LifeVlogger',
+                    avatar: 'L',
+                    color: 'from-pink-500 to-rose-500'
+                },
+                media: {
+                    type: 'video', 
+                    url: 'https://assets.mixkit.co/videos/preview/mixkit-girl-with-headphones-walking-in-a-park-44754-large.mp4'
+                },
+                title: 'Morning Walk Vibes',
+                likes: 189,
+                comments: 8,
+                timestamp: '5 hours ago'
+            }
+        ],
+        culture: [
+            {
+                id: 'reel_3',
+                user: {
+                    id: 'user_3',
+                    name: 'CultureExplorer',
+                    avatar: 'C',
+                    color: 'from-cyan-500 to-blue-500'
+                },
+                media: {
+                    type: 'video',
+                    url: 'https://assets.mixkit.co/videos/preview/mixkit-group-of-people-dancing-at-a-party-44753-large.mp4'
+                },
+                title: 'Traditional Dance',
+                likes: 312,
+                comments: 15,
+                timestamp: '1 hour ago'
+            }
+        ],
+        professional: [
+            {
+                id: 'reel_4',
+                user: {
+                    id: 'user_4',
+                    name: 'CareerCoach',
+                    avatar: 'C',
+                    color: 'from-orange-500 to-red-500'
+                },
+                media: {
+                    type: 'video',
+                    url: 'https://assets.mixkit.co/videos/preview/mixkit-business-meeting-in-a-modern-office-44755-large.mp4'
+                },
+                title: 'Office Tips',
+                likes: 156,
+                comments: 6,
+                timestamp: '3 hours ago'
+            }
+        ]
+    };
+    
+    ZYLORB_STATE.reels[zone] = sampleReels[zone] || [];
+    console.log('Sample reels created for', zone, ZYLORB_STATE.reels[zone]);
+}
+        function loadReels(zone) {
+    const reelsContainer = document.getElementById(`${zone}-reels-container`);
+    if (!reelsContainer) return;
+    
+    reelsContainer.innerHTML = '';
+    
+    // Add sample reels if none exist and function is available
+    if ((!ZYLORB_STATE.reels[zone] || ZYLORB_STATE.reels[zone].length === 0) && typeof createSampleReelsForZone === 'function') {
+        createSampleReelsForZone(zone);
+    }
+    
+    if (ZYLORB_STATE.reels[zone] && ZYLORB_STATE.reels[zone].length > 0) {
+        ZYLORB_STATE.reels[zone].forEach(reel => {
+            const reelElement = createReelElement(reel, zone);
+            reelsContainer.appendChild(reelElement);
+        });
+    } else {
+        reelsContainer.innerHTML = `
+            <div class="text-center py-4 w-full">
+                <p class="text-white/60">No reels yet. Be the first to create one!</p>
+            </div>
+        `;
+    }
+}
 
         function createStoryElement(story, zone, isCurrentUser = false) {
             const storyEl = document.createElement('div');
@@ -3857,22 +3961,26 @@ console.log('🎯 All Real-time Fixes Loaded: Persistent Auth, Enhanced Profiles
             return storyEl;
         }
 
-        function createReelElement(reel, zone) {
-            const reelEl = document.createElement('div');
-            reelEl.className = 'reel';
-            reelEl.onclick = () => viewReel(reel, zone);
-            
-            reelEl.innerHTML = `
-                <div class="reel-video">
-                    <video>
-                        <source src="${reel.media.url}" type="video/mp4">
-                    </video>
-                </div>
-                <div class="reel-username">${reel.user.name}</div>
-            `;
-            
-            return reelEl;
-        }
+     function createReelElement(reel, zone) {
+    const reelEl = document.createElement('div');
+    reelEl.className = 'reel';
+    reelEl.onclick = () => viewReel(reel, zone);
+    
+    // Error fix: Check if media exists
+    const mediaUrl = reel.media && reel.media.url ? reel.media.url : 'https://assets.mixkit.co/videos/preview/mixkit-gamer-playing-a-video-game-44751-large.mp4';
+    
+    reelEl.innerHTML = `
+        <div class="reel-video">
+            <video muted>
+                <source src="${mediaUrl}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="reel-username">${reel.user ? reel.user.name : 'User'}</div>
+    `;
+    
+    return reelEl;
+}
 
         function createPostElement(post, zone) {
             const postEl = document.createElement('div');
@@ -4910,21 +5018,27 @@ console.log('🎯 All Real-time Fixes Loaded: Persistent Auth, Enhanced Profiles
         }
 
         // Initialize systems
-        function initializeAuthSystem() {
-            // Set up auth form submission
-            const authForm = document.getElementById('auth-form');
-            authForm.addEventListener('submit', handleAuthSubmit);
-            
-            // Set up auth mode switching
-            const switchLink = document.getElementById('auth-switch-link');
+       function initializeAuthSystem() {
+    // Set up auth form submission
+    const authForm = document.getElementById('auth-form');
+    if (authForm) {
+        authForm.addEventListener('submit', handleAuthSubmit);
+    }
+    
+    // Set up auth mode switching
+    setTimeout(() => {
+        const switchLink = document.getElementById('auth-switch-link');
+        if (switchLink) {
             switchLink.addEventListener('click', function(e) {
                 e.preventDefault();
                 const newMode = ZYLORB_STATE.authMode === 'signup' ? 'signin' : 'signup';
                 showAuthModal(newMode);
             });
-            
-            console.log('🔐 Auth System Initialized');
         }
+    }, 500);
+    
+    console.log('🔐 Auth System Initialized');
+}
 
         function initializeZoneSystem() {
             console.log('🎮 Zone System Initialized');
@@ -4938,10 +5052,21 @@ console.log('🎯 All Real-time Fixes Loaded: Persistent Auth, Enhanced Profiles
             console.log('📱 Story System Initialized');
         }
 
-        function initializeReelsSystem() {
-            console.log('🎬 Reels System Initialized');
-        }
-
+      function initializeReelsSystem() {
+    console.log('🎬 Reels System Initialized');
+    
+    // Create sample reels for all zones only if function exists
+    if (typeof createSampleReelsForZone === 'function') {
+        const zones = ['gaming', 'life', 'culture', 'professional'];
+        zones.forEach(zone => {
+            if (!ZYLORB_STATE.reels[zone] || ZYLORB_STATE.reels[zone].length === 0) {
+                createSampleReelsForZone(zone);
+            }
+        });
+    } else {
+        console.warn('createSampleReelsForZone function not available');
+    }
+}
         function initializeChatSystem() {
             console.log('💬 Chat System Initialized');
         }

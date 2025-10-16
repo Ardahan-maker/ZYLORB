@@ -2079,7 +2079,1126 @@
             </div>
         </div>
     </footer>
+<!-- Add this CSS and JavaScript to fix all real-time issues -->
 
+<style>
+/* Additional Real-time Styles */
+.reels-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+}
+
+.reel-video-fullscreen {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+.reel-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.reel-control-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+.profile-edit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.other-user-profile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+/* Enhanced notification styles */
+.notification-item-real {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.notification-item-real:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+/* Auth button fixes */
+.auth-btn-fixed {
+    position: relative;
+    z-index: 1000;
+}
+
+/* Profile picture upload */
+.profile-pic-upload {
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-pic-upload input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Reels scroll container */
+.reels-scroll-container {
+    height: 80vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+}
+
+.reel-item {
+    scroll-snap-align: start;
+    height: 100%;
+}
+</style>
+
+<!-- Add these modals before closing body tag -->
+
+<!-- Profile Edit Modal -->
+<div id="profile-edit-modal" class="profile-edit-modal">
+    <div class="glass rounded-2xl p-6 max-w-md w-full">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-white">Edit Profile</h3>
+            <button class="text-white/60 hover:text-white" onclick="hideProfileEditModal()">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+
+        <div class="space-y-4">
+            <div class="text-center">
+                <div class="profile-pic-upload inline-block">
+                    <div class="profile-avatar bg-gradient-to-r from-green-500 to-blue-500 mx-auto mb-4" id="edit-profile-avatar">
+                        <span id="edit-profile-initial">U</span>
+                    </div>
+                    <input type="file" id="profile-pic-input" accept="image/*" onchange="handleProfilePicUpload(this)">
+                </div>
+                <p class="text-white/60 text-sm">Click to change profile picture</p>
+            </div>
+
+            <div>
+                <label class="block text-white/80 mb-2">Full Name</label>
+                <input type="text" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" 
+                       id="edit-profile-name" value="">
+            </div>
+
+            <div>
+                <label class="block text-white/80 mb-2">Bio</label>
+                <textarea class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" 
+                          rows="3" id="edit-profile-bio" placeholder="Tell everyone about yourself..."></textarea>
+            </div>
+
+            <div class="flex gap-4">
+                <button class="btn-secondary flex-1" onclick="hideProfileEditModal()">Cancel</button>
+                <button class="btn-primary flex-1" onclick="saveProfileChanges()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Other User Profile Modal -->
+<div id="other-user-profile" class="other-user-profile">
+    <div class="profile-content">
+        <div class="profile-header">
+            <div class="profile-avatar bg-gradient-to-r from-purple-500 to-pink-500" id="other-profile-avatar">
+                <span id="other-profile-initial">U</span>
+            </div>
+            <h2 class="text-3xl font-bold text-white" id="other-profile-name">User Name</h2>
+            <p class="text-white/60" id="other-profile-bio">No bio yet</p>
+            <p class="text-white/60 text-sm mt-2">Member since <span id="other-profile-join-date">2023</span></p>
+        </div>
+
+        <div class="profile-stats">
+            <div class="stat-item">
+                <div class="stat-number" id="other-profile-posts-count">0</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="other-profile-followers-count">0</div>
+                <div class="stat-label">Followers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="other-profile-following-count">0</div>
+                <div class="stat-label">Following</div>
+            </div>
+        </div>
+
+        <h3 class="text-xl font-bold text-white mb-4">Posts</h3>
+        <div class="profile-posts" id="other-profile-posts">
+            <!-- Other user's posts will be displayed here -->
+        </div>
+
+        <button class="btn-secondary w-full mt-6" onclick="hideOtherUserProfile()">
+            Close Profile
+        </button>
+    </div>
+</div>
+
+<!-- Fullscreen Reels Viewer -->
+<div id="reels-fullscreen" class="reels-fullscreen">
+    <div class="reel-video-fullscreen-container" style="flex: 1; position: relative;">
+        <video class="reel-video-fullscreen" id="fullscreen-reel-video" controls autoplay>
+            Your browser does not support the video tag.
+        </video>
+        <div class="reel-controls">
+            <button class="reel-control-btn" onclick="likeCurrentReel()">
+                <i class="fas fa-heart"></i>
+            </button>
+            <button class="reel-control-btn" onclick="closeFullscreenReel()">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="reel-control-btn" onclick="shareCurrentReel()">
+                <i class="fas fa-share"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// 🚀 COMPLETE REAL-TIME FIXES
+// Fixing all the issues mentioned
+
+// 1. AUTH SYSTEM FIXES - Persistent login
+function initializePersistentAuth() {
+    console.log('🔐 Initializing Persistent Auth System...');
+    
+    // Check if user was previously logged in
+    const savedUser = localStorage.getItem('zylorb_current_user');
+    if (savedUser) {
+        try {
+            ZYLORB_STATE.currentUser = JSON.parse(savedUser);
+            ZYLORB_STATE.isLoggedIn = true;
+            updateUIForLoggedInUser();
+            startRealTimeFeatures();
+            showToast('Welcome back!', 'success');
+        } catch (e) {
+            console.error('Error loading saved user:', e);
+            localStorage.removeItem('zylorb_current_user');
+        }
+    }
+    
+    // Fix auth buttons
+    fixAuthButtons();
+}
+
+function fixAuthButtons() {
+    // Ensure all auth buttons work properly
+    const authButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
+    authButtons.forEach(btn => {
+        if (btn.textContent.includes('Sign In') || btn.textContent.includes('Join Now') || btn.textContent.includes('Start Your Journey')) {
+            btn.classList.add('auth-btn-fixed');
+            btn.style.zIndex = '1000';
+        }
+    });
+}
+
+// Update auth submission to save user
+const originalHandleAuthSubmit = window.handleAuthSubmit;
+window.handleAuthSubmit = function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('auth-email').value;
+    const password = document.getElementById('auth-password').value;
+    const terms = document.getElementById('auth-terms').checked;
+    
+    if (ZYLORB_STATE.authMode === 'signup') {
+        const name = document.getElementById('auth-name').value;
+        
+        if (!name || !email || !password) {
+            showToast('Please fill in all fields', 'error');
+            return;
+        }
+        
+        if (!terms) {
+            showToast('Please agree to the terms and conditions', 'error');
+            return;
+        }
+        
+        if (ZYLORB_STATE.users.find(u => u.email === email)) {
+            showToast('User with this email already exists', 'error');
+            return;
+        }
+        
+        // Create user with enhanced profile
+        ZYLORB_STATE.currentUser = {
+            id: Date.now().toString(),
+            name: name,
+            email: email,
+            avatar: name.charAt(0).toUpperCase(),
+            joinDate: new Date().toISOString(),
+            posts: [],
+            likes: 0,
+            comments: 0,
+            followers: [],
+            following: [],
+            bio: 'Welcome to my ZYLORB profile!',
+            profilePic: null,
+            coverPic: null,
+            isOnline: true
+        };
+        
+        ZYLORB_STATE.users.push(ZYLORB_STATE.currentUser);
+        ZYLORB_STATE.isLoggedIn = true;
+        
+        // Save to persistent storage
+        localStorage.setItem('zylorb_current_user', JSON.stringify(ZYLORB_STATE.currentUser));
+        saveToLocalStorage();
+        
+        updateUIForLoggedInUser();
+        hideAuthModal();
+        showToast(`Welcome to ZYLORB, ${name}!`, 'success');
+        startRealTimeFeatures();
+        
+    } else {
+        // Sign in
+        if (!email || !password) {
+            showToast('Please enter your email and password', 'error');
+            return;
+        }
+        
+        const user = ZYLORB_STATE.users.find(u => u.email === email);
+        if (user) {
+            ZYLORB_STATE.currentUser = user;
+            ZYLORB_STATE.isLoggedIn = true;
+            
+            // Save to persistent storage
+            localStorage.setItem('zylorb_current_user', JSON.stringify(ZYLORB_STATE.currentUser));
+            
+            updateUIForLoggedInUser();
+            hideAuthModal();
+            showToast('Welcome back!', 'success');
+            startRealTimeFeatures();
+        } else {
+            showToast('Invalid email or password', 'error');
+        }
+    }
+};
+
+// Update logout to clear properly
+const originalLogout = window.logout;
+window.logout = function() {
+    ZYLORB_STATE.currentUser = null;
+    ZYLORB_STATE.isLoggedIn = false;
+    
+    // Clear persistent storage
+    localStorage.removeItem('zylorb_current_user');
+    
+    updateUIForLoggedInUser();
+    showHomePage();
+    
+    const userMenu = document.getElementById('user-menu');
+    if (userMenu) userMenu.style.display = 'none';
+    
+    stopRealTimeFeatures();
+    
+    showToast('You have been logged out', 'info');
+};
+
+// 2. ENHANCED PROFILE SYSTEM
+function showEnhancedProfilePage() {
+    if (!ZYLORB_STATE.isLoggedIn) {
+        showToast('Please sign in to view your profile', 'error');
+        return;
+    }
+    
+    const profilePage = document.getElementById('profile-page');
+    const profileAvatar = document.getElementById('profile-avatar');
+    const profileInitial = document.getElementById('profile-initial');
+    const profileName = document.getElementById('profile-name');
+    const profileEmail = document.getElementById('profile-email');
+    const profileJoinDate = document.getElementById('profile-join-date');
+    const profilePostsCount = document.getElementById('profile-posts-count');
+    const profileLikesCount = document.getElementById('profile-likes-count');
+    const profileCommentsCount = document.getElementById('profile-comments-count');
+    const profilePosts = document.getElementById('profile-posts');
+    
+    if (ZYLORB_STATE.currentUser) {
+        // Use profile pic if available, otherwise use initial
+        if (ZYLORB_STATE.currentUser.profilePic) {
+            profileAvatar.innerHTML = `<img src="${ZYLORB_STATE.currentUser.profilePic}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+        } else {
+            profileAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
+            profileInitial.textContent = ZYLORB_STATE.currentUser.avatar;
+        }
+        
+        profileName.textContent = ZYLORB_STATE.currentUser.name;
+        profileEmail.textContent = ZYLORB_STATE.currentUser.email;
+        profileJoinDate.textContent = new Date(ZYLORB_STATE.currentUser.joinDate).getFullYear();
+        
+        // Calculate real stats
+        const postsCount = ZYLORB_STATE.currentUser.posts.length;
+        const likesCount = ZYLORB_STATE.currentUser.likes;
+        const commentsCount = ZYLORB_STATE.currentUser.comments;
+        
+        profilePostsCount.textContent = postsCount;
+        profileLikesCount.textContent = likesCount;
+        profileCommentsCount.textContent = commentsCount;
+        
+        // Load user posts
+        loadEnhancedProfilePosts();
+    }
+    
+    profilePage.style.display = 'flex';
+}
+
+// Replace original profile function
+window.showProfilePage = showEnhancedProfilePage;
+
+function showProfileEditModal() {
+    const modal = document.getElementById('profile-edit-modal');
+    const nameInput = document.getElementById('edit-profile-name');
+    const bioInput = document.getElementById('edit-profile-bio');
+    const avatar = document.getElementById('edit-profile-avatar');
+    
+    if (ZYLORB_STATE.currentUser) {
+        nameInput.value = ZYLORB_STATE.currentUser.name;
+        bioInput.value = ZYLORB_STATE.currentUser.bio || '';
+        
+        if (ZYLORB_STATE.currentUser.profilePic) {
+            avatar.innerHTML = `<img src="${ZYLORB_STATE.currentUser.profilePic}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+        } else {
+            avatar.textContent = ZYLORB_STATE.currentUser.avatar;
+        }
+    }
+    
+    modal.style.display = 'flex';
+}
+
+function hideProfileEditModal() {
+    const modal = document.getElementById('profile-edit-modal');
+    modal.style.display = 'none';
+}
+
+function handleProfilePicUpload(input) {
+    const file = input.files[0];
+    if (!file) return;
+    
+    if (!file.type.startsWith('image/')) {
+        showToast('Please select an image file', 'error');
+        return;
+    }
+    
+    const objectUrl = URL.createObjectURL(file);
+    const avatar = document.getElementById('edit-profile-avatar');
+    
+    avatar.innerHTML = `<img src="${objectUrl}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+    
+    // Save to user profile
+    ZYLORB_STATE.currentUser.profilePic = objectUrl;
+    saveToLocalStorage();
+    localStorage.setItem('zylorb_current_user', JSON.stringify(ZYLORB_STATE.currentUser));
+    
+    showToast('Profile picture updated!', 'success');
+}
+
+function saveProfileChanges() {
+    const nameInput = document.getElementById('edit-profile-name');
+    const bioInput = document.getElementById('edit-profile-bio');
+    
+    if (!nameInput.value.trim()) {
+        showToast('Please enter your name', 'error');
+        return;
+    }
+    
+    ZYLORB_STATE.currentUser.name = nameInput.value.trim();
+    ZYLORB_STATE.currentUser.bio = bioInput.value.trim();
+    ZYLORB_STATE.currentUser.avatar = nameInput.value.trim().charAt(0).toUpperCase();
+    
+    // Update all instances
+    saveToLocalStorage();
+    localStorage.setItem('zylorb_current_user', JSON.stringify(ZYLORB_STATE.currentUser));
+    updateUIForLoggedInUser();
+    
+    hideProfileEditModal();
+    showToast('Profile updated successfully!', 'success');
+}
+
+// 3. ENHANCED NOTIFICATION SYSTEM
+function showEnhancedNotificationsPage() {
+    if (!ZYLORB_STATE.isLoggedIn) {
+        showToast('Please sign in to view notifications', 'error');
+        return;
+    }
+    
+    const page = document.getElementById('notifications-page');
+    page.classList.remove('hidden');
+    
+    loadEnhancedNotifications();
+}
+
+// Replace original notifications function
+window.showNotificationsPage = showEnhancedNotificationsPage;
+
+function loadEnhancedNotifications() {
+    const container = document.getElementById('notifications-list');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (PERMANENT_STORAGE.notifications.length === 0) {
+        container.innerHTML = `
+            <div class="text-center py-12">
+                <i class="fas fa-bell-slash text-4xl text-white/40 mb-4"></i>
+                <h3 class="text-xl font-bold text-white mb-2">No notifications yet</h3>
+                <p class="text-white/60">Your notifications will appear here</p>
+            </div>
+        `;
+        return;
+    }
+    
+    PERMANENT_STORAGE.notifications.forEach(notification => {
+        const notifElement = createEnhancedNotificationElement(notification);
+        container.appendChild(notifElement);
+    });
+}
+
+function createEnhancedNotificationElement(notification) {
+    const element = document.createElement('div');
+    element.className = `notification-item-real post-card ${notification.read ? '' : 'border-l-4 border-l-purple-500'}`;
+    element.onclick = () => handleNotificationClick(notification);
+    
+    element.innerHTML = `
+        <div class="flex items-start space-x-4">
+            <div class="user-avatar ${getNotificationIcon(notification.type)}">
+                <i class="${getNotificationIconClass(notification.type)}"></i>
+            </div>
+            <div class="flex-1">
+                <p class="text-white/90 mb-2">${notification.message}</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-white/60 text-sm">${formatTime(notification.timestamp)}</span>
+                    ${!notification.read ? `
+                        <button class="text-purple-400 text-sm hover:text-purple-300" onclick="event.stopPropagation(); markNotificationAsRead('${notification.id}')">
+                            Mark as read
+                        </button>
+                    ` : ''}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return element;
+}
+
+function handleNotificationClick(notification) {
+    markNotificationAsRead(notification.id);
+    
+    // Handle different notification types
+    switch(notification.type) {
+        case 'like':
+        case 'comment':
+            // Navigate to relevant post
+            if (notification.zone) {
+                hideNotificationsPage();
+                enterZone(notification.zone);
+            }
+            break;
+        case 'follow':
+            // Show follower's profile
+            hideNotificationsPage();
+            showOtherUserProfile(notification.fromUserId);
+            break;
+        default:
+            // Just mark as read
+            break;
+    }
+}
+
+// 4. ENHANCED REELS SYSTEM
+function initializeEnhancedReels() {
+    console.log('🎬 Initializing Enhanced Reels System...');
+    
+    // Create some sample reels for demonstration
+    if (ZYLORB_STATE.reels.gaming.length === 0) {
+        createSampleReels();
+    }
+}
+
+function createSampleReels() {
+    const sampleReels = [
+        {
+            id: 'reel_1',
+            user: {
+                id: 'user_1',
+                name: 'ProGamer',
+                avatar: 'P',
+                color: 'from-purple-500 to-pink-500'
+            },
+            videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-gamer-playing-a-video-game-44751-large.mp4',
+            title: 'Epic Gaming Moment!',
+            likes: 245,
+            comments: 12,
+            timestamp: '2 hours ago'
+        },
+        {
+            id: 'reel_2', 
+            user: {
+                id: 'user_2',
+                name: 'GameMaster',
+                avatar: 'G',
+                color: 'from-blue-500 to-cyan-500'
+            },
+            videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-girl-playing-a-video-game-44750-large.mp4',
+            title: 'New Game Strategy',
+            likes: 189,
+            comments: 8,
+            timestamp: '5 hours ago'
+        }
+    ];
+    
+    sampleReels.forEach(reel => {
+        ZYLORB_STATE.reels.gaming.push(reel);
+        ZYLORB_STATE.reels.life.push(reel); // Add to multiple zones for demo
+    });
+    
+    saveToLocalStorage();
+}
+
+function loadEnhancedReels(zone) {
+    const container = document.getElementById(`${zone}-reels-container`);
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (ZYLORB_STATE.reels[zone] && ZYLORB_STATE.reels[zone].length > 0) {
+        ZYLORB_STATE.reels[zone].forEach(reel => {
+            const reelElement = createEnhancedReelElement(reel, zone);
+            container.appendChild(reelElement);
+        });
+    } else {
+        container.innerHTML = `
+            <div class="text-center py-4 w-full">
+                <p class="text-white/60">No reels yet. Be the first to create one!</p>
+                <button class="btn-primary mt-2" onclick="createEnhancedReel('${zone}')">
+                    <i class="fas fa-plus mr-2"></i>Create First Reel
+                </button>
+            </div>
+        `;
+    }
+}
+
+function createEnhancedReelElement(reel, zone) {
+    const reelEl = document.createElement('div');
+    reelEl.className = 'reel';
+    reelEl.onclick = () => viewEnhancedReel(reel, zone);
+    
+    reelEl.innerHTML = `
+        <div class="reel-video">
+            <video>
+                <source src="${reel.videoUrl}" type="video/mp4">
+            </video>
+            <div class="absolute bottom-2 left-2 right-2">
+                <p class="text-white text-sm font-semibold truncate">${reel.title}</p>
+                <div class="flex justify-between items-center mt-1">
+                    <span class="text-white/80 text-xs">${reel.user.name}</span>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-white/80 text-xs"><i class="fas fa-heart mr-1"></i>${reel.likes}</span>
+                        <span class="text-white/80 text-xs"><i class="fas fa-comment mr-1"></i>${reel.comments}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return reelEl;
+}
+
+function viewEnhancedReel(reel, zone) {
+    const fullscreen = document.getElementById('reels-fullscreen');
+    const video = document.getElementById('fullscreen-reel-video');
+    
+    video.innerHTML = `<source src="${reel.videoUrl}" type="video/mp4">`;
+    video.load();
+    
+    fullscreen.style.display = 'flex';
+    
+    // Store current reel for interactions
+    window.currentReel = reel;
+}
+
+function closeFullscreenReel() {
+    const fullscreen = document.getElementById('reels-fullscreen');
+    const video = document.getElementById('fullscreen-reel-video');
+    
+    video.pause();
+    fullscreen.style.display = 'none';
+    window.currentReel = null;
+}
+
+function likeCurrentReel() {
+    if (window.currentReel) {
+        window.currentReel.likes++;
+        showToast('Liked reel!', 'success');
+        // In real implementation, save to backend
+    }
+}
+
+function createEnhancedReel(zone) {
+    if (!ZYLORB_STATE.isLoggedIn) {
+        showToast('Please sign in to create reels', 'error');
+        return;
+    }
+    
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'video/*';
+    fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const objectUrl = URL.createObjectURL(file);
+            const title = prompt('Enter reel title:');
+            
+            if (title) {
+                const newReel = {
+                    id: 'reel_' + Date.now(),
+                    user: {
+                        id: ZYLORB_STATE.currentUser.id,
+                        name: ZYLORB_STATE.currentUser.name,
+                        avatar: ZYLORB_STATE.currentUser.avatar,
+                        color: getZoneColor(zone)
+                    },
+                    videoUrl: objectUrl,
+                    title: title,
+                    likes: 0,
+                    comments: [],
+                    timestamp: 'Just now'
+                };
+                
+                ZYLORB_STATE.reels[zone].unshift(newReel);
+                saveToLocalStorage();
+                loadEnhancedReels(zone);
+                showToast('Reel created successfully!', 'success');
+                
+                // Create notification
+                createNotification('reel_created', `You created a new reel: ${title}`);
+            }
+        }
+    };
+    fileInput.click();
+}
+
+// 5. PUBLIC POSTS & PROFILES
+function makeAllPostsPublic() {
+    // Ensure all posts are visible to all users
+    Object.keys(ZYLORB_STATE.posts).forEach(zone => {
+        ZYLORB_STATE.posts[zone].forEach(post => {
+            post.isPublic = true;
+            post.visibleToAll = true;
+        });
+    });
+    saveToLocalStorage();
+}
+
+function showOtherUserProfile(userId) {
+    const user = ZYLORB_STATE.users.find(u => u.id === userId);
+    if (!user) {
+        showToast('User not found', 'error');
+        return;
+    }
+    
+    const modal = document.getElementById('other-user-profile');
+    const avatar = document.getElementById('other-profile-avatar');
+    const name = document.getElementById('other-profile-name');
+    const bio = document.getElementById('other-profile-bio');
+    const joinDate = document.getElementById('other-profile-join-date');
+    const postsCount = document.getElementById('other-profile-posts-count');
+    const followersCount = document.getElementById('other-profile-followers-count');
+    const followingCount = document.getElementById('other-profile-following-count');
+    const postsContainer = document.getElementById('other-profile-posts');
+    
+    // Set profile data
+    if (user.profilePic) {
+        avatar.innerHTML = `<img src="${user.profilePic}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+    } else {
+        avatar.textContent = user.avatar;
+    }
+    
+    name.textContent = user.name;
+    bio.textContent = user.bio || 'No bio yet';
+    joinDate.textContent = new Date(user.joinDate).getFullYear();
+    postsCount.textContent = user.posts.length;
+    followersCount.textContent = user.followers.length;
+    followingCount.textContent = user.following.length;
+    
+    // Load user's posts
+    postsContainer.innerHTML = '';
+    const userPosts = [];
+    
+    Object.keys(ZYLORB_STATE.posts).forEach(zone => {
+        ZYLORB_STATE.posts[zone].forEach(post => {
+            if (post.user.id === userId) {
+                userPosts.push({...post, zone: zone});
+            }
+        });
+    });
+    
+    if (userPosts.length === 0) {
+        postsContainer.innerHTML = `
+            <div class="col-span-full text-center py-8">
+                <div class="text-6xl mb-4">📝</div>
+                <h3 class="text-xl font-bold text-white mb-2">No posts yet</h3>
+                <p class="text-white/60">This user hasn't posted anything yet</p>
+            </div>
+        `;
+    } else {
+        userPosts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.className = 'profile-post';
+            postElement.onclick = () => {
+                hideOtherUserProfile();
+                enterZone(post.zone);
+            };
+            
+            let content = '';
+            if (post.media) {
+                if (post.media.type === 'image') {
+                    content = `<img src="${post.media.url}" alt="Post media">`;
+                } else {
+                    content = `<video muted><source src="${post.media.url}" type="video/mp4"></video>`;
+                }
+            } else {
+                content = `
+                    <div class="profile-post-text">
+                        <p>${post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content}</p>
+                    </div>
+                `;
+            }
+            
+            postElement.innerHTML = `
+                ${content}
+                <div class="profile-post-zone">${post.zone}</div>
+            `;
+            
+            postsContainer.appendChild(postElement);
+        });
+    }
+    
+    modal.style.display = 'flex';
+}
+
+function hideOtherUserProfile() {
+    const modal = document.getElementById('other-user-profile');
+    modal.style.display = 'none';
+}
+
+// 6. VOICE/VIDEO FIXES
+function handleVideoUploadWithAudio(input, zone) {
+    const file = input.files[0];
+    if (!file) return;
+    
+    const preview = document.getElementById(`${zone}-media-preview`);
+    if (!preview) return;
+    
+    preview.innerHTML = '';
+    
+    const objectUrl = URL.createObjectURL(file);
+    const isVideo = file.type.startsWith('video/');
+    
+    if (isVideo) {
+        preview.innerHTML = `
+            <video controls style="width: 100%; max-height: 400px; background: #000;">
+                <source src="${objectUrl}" type="${file.type}">
+                Your browser does not support the video tag.
+            </video>
+            <button class="remove-media" onclick="removeMediaPreview('${zone}')">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        ZYLORB_STATE.currentMedia[zone] = { type: 'video', url: objectUrl, file: file, hasAudio: true };
+    } else {
+        preview.innerHTML = `
+            <img src="${objectUrl}" alt="Preview" style="width: 100%; max-height: 400px; object-fit: contain;">
+            <button class="remove-media" onclick="removeMediaPreview('${zone}')">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        ZYLORB_STATE.currentMedia[zone] = { type: 'image', url: objectUrl, file: file };
+    }
+    
+    showToast(`${isVideo ? 'Video' : 'Image'} added with audio preserved`, 'success');
+}
+
+// Replace original media upload handlers
+window.handleMediaUpload = handleVideoUploadWithAudio;
+window.handleModalMediaUpload = handleVideoUploadWithAudio;
+window.handleStoryMediaUpload = handleVideoUploadWithAudio;
+
+// 7. ENHANCE POST CREATION FOR PUBLIC VISIBILITY
+const originalCreateNewPostFromModal = window.createNewPostFromModal;
+window.createNewPostFromModal = function() {
+    const content = document.getElementById('post-content').value.trim();
+    const zone = ZYLORB_STATE.currentZone;
+    
+    if (!content && !ZYLORB_STATE.currentMedia.modal) {
+        showToast('Please enter some content or add media for your post', 'error');
+        return;
+    }
+    
+    if (!zone) {
+        showToast('Please select a zone for your post', 'error');
+        return;
+    }
+    
+    // Create post with public visibility
+    const newPost = {
+        id: 'perm_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        user: {
+            id: ZYLORB_STATE.currentUser.id,
+            name: ZYLORB_STATE.currentUser.name,
+            avatar: ZYLORB_STATE.currentUser.avatar,
+            color: getZoneColor(zone)
+        },
+        content: content,
+        media: ZYLORB_STATE.currentMedia.modal,
+        timestamp: new Date().toLocaleString(),
+        likes: 0,
+        comments: [],
+        shares: 0,
+        liked: false,
+        isPermanent: true,
+        isPublic: true,
+        visibleToAll: true
+    };
+    
+    if (!ZYLORB_STATE.posts[zone]) {
+        ZYLORB_STATE.posts[zone] = [];
+    }
+    ZYLORB_STATE.posts[zone].unshift(newPost);
+    
+    ZYLORB_STATE.currentUser.posts.push({
+        id: newPost.id,
+        zone: zone,
+        content: content,
+        media: ZYLORB_STATE.currentMedia.modal ? true : false,
+        timestamp: newPost.timestamp
+    });
+    
+    hideCreatePostModal();
+    loadZoneContent(zone);
+    
+    showToast('Public post created successfully!', 'success');
+    createNotification('post_created', `You created a new public post in ${zone} zone`);
+    
+    saveToLocalStorage();
+};
+
+// 8. ENHANCE ZONE CONTENT LOADING
+const originalLoadZoneContent = window.loadZoneContent;
+window.loadZoneContent = function(zone) {
+    const feed = document.getElementById(`${zone}-posts-feed`);
+    const storiesContainer = document.getElementById(`${zone}-stories-container`);
+    const reelsContainer = document.getElementById(`${zone}-reels-container`);
+    
+    if (!feed) return;
+    
+    feed.innerHTML = '';
+    if (storiesContainer) storiesContainer.innerHTML = '';
+    if (reelsContainer) reelsContainer.innerHTML = '';
+    
+    // Load enhanced reels
+    loadEnhancedReels(zone);
+    
+    // Load stories
+    loadStories(zone);
+    
+    // Add posts (all posts are public now)
+    if (ZYLORB_STATE.posts[zone] && ZYLORB_STATE.posts[zone].length > 0) {
+        ZYLORB_STATE.posts[zone].forEach(post => {
+            const postElement = createEnhancedPostElement(post, zone);
+            feed.appendChild(postElement);
+        });
+    } else {
+        feed.innerHTML = `
+            <div class="text-center py-12">
+                <div class="text-6xl mb-4">👋</div>
+                <h3 class="text-xl font-bold text-white mb-2">No posts yet</h3>
+                <p class="text-white/60 mb-6">Be the first to share something in this zone!</p>
+                <button class="btn-primary" onclick="showCreatePostModal('${zone}')">
+                    <i class="fas fa-plus mr-2"></i>Create First Post
+                </button>
+            </div>
+        `;
+    }
+};
+
+function createEnhancedPostElement(post, zone) {
+    const postEl = document.createElement('div');
+    postEl.className = 'post-card animate-fade-in';
+    
+    postEl.innerHTML = `
+        <div class="flex items-start space-x-4">
+            <div class="user-avatar bg-gradient-to-r ${post.user.color} cursor-pointer" onclick="showOtherUserProfile('${post.user.id}')">
+                ${post.user.avatar}
+            </div>
+            <div class="flex-1">
+                <div class="flex items-center space-x-2 mb-2">
+                    <div class="text-white font-semibold cursor-pointer" onclick="showOtherUserProfile('${post.user.id}')">${post.user.name}</div>
+                    <div class="text-white/60 text-sm">•</div>
+                    <div class="text-white/60 text-sm">${post.timestamp}</div>
+                </div>
+                <p class="text-white/90 mb-4">${post.content}</p>
+                
+                ${post.media ? `
+                    <div class="media-preview mb-4">
+                        ${post.media.type === 'image' ? 
+                            `<img src="${post.media.url}" alt="Post media">` : 
+                            `<video controls style="width: 100%; max-height: 400px; background: #000;">
+                                <source src="${post.media.url}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>`
+                        }
+                    </div>
+                ` : ''}
+                
+                <div class="post-actions">
+                    <div class="post-action ${post.liked ? 'active' : ''}" onclick="toggleLike('${post.id}', '${zone}')">
+                        <i class="fas fa-heart"></i>
+                        <span>${post.likes}</span>
+                    </div>
+                    <div class="post-action" onclick="toggleComments('${post.id}', '${zone}')">
+                        <i class="fas fa-comment"></i>
+                        <span>${post.comments.length}</span>
+                    </div>
+                    <div class="post-action" onclick="showShareModal('${post.id}', '${zone}')">
+                        <i class="fas fa-share"></i>
+                        <span>${post.shares}</span>
+                    </div>
+                </div>
+                
+                <div class="comments-section hidden" id="comments-${post.id}">
+                    <div class="comment-input-container flex space-x-2 mb-4">
+                        <input type="text" class="comment-input flex-1" placeholder="Write a comment..." id="comment-input-${post.id}">
+                        <button class="btn-primary" onclick="addComment('${post.id}', '${zone}')">Post</button>
+                    </div>
+                    <div class="comments-list" id="comments-list-${post.id}">
+                        ${post.comments.map(comment => `
+                            <div class="comment">
+                                <div class="user-avatar bg-gradient-to-r ${getRandomColor()} text-xs cursor-pointer" onclick="showOtherUserProfile('${comment.user.id}')">
+                                    ${comment.user.avatar}
+                                </div>
+                                <div class="flex-1">
+                                    <div class="text-white font-semibold text-sm cursor-pointer" onclick="showOtherUserProfile('${comment.user.id}')">${comment.user.name}</div>
+                                    <div class="text-white/80 text-sm">${comment.content}</div>
+                                    <div class="text-white/60 text-xs">${comment.timestamp}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return postEl;
+}
+
+// 9. INITIALIZE ALL ENHANCEMENTS
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize after main platform loads
+    setTimeout(() => {
+        initializePersistentAuth();
+        initializeEnhancedReels();
+        makeAllPostsPublic();
+        
+        // Add edit profile button to profile page
+        addProfileEditButton();
+        
+        console.log('🚀 All Real-time Enhancements Initialized');
+    }, 3000);
+});
+
+function addProfileEditButton() {
+    const profileHeader = document.querySelector('.profile-header');
+    if (profileHeader) {
+        const editButton = document.createElement('button');
+        editButton.className = 'btn-secondary mt-4';
+        editButton.innerHTML = '<i class="fas fa-edit mr-2"></i>Edit Profile';
+        editButton.onclick = showProfileEditModal;
+        profileHeader.appendChild(editButton);
+    }
+}
+
+// 10. ENHANCE USER INTERFACE
+function updateEnhancedUIForLoggedInUser() {
+    const authButtons = document.getElementById('auth-buttons');
+    const userProfile = document.getElementById('user-profile');
+    const username = document.getElementById('header-username');
+    const userInitial = document.getElementById('header-user-initial');
+    const userAvatar = document.getElementById('header-user-avatar');
+    
+    if (ZYLORB_STATE.isLoggedIn && ZYLORB_STATE.currentUser) {
+        if (authButtons) authButtons.classList.add('hidden');
+        if (userProfile) userProfile.classList.remove('hidden');
+        if (username) username.textContent = ZYLORB_STATE.currentUser.name;
+        if (userInitial) userInitial.textContent = ZYLORB_STATE.currentUser.avatar;
+        if (userAvatar) {
+            if (ZYLORB_STATE.currentUser.profilePic) {
+                userAvatar.innerHTML = `<img src="${ZYLORB_STATE.currentUser.profilePic}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+            } else {
+                userAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
+            }
+        }
+        
+        updateZoneUserAvatars();
+        updateNotificationCount();
+    } else {
+        if (authButtons) authButtons.classList.remove('hidden');
+        if (userProfile) userProfile.classList.add('hidden');
+    }
+}
+
+// Replace original UI update function
+window.updateUIForLoggedInUser = updateEnhancedUIForLoggedInUser;
+
+console.log('🎯 All Real-time Fixes Loaded: Persistent Auth, Enhanced Profiles, Working Notifications, Public Reels, Voice Videos');
+</script>
     <!-- JavaScript -->
     <script>
         // 🚀 ZYLORB - COMPLETE REAL SOCIAL MEDIA PLATFORM

@@ -993,6 +993,208 @@
                 height: 400px;
             }
         }
+       /* ==================== REAL-TIME FEATURES CSS ==================== */
+
+/* Real-time Features CSS */
+.reel-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    gap: 0.25rem;
+}
+
+.live-reaction-btn {
+    background-color: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 9999px;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: transform 0.2s;
+}
+
+.live-reaction-btn:hover {
+    transform: scale(1.1);
+}
+
+.reaction-animation {
+    animation: floatUp 3s ease-in-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #8b5cf6;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Improved input styles */
+input:focus, textarea:focus {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Instagram Reels Styles */
+.reel-video {
+    transition: transform 0.3s ease;
+}
+
+.reel-video:hover {
+    transform: scale(1.02);
+}
+
+/* TikTok Live Styles */
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.live-indicator::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+/* Profile Settings Styles */
+.profile-avatar {
+    transition: transform 0.3s ease;
+}
+
+.profile-avatar:hover {
+    transform: scale(1.05);
+}
+
+/* Zone Experience Styles */
+.zone-world {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Enhanced Form Styles */
+.form-input-enhanced {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    transition: all 0.3s ease;
+}
+
+.form-input-enhanced:focus {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+/* Real-time Notification Styles */
+.real-time-notification {
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Enhanced Button Styles */
+.btn-enhanced {
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: 0.5s;
+}
+
+.btn-enhanced:hover::before {
+    left: 100%;
+}
+
+.btn-enhanced:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+}
+
+/* ==================== END REAL-TIME FEATURES CSS ==================== */
     </style>
 </head>
 <body class="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 min-h-screen text-white">
@@ -1754,52 +1956,55 @@
     </div>
 
     <!-- REAL AUTH MODAL -->
-    <div id="auth-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
-        <div class="glass rounded-2xl p-8 max-w-md w-full">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold gradient-text mb-2" id="auth-modal-title">Join ZYLORB</h2>
-                <p class="text-white/60" id="auth-modal-subtitle">Create your account to explore all four zones</p>
-            </div>
-
-            <form id="auth-form">
-                <div class="space-y-4">
-                    <div id="name-field" class="hidden">
-                        <label class="block text-white/80 mb-2">Full Name</label>
-                        <input type="text" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Enter your full name" id="auth-name">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-white/80 mb-2">Email</label>
-                        <input type="email" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Enter your email" id="auth-email">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-white/80 mb-2">Password</label>
-                        <input type="password" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Enter your password" id="auth-password">
-                    </div>
-                    
-                    <div class="flex items-center space-x-2">
-                        <input type="checkbox" class="custom-checkbox" id="auth-terms">
-                        <label for="auth-terms" class="text-white/80 text-sm">I agree to the <a href="#" class="text-purple-400 hover:underline">Terms of Service</a> and <a href="#" class="text-purple-400 hover:underline">Privacy Policy</a></label>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-primary w-full mt-6" id="auth-submit-btn">
-                    Create Account
-                </button>
-            </form>
-
-            <div class="text-center mt-6">
-                <p class="text-white/60" id="auth-switch-text">
-                    Already have an account? <a href="#" class="text-purple-400 hover:underline font-medium" id="auth-switch-link">Sign In</a>
-                </p>
-            </div>
-
-            <button class="absolute top-4 right-4 text-white/60 hover:text-white" onclick="hideAuthModal()">
-                <i class="fas fa-times text-xl"></i>
-            </button>
+<div id="auth-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
+    <div class="glass rounded-2xl p-8 max-w-md w-full">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold gradient-text mb-2" id="auth-modal-title">Join ZYLORB</h2>
+            <p class="text-white/60" id="auth-modal-subtitle">Create your account to explore all four zones</p>
         </div>
+
+        <form id="auth-form">
+            <div class="space-y-4">
+                <div id="name-field">
+                    <label class="block text-white/80 mb-2">Full Name</label>
+                    <input type="text" class="w-full bg-white/20 border-2 border-white/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:bg-white/30 transition-all duration-300" 
+                           placeholder="Enter your full name" id="auth-name" style="backdrop-filter: blur(10px);">
+                </div>
+                
+                <div>
+                    <label class="block text-white/80 mb-2">Email</label>
+                    <input type="email" class="w-full bg-white/20 border-2 border-white/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:bg-white/30 transition-all duration-300" 
+                           placeholder="Enter your email" id="auth-email" style="backdrop-filter: blur(10px);">
+                </div>
+                
+                <div>
+                    <label class="block text-white/80 mb-2">Password</label>
+                    <input type="password" class="w-full bg-white/20 border-2 border-white/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:bg-white/30 transition-all duration-300" 
+                           placeholder="Enter your password" id="auth-password" style="backdrop-filter: blur(10px);">
+                </div>
+                
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" class="custom-checkbox" id="auth-terms">
+                    <label for="auth-terms" class="text-white/80 text-sm">I agree to the <a href="#" class="text-purple-400 hover:underline">Terms of Service</a> and <a href="#" class="text-purple-400 hover:underline">Privacy Policy</a></label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary w-full mt-6" id="auth-submit-btn">
+                Create Account
+            </button>
+        </form>
+
+        <div class="text-center mt-6">
+            <p class="text-white/60" id="auth-switch-text">
+                Already have an account? <a href="#" class="text-purple-400 hover:underline font-medium" id="auth-switch-link">Sign In</a>
+            </p>
+        </div>
+
+        <button class="absolute top-4 right-4 text-white/60 hover:text-white" onclick="hideAuthModal()">
+            <i class="fas fa-times text-xl"></i>
+        </button>
     </div>
+</div>
 
     <!-- REAL POST CREATION MODAL -->
     <div id="create-post-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
@@ -1944,7 +2149,69 @@
             </div>
         </div>
     </div>
+<!-- REAL TIKTOK STYLE LIVE STREAM -->
+<div id="tiktok-live-modal" class="hidden fixed inset-0 bg-black z-50">
+    <div class="relative w-full h-full">
+        <!-- Live Video Stream -->
+        <video id="tiktok-live-video" autoplay muted class="w-full h-full object-cover"></video>
+        
+        <!-- Live Controls Overlay -->
+        <div class="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/60 to-transparent">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold" id="live-user-avatar">U</span>
+                    </div>
+                    <div>
+                        <div class="text-white font-bold" id="live-username">User Name</div>
+                        <div class="flex items-center space-x-2">
+                            <div class="live-indicator"></div>
+                            <span class="text-white/80 text-sm" id="live-viewers">0 viewers</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="text-white bg-red-500 px-4 py-2 rounded-full font-bold" onclick="endTikTokLive()">
+                    END LIVE
+                </button>
+            </div>
+        </div>
 
+        <!-- Live Comments Sidebar -->
+        <div class="absolute right-4 top-20 bottom-20 w-80 bg-black/40 backdrop-blur-md rounded-2xl p-4 overflow-hidden">
+            <h3 class="text-white font-bold mb-4">Live Comments</h3>
+            <div id="live-comments" class="h-96 overflow-y-auto space-y-3">
+                <!-- Comments will appear here -->
+            </div>
+            <div class="absolute bottom-4 left-4 right-4">
+                <div class="flex space-x-2">
+                    <input type="text" id="live-comment-input" placeholder="Add comment..." 
+                           class="flex-1 bg-white/20 border border-white/30 rounded-full px-4 py-2 text-white focus:outline-none focus:border-purple-500">
+                    <button class="bg-purple-500 text-white rounded-full w-10 h-10 flex items-center justify-center" onclick="sendLiveComment()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Reactions -->
+        <div class="absolute bottom-20 left-4">
+            <div class="flex space-x-3">
+                <button class="live-reaction-btn" onclick="sendLiveReaction('❤️')">❤️</button>
+                <button class="live-reaction-btn" onclick="sendLiveReaction('🔥')">🔥</button>
+                <button class="live-reaction-btn" onclick="sendLiveReaction('😂')">😂</button>
+                <button class="live-reaction-btn" onclick="sendLiveReaction('😮')">😮</button>
+            </div>
+        </div>
+
+        <!-- Gift Button -->
+        <div class="absolute bottom-20 right-4">
+            <button class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full font-bold flex items-center space-x-2" onclick="showGiftMenu()">
+                <i class="fas fa-gift"></i>
+                <span>Send Gift</span>
+            </button>
+        </div>
+    </div>
+</div>
     <!-- STORY VIEWER -->
     <div id="story-viewer" class="story-viewer">
         <div class="story-content">
@@ -1955,6 +2222,74 @@
             </button>
         </div>
     </div>
+<!-- INSTAGRAM STYLE REELS FULLSCREEN -->
+<div id="instagram-reels" class="hidden fixed inset-0 bg-black z-50">
+    <div class="relative w-full h-full">
+        <!-- Reel Video -->
+        <video id="reel-video" autoplay muted class="w-full h-full object-cover"></video>
+        
+        <!-- Reel Controls -->
+        <div class="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/60 to-transparent">
+            <div class="flex justify-between items-center">
+                <button class="text-white text-2xl" onclick="closeInstagramReel()">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="text-white font-bold">Reels</div>
+                <button class="text-white text-xl" onclick="toggleReelSound()">
+                    <i class="fas fa-volume-mute" id="sound-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Reel Info Sidebar -->
+        <div class="absolute bottom-20 left-4 right-4">
+            <div class="flex justify-between items-end">
+                <div class="flex-1">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="user-avatar bg-gradient-to-r from-purple-500 to-pink-500" id="reel-user-avatar">U</div>
+                        <div class="text-white font-semibold" id="reel-username">Username</div>
+                        <button class="text-white bg-white/20 px-3 py-1 rounded-full text-sm">Follow</button>
+                    </div>
+                    <p class="text-white mb-2" id="reel-caption">Caption will appear here...</p>
+                    <div class="flex items-center space-x-4 text-white/80">
+                        <div class="flex items-center space-x-1">
+                            <i class="fas fa-music"></i>
+                            <span id="reel-music">Original Sound</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex flex-col items-center space-y-4 ml-4">
+                    <button class="reel-action-btn" onclick="likeReel()">
+                        <i class="fas fa-heart text-2xl"></i>
+                        <span id="reel-likes">0</span>
+                    </button>
+                    <button class="reel-action-btn" onclick="focusCommentInput()">
+                        <i class="fas fa-comment text-2xl"></i>
+                        <span id="reel-comments">0</span>
+                    </button>
+                    <button class="reel-action-btn" onclick="shareReel()">
+                        <i class="fas fa-share text-2xl"></i>
+                        <span>Share</span>
+                    </button>
+                    <button class="reel-action-btn" onclick="showMoreOptions()">
+                        <i class="fas fa-ellipsis-h text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comment Input -->
+        <div class="absolute bottom-4 left-4 right-4">
+            <div class="flex space-x-2">
+                <input type="text" id="reel-comment-input" placeholder="Add comment..." 
+                       class="flex-1 bg-white/20 border border-white/30 rounded-full px-4 py-3 text-white focus:outline-none focus:border-purple-500">
+                <button class="text-purple-400 font-semibold" onclick="addReelComment()">Post</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- SHARE MODAL -->
     <div id="share-modal" class="share-modal">
@@ -2018,6 +2353,93 @@
 
             <h3 class="text-xl font-bold text-white mb-4">Your Posts</h3>
             <div class="profile-posts" id="profile-posts">
+                <!-- REAL-TIME PROFILE SETTINGS MODAL -->
+<div id="profile-settings-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 overflow-y-auto">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="glass rounded-2xl p-6 max-w-2xl w-full">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-white">Profile Settings</h3>
+                <button class="text-white/60 hover:text-white" onclick="hideProfileSettings()">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Profile Picture Section -->
+                <div class="flex items-center space-x-6">
+                    <div class="relative">
+                        <div class="profile-avatar bg-gradient-to-r from-green-500 to-blue-500 w-20 h-20 text-2xl" id="settings-profile-avatar">
+                            <span id="settings-profile-initial">U</span>
+                        </div>
+                        <input type="file" id="profile-picture-input" class="hidden" accept="image/*" onchange="updateProfilePicture(this)">
+                        <button class="absolute bottom-0 right-0 bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center" onclick="document.getElementById('profile-picture-input').click()">
+                            <i class="fas fa-camera text-sm"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-semibold">Profile Picture</h4>
+                        <p class="text-white/60 text-sm">Click the camera icon to update</p>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-white/80 mb-2">Full Name</label>
+                        <input type="text" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" 
+                               id="settings-name" value="">
+                    </div>
+                    <div>
+                        <label class="block text-white/80 mb-2">Email</label>
+                        <input type="email" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" 
+                               id="settings-email" value="">
+                    </div>
+                </div>
+
+                <!-- Bio Section -->
+                <div>
+                    <label class="block text-white/80 mb-2">Bio</label>
+                    <textarea class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" 
+                              rows="3" id="settings-bio" placeholder="Tell everyone about yourself..."></textarea>
+                </div>
+
+                <!-- Privacy Settings -->
+                <div class="border-t border-white/20 pt-4">
+                    <h4 class="text-white font-semibold mb-4">Privacy Settings</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-white font-medium">Private Account</div>
+                                <div class="text-white/60 text-sm">Only approved followers can see your content</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="private-account">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-white font-medium">Allow Messages</div>
+                                <div class="text-white/60 text-sm">Anyone can send you direct messages</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="allow-messages" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Buttons -->
+                <div class="flex gap-4 pt-4">
+                    <button class="btn-secondary flex-1" onclick="hideProfileSettings()">Cancel</button>
+                    <button class="btn-primary flex-1" onclick="saveProfileSettings()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                 <!-- User posts will be displayed here -->
             </div>
 
@@ -3516,77 +3938,126 @@ console.log('🎯 All Real-time Fixes Loaded: Persistent Auth, Enhanced Profiles
         }
     }
 }
-        function updateUIForLoggedInUser() {
-            const authButtons = document.getElementById('auth-buttons');
-            const userProfile = document.getElementById('user-profile');
-            const username = document.getElementById('header-username');
-            const userInitial = document.getElementById('header-user-initial');
-            const userAvatar = document.getElementById('header-user-avatar');
-            
-            if (ZYLORB_STATE.isLoggedIn && ZYLORB_STATE.currentUser) {
-                authButtons.classList.add('hidden');
-                userProfile.classList.remove('hidden');
-                username.textContent = ZYLORB_STATE.currentUser.name;
-                userInitial.textContent = ZYLORB_STATE.currentUser.avatar;
-                userAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
-                
-                // Update all user avatars in zones
-                updateZoneUserAvatars();
-                
-                // Update notification count
-                updateNotificationCount();
+       function updateUIForLoggedInUser() {
+    console.log('Updating UI for logged in user:', ZYLORB_STATE.isLoggedIn);
+    
+    const authButtons = document.getElementById('auth-buttons');
+    const userProfile = document.getElementById('user-profile');
+    const username = document.getElementById('header-username');
+    const userInitial = document.getElementById('header-user-initial');
+    const userAvatar = document.getElementById('header-user-avatar');
+    
+    console.log('UI Elements:', {authButtons, userProfile, username, userInitial, userAvatar});
+    
+    if (ZYLORB_STATE.isLoggedIn && ZYLORB_STATE.currentUser) {
+        console.log('User is logged in, showing user profile');
+        
+        if (authButtons) {
+            authButtons.style.display = 'none';
+            console.log('Auth buttons hidden');
+        }
+        
+        if (userProfile) {
+            userProfile.style.display = 'flex';
+            console.log('User profile shown');
+        }
+        
+        if (username) {
+            username.textContent = ZYLORB_STATE.currentUser.name;
+            console.log('Username updated:', ZYLORB_STATE.currentUser.name);
+        }
+        
+        if (userInitial) {
+            userInitial.textContent = ZYLORB_STATE.currentUser.avatar;
+            console.log('User initial updated:', ZYLORB_STATE.currentUser.avatar);
+        }
+        
+        if (userAvatar) {
+            // Check if profile picture exists
+            if (ZYLORB_STATE.currentUser.profilePic) {
+                userAvatar.innerHTML = `<img src="${ZYLORB_STATE.currentUser.profilePic}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
             } else {
-                authButtons.classList.remove('hidden');
-                userProfile.classList.add('hidden');
+                userAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
+            }
+            console.log('User avatar updated');
+        }
+        
+        updateZoneUserAvatars();
+        updateNotificationCount();
+        
+    } else {
+        console.log('User is not logged in, showing auth buttons');
+        
+        if (authButtons) {
+            authButtons.style.display = 'flex';
+            console.log('Auth buttons shown');
+        }
+        
+        if (userProfile) {
+            userProfile.style.display = 'none';
+            console.log('User profile hidden');
+        }
+    }
+}
+
+       function updateZoneUserAvatars() {
+    console.log('Updating zone user avatars');
+    
+    if (!ZYLORB_STATE.currentUser) {
+        console.log('No current user found');
+        return;
+    }
+    
+    const zones = ['gaming', 'life', 'culture', 'professional'];
+    zones.forEach(zone => {
+        const avatar = document.getElementById(`${zone}-user-avatar`);
+        const initial = document.getElementById(`${zone}-user-initial`);
+        
+        if (avatar && ZYLORB_STATE.currentUser) {
+            if (ZYLORB_STATE.currentUser.profilePic) {
+                avatar.innerHTML = `<img src="${ZYLORB_STATE.currentUser.profilePic}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+            } else {
+                avatar.textContent = ZYLORB_STATE.currentUser.avatar;
             }
         }
-
-        function updateZoneUserAvatars() {
-            const zones = ['gaming', 'life', 'culture', 'professional'];
-            zones.forEach(zone => {
-                const avatar = document.getElementById(`${zone}-user-avatar`);
-                const initial = document.getElementById(`${zone}-user-initial`);
-                const postAvatar = document.getElementById('post-user-avatar');
-                const postInitial = document.getElementById('post-user-initial');
-                const postUsername = document.getElementById('post-username');
-                const storyAvatar = document.getElementById('story-user-avatar');
-                const storyInitial = document.getElementById('story-user-initial');
-                const storyUsername = document.getElementById('story-username');
-                const liveAvatar = document.getElementById('live-user-avatar');
-                const liveInitial = document.getElementById('live-user-initial');
-                const liveUsername = document.getElementById('live-username');
-                const chatAvatar = document.getElementById('chat-user-avatar');
-                const chatUsername = document.getElementById('chat-username');
-                
-                if (avatar && initial && ZYLORB_STATE.currentUser) {
-                    avatar.textContent = ZYLORB_STATE.currentUser.avatar;
-                    initial.textContent = ZYLORB_STATE.currentUser.avatar;
-                }
-                
-                if (postAvatar && postInitial && postUsername && ZYLORB_STATE.currentUser) {
-                    postAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
-                    postInitial.textContent = ZYLORB_STATE.currentUser.avatar;
-                    postUsername.textContent = ZYLORB_STATE.currentUser.name;
-                }
-                
-                if (storyAvatar && storyInitial && storyUsername && ZYLORB_STATE.currentUser) {
-                    storyAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
-                    storyInitial.textContent = ZYLORB_STATE.currentUser.avatar;
-                    storyUsername.textContent = ZYLORB_STATE.currentUser.name;
-                }
-                
-                if (liveAvatar && liveInitial && liveUsername && ZYLORB_STATE.currentUser) {
-                    liveAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
-                    liveInitial.textContent = ZYLORB_STATE.currentUser.avatar;
-                    liveUsername.textContent = ZYLORB_STATE.currentUser.name;
-                }
-                
-                if (chatAvatar && chatUsername && ZYLORB_STATE.currentUser) {
-                    chatAvatar.textContent = ZYLORB_STATE.currentUser.avatar;
-                    chatUsername.textContent = ZYLORB_STATE.currentUser.name;
-                }
-            });
+        
+        if (initial && ZYLORB_STATE.currentUser) {
+            initial.textContent = ZYLORB_STATE.currentUser.avatar;
         }
+    });
+    
+    // Update other avatars
+    const elements = [
+        { avatar: 'post-user-avatar', initial: 'post-user-initial', username: 'post-username' },
+        { avatar: 'story-user-avatar', initial: 'story-user-initial', username: 'story-username' },
+        { avatar: 'live-user-avatar', initial: 'live-user-initial', username: 'live-username' },
+        { avatar: 'chat-user-avatar', username: 'chat-username' }
+    ];
+    
+    elements.forEach(element => {
+        const avatarEl = document.getElementById(element.avatar);
+        const initialEl = element.initial ? document.getElementById(element.initial) : null;
+        const usernameEl = element.username ? document.getElementById(element.username) : null;
+        
+        if (avatarEl && ZYLORB_STATE.currentUser) {
+            if (ZYLORB_STATE.currentUser.profilePic) {
+                avatarEl.innerHTML = `<img src="${ZYLORB_STATE.currentUser.profilePic}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+            } else {
+                avatarEl.textContent = ZYLORB_STATE.currentUser.avatar;
+            }
+        }
+        
+        if (initialEl && ZYLORB_STATE.currentUser) {
+            initialEl.textContent = ZYLORB_STATE.currentUser.avatar;
+        }
+        
+        if (usernameEl && ZYLORB_STATE.currentUser) {
+            usernameEl.textContent = ZYLORB_STATE.currentUser.name;
+        }
+    });
+    
+    console.log('Zone user avatars updated successfully');
+}
 
         function updateNotificationCount() {
             const notificationCount = document.getElementById('header-notification-count');
@@ -4987,7 +5458,547 @@ function createSampleReelsForZone(zone) {
                 ZYLORB_STATE.realTimeInterval = null;
             }
         }
+// ==================== REAL-TIME FEATURES ====================
 
+// 1. TikTok-style Live Streaming System
+let TIKTOK_LIVE_STATE = {
+    mediaStream: null,
+    isLive: false,
+    viewers: 0,
+    comments: [],
+    reactions: []
+};
+
+async function startTikTokLive() {
+    try {
+        // Get camera access
+        TIKTOK_LIVE_STATE.mediaStream = await navigator.mediaDevices.getUserMedia({
+            video: { 
+                width: { ideal: 1080 },
+                height: { ideal: 1920 },
+                facingMode: 'user'
+            },
+            audio: true
+        });
+
+        const videoElement = document.getElementById('tiktok-live-video');
+        videoElement.srcObject = TIKTOK_LIVE_STATE.mediaStream;
+        
+        // Show live modal
+        document.getElementById('tiktok-live-modal').classList.remove('hidden');
+        TIKTOK_LIVE_STATE.isLive = true;
+        
+        // Start viewer simulation
+        startViewerSimulation();
+        
+        // Start comment simulation
+        startCommentSimulation();
+        
+        showToast('Live stream started!', 'success');
+        
+    } catch (error) {
+        console.error('Live stream error:', error);
+        showToast('Could not start live stream', 'error');
+    }
+}
+
+function endTikTokLive() {
+    if (TIKTOK_LIVE_STATE.mediaStream) {
+        TIKTOK_LIVE_STATE.mediaStream.getTracks().forEach(track => track.stop());
+    }
+    
+    document.getElementById('tiktok-live-modal').classList.add('hidden');
+    TIKTOK_LIVE_STATE.isLive = false;
+    showToast('Live stream ended', 'info');
+}
+
+function startViewerSimulation() {
+    setInterval(() => {
+        if (TIKTOK_LIVE_STATE.isLive) {
+            const change = Math.floor(Math.random() * 10) - 3;
+            TIKTOK_LIVE_STATE.viewers = Math.max(0, TIKTOK_LIVE_STATE.viewers + change);
+            document.getElementById('live-viewers').textContent = TIKTOK_LIVE_STATE.viewers + ' viewers';
+        }
+    }, 3000);
+}
+
+function startCommentSimulation() {
+    const sampleComments = [
+        { user: 'Viewer1', text: 'Amazing stream! 🔥', time: 'just now' },
+        { user: 'GamerPro', text: 'What game is this?', time: 'just now' },
+        { user: 'Fan123', text: 'You are so talented!', time: 'just now' },
+        { user: 'StreamLover', text: 'Following you now!', time: 'just now' }
+    ];
+
+    setInterval(() => {
+        if (TIKTOK_LIVE_STATE.isLive && Math.random() > 0.5) {
+            const randomComment = sampleComments[Math.floor(Math.random() * sampleComments.length)];
+            addLiveComment(randomComment.user, randomComment.text);
+        }
+    }, 5000);
+}
+
+function addLiveComment(user, text) {
+    const commentsContainer = document.getElementById('live-comments');
+    const commentElement = document.createElement('div');
+    commentElement.className = 'bg-white/10 rounded-lg p-3 animate-fade-in';
+    commentElement.innerHTML = `
+        <div class="text-white font-semibold">${user}</div>
+        <div class="text-white/80">${text}</div>
+        <div class="text-white/60 text-xs">just now</div>
+    `;
+    commentsContainer.appendChild(commentElement);
+    commentsContainer.scrollTop = commentsContainer.scrollHeight;
+}
+
+function sendLiveComment() {
+    const input = document.getElementById('live-comment-input');
+    const text = input.value.trim();
+    
+    if (text && ZYLORB_STATE.currentUser) {
+        addLiveComment(ZYLORB_STATE.currentUser.name, text);
+        input.value = '';
+    }
+}
+
+function sendLiveReaction(reaction) {
+    if (TIKTOK_LIVE_STATE.isLive) {
+        // Show reaction animation
+        showReactionAnimation(reaction);
+    }
+}
+
+function showReactionAnimation(reaction) {
+    const container = document.getElementById('tiktok-live-modal');
+    const reactionElement = document.createElement('div');
+    reactionElement.className = 'reaction-animation';
+    reactionElement.textContent = reaction;
+    reactionElement.style.cssText = `
+        position: absolute;
+        bottom: 100px;
+        right: 100px;
+        font-size: 2rem;
+        animation: floatUp 3s ease-in-out forwards;
+    `;
+    
+    container.appendChild(reactionElement);
+    
+    setTimeout(() => {
+        container.removeChild(reactionElement);
+    }, 3000);
+}
+
+// Update header live button
+function showRealLiveStream() {
+    if (!ZYLORB_STATE.isLoggedIn) {
+        showToast('Please sign in to go live', 'error');
+        return;
+    }
+    startTikTokLive();
+}
+
+// 2. Instagram-style Reels System
+let REELS_STATE = {
+    currentReel: null,
+    reels: [],
+    currentIndex: 0,
+    isMuted: true
+};
+
+// Load reels for zone
+function loadInstagramReels(zone) {
+    const reelsContainer = document.getElementById(`${zone}-reels-container`);
+    if (!reelsContainer) return;
+    
+    reelsContainer.innerHTML = '';
+    
+    if (!ZYLORB_STATE.reels[zone] || ZYLORB_STATE.reels[zone].length === 0) {
+        createSampleReelsForZone(zone);
+    }
+    
+    if (ZYLORB_STATE.reels[zone] && ZYLORB_STATE.reels[zone].length > 0) {
+        ZYLORB_STATE.reels[zone].forEach((reel, index) => {
+            const reelElement = createInstagramReelElement(reel, zone, index);
+            reelsContainer.appendChild(reelElement);
+        });
+    }
+}
+
+function createInstagramReelElement(reel, zone, index) {
+    const reelEl = document.createElement('div');
+    reelEl.className = 'reel cursor-pointer';
+    reelEl.onclick = () => openInstagramReel(zone, index);
+    
+    const mediaUrl = reel.media && reel.media.url ? reel.media.url : 'https://assets.mixkit.co/videos/preview/mixkit-gamer-playing-a-video-game-44751-large.mp4';
+    
+    reelEl.innerHTML = `
+        <div class="reel-video relative">
+            <video muted class="w-full h-64 object-cover rounded-lg">
+                <source src="${mediaUrl}" type="video/mp4">
+            </video>
+            <div class="absolute bottom-2 left-2 flex items-center space-x-1 text-white">
+                <i class="fas fa-play"></i>
+                <span class="text-sm">${reel.views || 0}</span>
+            </div>
+        </div>
+        <div class="reel-username mt-2 text-white/80 text-sm">${reel.user?.name || 'User'}</div>
+    `;
+    
+    return reelEl;
+}
+
+function openInstagramReel(zone, index) {
+    const reels = ZYLORB_STATE.reels[zone];
+    if (!reels || !reels[index]) return;
+    
+    REELS_STATE.currentReel = reels[index];
+    REELS_STATE.currentIndex = index;
+    
+    const videoElement = document.getElementById('reel-video');
+    const userAvatar = document.getElementById('reel-user-avatar');
+    const username = document.getElementById('reel-username');
+    const caption = document.getElementById('reel-caption');
+    const likes = document.getElementById('reel-likes');
+    const comments = document.getElementById('reel-comments');
+    
+    if (videoElement && REELS_STATE.currentReel.media) {
+        videoElement.innerHTML = `<source src="${REELS_STATE.currentReel.media.url}" type="video/mp4">`;
+        videoElement.muted = REELS_STATE.isMuted;
+        videoElement.play();
+    }
+    
+    if (userAvatar) userAvatar.textContent = REELS_STATE.currentReel.user?.avatar || 'U';
+    if (username) username.textContent = REELS_STATE.currentReel.user?.name || 'User';
+    if (caption) caption.textContent = REELS_STATE.currentReel.caption || 'Check out this amazing content!';
+    if (likes) likes.textContent = REELS_STATE.currentReel.likes || 0;
+    if (comments) comments.textContent = REELS_STATE.currentReel.comments?.length || 0;
+    
+    document.getElementById('instagram-reels').classList.remove('hidden');
+}
+
+function closeInstagramReel() {
+    const videoElement = document.getElementById('reel-video');
+    if (videoElement) {
+        videoElement.pause();
+    }
+    document.getElementById('instagram-reels').classList.add('hidden');
+}
+
+function toggleReelSound() {
+    const videoElement = document.getElementById('reel-video');
+    const soundIcon = document.getElementById('sound-icon');
+    
+    if (videoElement) {
+        REELS_STATE.isMuted = !REELS_STATE.isMuted;
+        videoElement.muted = REELS_STATE.isMuted;
+        
+        if (soundIcon) {
+            soundIcon.className = REELS_STATE.isMuted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+        }
+    }
+}
+
+function likeReel() {
+    if (REELS_STATE.currentReel) {
+        REELS_STATE.currentReel.likes = (REELS_STATE.currentReel.likes || 0) + 1;
+        document.getElementById('reel-likes').textContent = REELS_STATE.currentReel.likes;
+        showToast('Liked reel!', 'success');
+    }
+}
+
+function addReelComment() {
+    const input = document.getElementById('reel-comment-input');
+    const text = input.value.trim();
+    
+    if (text && ZYLORB_STATE.currentUser && REELS_STATE.currentReel) {
+        if (!REELS_STATE.currentReel.comments) {
+            REELS_STATE.currentReel.comments = [];
+        }
+        
+        REELS_STATE.currentReel.comments.push({
+            user: ZYLORB_STATE.currentUser.name,
+            text: text,
+            time: 'just now'
+        });
+        
+        document.getElementById('reel-comments').textContent = REELS_STATE.currentReel.comments.length;
+        input.value = '';
+        showToast('Comment added!', 'success');
+    }
+}
+
+// Create reel with title requirement
+function createReelWithTitle(zone) {
+    if (!ZYLORB_STATE.isLoggedIn) {
+        showToast('Please sign in to create reels', 'error');
+        return;
+    }
+    
+    const title = prompt('Enter reel title (required):');
+    if (!title) {
+        showToast('Reel title is required', 'error');
+        return;
+    }
+    
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'video/*';
+    fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const objectUrl = URL.createObjectURL(file);
+            
+            const newReel = {
+                id: 'reel_' + Date.now(),
+                user: {
+                    id: ZYLORB_STATE.currentUser.id,
+                    name: ZYLORB_STATE.currentUser.name,
+                    avatar: ZYLORB_STATE.currentUser.avatar,
+                    color: getZoneColor(zone)
+                },
+                media: { type: 'video', url: objectUrl, file: file },
+                caption: title,
+                likes: 0,
+                comments: [],
+                views: 0,
+                timestamp: 'Just now'
+            };
+            
+            if (!ZYLORB_STATE.reels[zone]) {
+                ZYLORB_STATE.reels[zone] = [];
+            }
+            ZYLORB_STATE.reels[zone].unshift(newReel);
+            saveToLocalStorage();
+            loadInstagramReels(zone);
+            showToast('Reel created successfully!', 'success');
+        }
+    };
+    fileInput.click();
+}
+
+// 3. Real-time Profile Settings System
+function showProfileSettings() {
+    if (!ZYLORB_STATE.isLoggedIn) {
+        showToast('Please sign in to access settings', 'error');
+        return;
+    }
+    
+    const modal = document.getElementById('profile-settings-modal');
+    const nameInput = document.getElementById('settings-name');
+    const emailInput = document.getElementById('settings-email');
+    const bioInput = document.getElementById('settings-bio');
+    const avatar = document.getElementById('settings-profile-avatar');
+    const initial = document.getElementById('settings-profile-initial');
+    
+    if (ZYLORB_STATE.currentUser) {
+        nameInput.value = ZYLORB_STATE.currentUser.name;
+        emailInput.value = ZYLORB_STATE.currentUser.email;
+        bioInput.value = ZYLORB_STATE.currentUser.bio || '';
+        
+        if (ZYLORB_STATE.currentUser.profilePic) {
+            avatar.innerHTML = `<img src="${ZYLORB_STATE.currentUser.profilePic}" alt="Profile" class="w-full h-full rounded-full object-cover">`;
+        } else {
+            avatar.textContent = ZYLORB_STATE.currentUser.avatar;
+            initial.textContent = ZYLORB_STATE.currentUser.avatar;
+        }
+    }
+    
+    modal.classList.remove('hidden');
+}
+
+function hideProfileSettings() {
+    document.getElementById('profile-settings-modal').classList.add('hidden');
+}
+
+function updateProfilePicture(input) {
+    const file = input.files[0];
+    if (!file) return;
+    
+    if (!file.type.startsWith('image/')) {
+        showToast('Please select an image file', 'error');
+        return;
+    }
+    
+    const objectUrl = URL.createObjectURL(file);
+    const avatar = document.getElementById('settings-profile-avatar');
+    
+    avatar.innerHTML = `<img src="${objectUrl}" alt="Profile" class="w-full h-full rounded-full object-cover">`;
+    
+    // Save immediately
+    ZYLORB_STATE.currentUser.profilePic = objectUrl;
+    saveToLocalStorage();
+    localStorage.setItem('zylorb_current_user', JSON.stringify(ZYLORB_STATE.currentUser));
+    
+    showToast('Profile picture updated!', 'success');
+}
+
+function saveProfileSettings() {
+    console.log('Saving profile settings...');
+    
+    const nameInput = document.getElementById('settings-name');
+    const emailInput = document.getElementById('settings-email');
+    const bioInput = document.getElementById('settings-bio');
+    
+    if (!nameInput || !nameInput.value.trim()) {
+        showToast('Please enter your name', 'error');
+        return;
+    }
+    
+    if (!ZYLORB_STATE.currentUser) {
+        showToast('No user found. Please sign in again.', 'error');
+        return;
+    }
+    
+    // Update user data
+    ZYLORB_STATE.currentUser.name = nameInput.value.trim();
+    ZYLORB_STATE.currentUser.email = emailInput.value.trim();
+    ZYLORB_STATE.currentUser.bio = bioInput.value.trim();
+    ZYLORB_STATE.currentUser.avatar = nameInput.value.trim().charAt(0).toUpperCase();
+    
+    console.log('Updated user data:', ZYLORB_STATE.currentUser);
+    
+    // Update in users array
+    const userIndex = ZYLORB_STATE.users.findIndex(u => u.id === ZYLORB_STATE.currentUser.id);
+    if (userIndex !== -1) {
+        ZYLORB_STATE.users[userIndex] = ZYLORB_STATE.currentUser;
+    }
+    
+    // Save to storage
+    saveToLocalStorage();
+    localStorage.setItem('zylorb_current_user', JSON.stringify(ZYLORB_STATE.currentUser));
+    
+    console.log('Data saved to storage');
+    
+    // Update UI
+    updateUIForLoggedInUser();
+    
+    // Hide modal
+    hideProfileSettings();
+    
+    showToast('Profile settings saved successfully!', 'success');
+    console.log('Profile settings saved successfully');
+}
+
+// 4. Real-time Zone Experience System
+function initializeZoneExperience(zone) {
+    console.log(`Initializing real-time experience for ${zone} zone`);
+    
+    // Load real-time content
+    loadRealTimeZoneContent(zone);
+    
+    // Start real-time updates
+    startZoneRealTimeUpdates(zone);
+    
+    // Initialize zone-specific features
+    initializeZoneSpecificFeatures(zone);
+}
+
+function loadRealTimeZoneContent(zone) {
+    // Load posts
+    loadZoneContent(zone);
+    
+    // Load reels
+    loadInstagramReels(zone);
+    
+    // Load stories
+    loadStories(zone);
+    
+    // Load live streams
+    loadLiveStreams(zone);
+}
+
+function startZoneRealTimeUpdates(zone) {
+    // Simulate real-time activity in zone
+    setInterval(() => {
+        if (ZYLORB_STATE.currentZone === zone && Math.random() > 0.8) {
+            simulateZoneActivity(zone);
+        }
+    }, 10000);
+}
+
+function simulateZoneActivity(zone) {
+    const activities = {
+        gaming: ['New gaming clip uploaded', 'Tournament starting soon', 'Pro player joined the zone'],
+        life: ['User shared daily vlog', 'New cooking recipe added', 'Travel diary updated'],
+        culture: ['Cultural event announced', 'Traditional art shared', 'Festival celebration posted'],
+        professional: ['Job opportunity posted', 'Industry insights shared', 'Networking event announced']
+    };
+    
+    const randomActivity = activities[zone][Math.floor(Math.random() * activities[zone].length)];
+    showRealTimeNotification(`${randomActivity} in ${zone} zone`);
+}
+
+function initializeZoneSpecificFeatures(zone) {
+    switch(zone) {
+        case 'gaming':
+            initializeGamingFeatures();
+            break;
+        case 'life':
+            initializeLifeFeatures();
+            break;
+        case 'culture':
+            initializeCultureFeatures();
+            break;
+        case 'professional':
+            initializeProfessionalFeatures();
+            break;
+    }
+}
+
+function initializeGamingFeatures() {
+    // Gaming-specific features
+    console.log('Initializing gaming features...');
+}
+
+function initializeLifeFeatures() {
+    // Life-specific features
+    console.log('Initializing life features...');
+}
+
+function initializeCultureFeatures() {
+    // Culture-specific features
+    console.log('Initializing culture features...');
+}
+
+function initializeProfessionalFeatures() {
+    // Professional-specific features
+    console.log('Initializing professional features...');
+}
+
+// Update enterZone function
+function enterZone(zone) {
+    if (!ZYLORB_STATE.isLoggedIn) {
+        showToast('Please sign in to enter zones', 'error');
+        showAuthModal('signin');
+        return;
+    }
+    
+    ZYLORB_STATE.currentZone = zone;
+    
+    // Hide main content
+    document.getElementById('main-content').classList.add('hidden');
+    
+    // Show zone page
+    const zonePage = document.getElementById(`${zone}-zone-page`);
+    zonePage.classList.remove('hidden');
+    
+    // Initialize real-time zone experience
+    initializeZoneExperience(zone);
+    
+    showToast(`Entering ${zone} zone...`, 'success');
+}
+
+// Update settings button in user menu
+function showSettings() {
+    showProfileSettings();
+}
+
+// Update live button in header
+function showLiveStreamModal() {
+    showRealLiveStream();
+}
+
+// ==================== END REAL-TIME FEATURES ====================
         // Utility Functions
         function getZoneColor(zone) {
             switch(zone) {
